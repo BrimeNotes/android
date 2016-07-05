@@ -13,13 +13,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class SignupActivity extends AppCompatActivity {
 
     edittext etname,etemail,etpass;
     buttons btnsign;
     textview loginlink;
-
+    //Added hash function from maxsam4 commit
+     public final static String encryptSHA512(String target) {
+             try {
+                    MessageDigest sh = MessageDigest.getInstance("SHA-512");
+                    sh.update(target.getBytes());
+                    StringBuffer sb = new StringBuffer();
+                    for (byte b : sh.digest()) sb.append(Integer.toHexString(0xff & b));
+                    return sb.toString();
+                 } catch (NoSuchAlgorithmException e) {
+                     throw new RuntimeException(e);
+                 }
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
