@@ -75,6 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_centerInParent="true"
                 android:text="GET STARTED"
+                android:id="@+id/btn_getstart"
                 android:textSize="20sp"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
