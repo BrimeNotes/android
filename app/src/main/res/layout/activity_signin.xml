@@ -145,6 +145,7 @@
                 <com.procleus.brime.buttons
                     android:layout_centerInParent="true"
                     android:text="FACEBOOK"
+                    android:id="@+id/fb_button"
                     android:textColor="#dafa5223"
                     android:background="@drawable/textbtn_light_left_cornered"
                     android:layout_gravity="center_vertical"
