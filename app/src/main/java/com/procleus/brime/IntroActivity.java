@@ -15,7 +15,7 @@ public class IntroActivity extends AppCompatActivity {
         signinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(IntroActivity.this,SignupActivity.class);
+                Intent i = new Intent(IntroActivity.this,SigninActivity.class);
                 startActivity(i);
             }
         });

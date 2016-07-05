@@ -78,6 +78,9 @@ public class SigninActivity extends AppCompatActivity {
             }
         });
 
+        //FB_CodeEND
+
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -113,7 +116,7 @@ public class SigninActivity extends AppCompatActivity {
             handleSignInResult(result);
         }
 
-        callbackManager.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode,resultCode,data);//FB Data
     }
 
 
