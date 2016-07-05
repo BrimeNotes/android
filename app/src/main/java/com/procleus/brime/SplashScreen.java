@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.transition.Fade;
 
 public class SplashScreen extends Activity {
 
@@ -19,6 +20,7 @@ public class SplashScreen extends Activity {
             public void run() {
                 Intent mainIntent = new Intent(SplashScreen.this,IntroActivity.class);
                 startActivity(mainIntent);
+                SplashScreen.this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
