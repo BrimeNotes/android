@@ -8,19 +8,19 @@ import android.view.View;
 
 public class IntroActivity extends AppCompatActivity {
     buttons signinBtn;
-    buttons getstartbtn;
+    buttons getStarted;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_intro);
-        getstartbtn=(buttons)findViewById(R.id.btn_getstart);
-        //linked SignupActivity on Getstared button click until getstarted not implemt
-        getstartbtn.setOnClickListener(new View.OnClickListener() {
+        getStarted = (buttons) findViewById(R.id.getStarted);
+        getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent igstar= new Intent(IntroActivity.this,SignupActivity.class);
-                startActivity(igstar);
+                Intent intent = new Intent(IntroActivity.this, GetStartedActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
         signinBtn =(buttons)findViewById(R.id.signinbtn) ;
