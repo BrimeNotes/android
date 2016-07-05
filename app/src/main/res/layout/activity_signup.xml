@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:background="#ffffff"
+        android:layout_weight="4.00"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background2"
+            >
+            <ImageView
+                android:layout_height="150dp"
+                android:layout_width="150dp"
+                android:src="@drawable/logolightnoshadow"
+                android:id="@+id/image"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="35dp"
+                android:paddingBottom="20dp"
+                />
+            <View
+                android:layout_width="100dp"
+                android:layout_height="1dp"
+                android:background="#ffffff"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/image"
+                android:id="@+id/view" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:weightSum="10"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        >
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="147dp"
+            android:layout_marginTop="10dp">
+
+
+                <com.procleus.brime.edittext
+                    style="@style/textInput"
+                    android:id="@+id/input_name"
+                    android:layout_centerHorizontal="true"
+                    android:hint="Username"
+                    android:gravity="center_horizontal"
+
+                    />
+                <com.procleus.brime.edittext
+                    style="@style/textInput"
+                    android:id="@+id/input_email"
+                    android:hint="Email"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+                <com.procleus.brime.edittext
+                    style="@style/textInput"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/input_password"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/input_name" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+
+            android:layout_marginTop="10dp">
+
+            <com.procleus.brime.buttons
+                android:id="@+id/btn_signup"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:text="Create Account"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/textbtn_dark_cornered"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp" />
+            <com.procleus.brime.textview
+                android:id="@+id/link_login"
+                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/textbtn_dark_cornered"
+                android:gravity="center"
+                android:text="Already a member? Login"
+                android:layout_below="@+id/btn_signup"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentRight="false"
+                android:layout_marginTop="20dp" />
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
