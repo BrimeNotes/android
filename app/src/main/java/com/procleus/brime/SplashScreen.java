@@ -36,4 +36,10 @@ public class SplashScreen extends Activity {
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences = getSharedPreferences("com.procleus.brime", MODE_PRIVATE);
+    }
 }
