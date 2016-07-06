@@ -63,7 +63,9 @@ public class GetStartedActivity extends AppCompatActivity{
                 if (current < layouts.length) {
                     viewPager.setCurrentItem(current);
                 } else {
-
+                    Intent intent = new Intent(GetStartedActivity.this, SignupActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
