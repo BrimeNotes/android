@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.content.SharedPreferences;
 import android.transition.Fade;
 
 public class SplashScreen extends Activity {
@@ -38,5 +39,11 @@ public class SplashScreen extends Activity {
                 }
             }
         }, SPLASH_DISPLAY_LENGTH);
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences = getSharedPreferences("com.procleus.brime", MODE_PRIVATE);
     }
 }
