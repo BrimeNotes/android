@@ -33,4 +33,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:8.3.0'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
 
+    compile 'com.google.android.gms:play-services-appindexing:8.3.0'
 }
