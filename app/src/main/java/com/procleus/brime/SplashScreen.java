@@ -8,7 +8,7 @@ import android.transition.Fade;
 
 public class SplashScreen extends Activity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 1000;
 
     @Override
     public void onCreate(Bundle icicle) {

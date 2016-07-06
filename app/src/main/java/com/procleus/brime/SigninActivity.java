@@ -35,9 +35,17 @@ public class SigninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
+        textview tv = (textview)findViewById(R.id.textView3);
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SigninActivity.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         //FBcode
-
-
         final List<String> permissionNeeds = Arrays.asList("user_friends","user_photos","email");
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager= CallbackManager.Factory.create();
