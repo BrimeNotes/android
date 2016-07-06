@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -21,6 +22,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,12 +38,24 @@ public class SigninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        textview tv = (textview)findViewById(R.id.textView3);
+        textview tv = (textview) findViewById(R.id.textView3);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SigninActivity.this,MainActivity.class);
                 startActivity(i);
+                finish();
+            }
+        });
+
+
+        textview tv2 = (textview) findViewById(R.id.textView4);
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SigninActivity.this,SignupActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 

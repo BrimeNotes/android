@@ -100,16 +100,36 @@
                     android:inputType="textPassword"
                     />
 
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    android:layout_below="@id/editText2"
+                    >
                 <com.procleus.brime.textview
                     style="@style/textInput"
                     android:gravity="center_horizontal"
+                    android:textColor="#fa4513"
                     android:id="@+id/textView3"
+                    android:layout_weight="5"
                     android:text="SkipToLocal"
                     android:textSize="12sp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/editText2"
-                    />
 
+                    android:textStyle="bold" />
+
+                    <com.procleus.brime.textview
+                        android:layout_weight="5"
+                        style="@style/textInput"
+                        android:gravity="center_horizontal"
+                        android:id="@+id/textView4"
+                        android:text="SignUp"
+                        android:textColor="#fa4513"
+                        android:textSize="12sp"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold" />
+            </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
