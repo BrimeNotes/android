@@ -15,7 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
-
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Toast.makeText(MainActivity.this, "You cannot Exit", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -83,12 +84,13 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
-        }
 
+        } else if (id == R.id.action_exit) {
+            finish();
+            System.exit(0);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -97,25 +99,37 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = new PublicFragment();
+        if (id == R.id.nav_public_notes) {
+            getSupportActionBar().setTitle("Public Notes");
+            fragment = new PublicFragment();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_private_notes) {
+            getSupportActionBar().setTitle("Private Notes");
+            fragment = new PrivateFragment();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_labels) {
+            getSupportActionBar().setTitle("Labels");
+            fragment = new LabelsFragment();
+        } else if (id == R.id.nav_trash) {
+            getSupportActionBar().setTitle("Trash");
+            fragment = new TrashFragment();
+        } else if (id == R.id.nav_settings) {
+            getSupportActionBar().setTitle("Settings");
+            fragment = new SettingsFragment();
+        } else if (id == R.id.nav_sync) {
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
         }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 
 }
