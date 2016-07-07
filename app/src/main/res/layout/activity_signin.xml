@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="10"
     android:orientation="vertical"
-   >
+    android:weightSum="10">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#ffffff"
         android:layout_weight="5"
+        android:background="#ffffff"
         >
 
         <RelativeLayout
@@ -21,41 +18,41 @@
          android:background="@drawable/background2"
          >
         <ImageView
-            android:layout_height="150dp"
-            android:layout_width="150dp"
-            android:src="@drawable/logolightnoshadow"
             android:id="@+id/image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            android:paddingTop="35dp"
             android:paddingBottom="20dp"
+            android:paddingTop="35dp"
+            android:src="@drawable/logolightnoshadow"
             />
          <View
+             android:id="@+id/view"
              android:layout_width="100dp"
              android:layout_height="1dp"
-             android:background="#ffffff"
-             android:layout_centerHorizontal="true"
              android:layout_below="@id/image"
-             android:id="@+id/view" />
+             android:layout_centerHorizontal="true"
+             android:background="#ffffff" />
 
          <com.procleus.brime.textview
-             android:layout_height="wrap_content"
+             android:id="@+id/textView2"
              android:layout_width="wrap_content"
-             android:text="BRIME"
-             android:textSize="60sp"
-             android:textColor="#ffffff"
+             android:layout_height="wrap_content"
              android:layout_below="@+id/view"
              android:layout_centerHorizontal="true"
-             android:id="@+id/textView2" />
+             android:text="BRIME"
+             android:textColor="#ffffff"
+             android:textSize="60sp" />
 
          <com.procleus.brime.textview
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:text="NOTE TAKING MADE EASY"
-             android:textSize="18sp"
-             android:textColor="#ffffff"
              android:id="@+id/textView"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
              android:layout_below="@+id/textView2"
-             android:layout_centerHorizontal="true" />
+             android:layout_centerHorizontal="true"
+             android:text="NOTE TAKING MADE EASY"
+             android:textColor="#ffffff"
+             android:textSize="18sp" />
 
 
 
@@ -66,9 +63,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:weightSum="10"
         android:background="#ffffff"
         android:orientation="vertical"
+        android:weightSum="10"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,51 +80,51 @@
 
 
                 <com.procleus.brime.edittext
-                    style="@style/textInput"
                     android:id="@+id/editText"
-                    android:hint="USERNAME"
+                    style="@style/textInput"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_horizontal"
+                    android:hint="USERNAME"
 
                     />
                 <com.procleus.brime.edittext
-                    style="@style/textInput"
-                    android:gravity="center_horizontal"
                     android:id="@+id/editText2"
-                    android:hint="PASSWORD"
-                    android:layout_centerHorizontal="true"
+                    style="@style/textInput"
                     android:layout_below="@id/editText"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:hint="PASSWORD"
                     android:inputType="textPassword"
                     />
 
                 <LinearLayout
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/editText2"
                     android:orientation="horizontal"
                     android:weightSum="10"
-                    android:layout_below="@id/editText2"
                     >
                 <com.procleus.brime.textview
-                    style="@style/textInput"
-                    android:gravity="center_horizontal"
-                    android:textColor="#fa4513"
                     android:id="@+id/textView3"
-                    android:layout_weight="5"
-                    android:text="SkipToLocal"
-                    android:textSize="12sp"
+                    style="@style/textInput"
                     android:layout_centerHorizontal="true"
+                    android:layout_weight="5"
+                    android:gravity="center_horizontal"
+                    android:text="SkipToLocal"
+                    android:textColor="#fa4513"
+                    android:textSize="12sp"
 
                     android:textStyle="bold" />
 
                     <com.procleus.brime.textview
-                        android:layout_weight="5"
-                        style="@style/textInput"
-                        android:gravity="center_horizontal"
                         android:id="@+id/textView4"
+                        style="@style/textInput"
+                        android:layout_centerHorizontal="true"
+                        android:layout_weight="5"
+                        android:gravity="center_horizontal"
                         android:text="SignUp"
                         android:textColor="#fa4513"
                         android:textSize="12sp"
-                        android:layout_centerHorizontal="true"
                         android:textStyle="bold" />
             </LinearLayout>
             </RelativeLayout>
@@ -136,60 +133,60 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
-            android:weightSum="10"
             android:orientation="vertical"
+            android:weightSum="10"
             >
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:paddingRight="8dp"
                 android:paddingLeft="8dp"
+                android:paddingRight="8dp"
 
                 >
 
             <com.procleus.brime.buttons
-                android:layout_height="50dp"
                 android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_centerInParent="true"
-                android:text="LOGIN"
-                android:textSize="20sp"
-                android:textAlignment="center"
-                android:textColor="#ffffff"
                 android:background="@drawable/textbtn_dark_cornered"
                 android:gravity="center"
-                />
+                android:onClick="logIn"
+                android:text="LOGIN"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
 
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="5"
-                android:weightSum="10"
                 android:orientation="horizontal"
-                android:paddingRight="8dp"
                 android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:weightSum="10"
                 >
 
                 <com.procleus.brime.buttons
-                    android:layout_centerInParent="true"
-                    android:text="FACEBOOK"
                     android:id="@+id/fb_button"
-                    android:textColor="#dafa5223"
-                    android:background="@drawable/textbtn_light_left_cornered"
-                    android:layout_gravity="center_vertical"
                     style="@style/textbtn"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/textbtn_light_left_cornered"
+                    android:text="FACEBOOK"
+                    android:textColor="#dafa5223"
                     />
 
                 <com.procleus.brime.buttons
+                    android:id="@+id/google_signin_btn"
+                    style="@style/textbtn"
                     android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/textbtn_light_right_cornered"
                     android:text="GOOGLE"
                     android:textColor="#dafa5223"
-                    android:background="@drawable/textbtn_light_right_cornered"
-                    android:layout_gravity="center_vertical"
-                    style="@style/textbtn"
-                    android:id="@+id/google_signin_btn"
                     />
 
             </LinearLayout>

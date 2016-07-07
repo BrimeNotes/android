@@ -36,7 +36,6 @@ public class SignupActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private GoogleApiClient client;
 
-    //Added hash function from maxsam4 commit
     public static String convertByteToHex(byte data[]) {
         StringBuffer hexData = new StringBuffer();
         for (int byteIndex = 0; byteIndex < data.length; byteIndex++)

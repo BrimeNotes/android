@@ -1,11 +1,12 @@
 package com.procleus.brime;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -22,17 +23,43 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import org.w3c.dom.Text;
-
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.List;
 
 public class SigninActivity extends AppCompatActivity {
-    private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
-    private CallbackManager callbackManager;
     private static final String TAG = "SignInActivity";
     buttons b ;
+    private GoogleApiClient mGoogleApiClient;
+    private CallbackManager callbackManager;
+
+    public static String convertByteToHex(byte data[]) {
+        StringBuffer hexData = new StringBuffer();
+        for (int byteIndex = 0; byteIndex < data.length; byteIndex++)
+            hexData.append(Integer.toString((data[byteIndex] & 0xff) + 0x100, 16).substring(1));
+
+        return hexData.toString();
+    }
+
+    public static String hashText(String textToHash) {
+        try {
+            final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
+            sha512.update(textToHash.getBytes());
+            return convertByteToHex(sha512.digest());
+        } catch (Exception e) {
+            return textToHash;
+        }
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +183,69 @@ public class SigninActivity extends AppCompatActivity {
         } else {
             // Signed out, show unauthenticated UI.
             //updateUI(false);
+        }
+    }
+
+    public void logIn() {
+        new PostClass(this).execute();
+    }
+
+    private class PostClass extends AsyncTask<String, Void, Void> {
+
+        private final Context context;
+        /**
+         * Fetch data here
+         */
+        String email;
+        String password;
+
+        public PostClass(Context c) {
+
+            this.context = c;
+        }
+
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+
+                URL url = new URL("http://api.brime.tk/login.php");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + hashText(password);
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("USER-AGENT", "Brime Android App");
+                connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
+                connection.setDoOutput(true);
+                DataOutputStream dStream = new DataOutputStream(connection.getOutputStream());
+                dStream.writeBytes(urlParameters);
+                dStream.flush();
+                dStream.close();
+                //int responseCode = connection.getResponseCode();
+                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = "";
+                StringBuilder responseOutput = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    responseOutput.append(line);
+                }
+                Log.i("response", responseOutput.toString());
+                if (responseOutput.toString().equals("Logged in Successfully")) {
+
+                } else {
+
+                }
+                br.close();
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
