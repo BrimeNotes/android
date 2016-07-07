@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
@@ -28,26 +27,33 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class SignupActivity extends AppCompatActivity {
 
     edittext etname, etemail, etpass;
     buttons btnsign;
     textview loginlink;
+    ProgressDialog progressDialog;
     private GoogleApiClient client;
 
     //Added hash function from maxsam4 commit
-    public final static String encryptSHA512(String target) {
+    public static String convertByteToHex(byte data[]) {
+        StringBuffer hexData = new StringBuffer();
+        for (int byteIndex = 0; byteIndex < data.length; byteIndex++)
+            hexData.append(Integer.toString((data[byteIndex] & 0xff) + 0x100, 16).substring(1));
+
+        return hexData.toString();
+    }
+
+    public static String hashText(String textToHash) {
         try {
-            MessageDigest sh = MessageDigest.getInstance("SHA-512");
-            sh.update(target.getBytes());
-            StringBuffer sb = new StringBuffer();
-            for (byte b : sh.digest()) sb.append(Integer.toHexString(0xff & b));
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
+            sha512.update(textToHash.getBytes());
+            return convertByteToHex(sha512.digest());
+        } catch (Exception e) {
+            return textToHash;
         }
+
     }
 
 
@@ -87,26 +93,18 @@ public class SignupActivity extends AppCompatActivity {
     public void signup() {
 
         if (!validate()) {
-            onSignupFailed();
+            onSignupFailed("Data Validation Error");
             return;
         }
         btnsign.setEnabled(false);
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this, R.style.AppTheme2);
+        progressDialog = new ProgressDialog(SignupActivity.this, R.style.AppTheme2);
+        //String name = etname.getText().toString();
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account");
         progressDialog.show();
-        //String name = etname.getText().toString();
-
         new PostClass(this).execute();
 
-        new Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        onSignupSuccess();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+
     }
 
     public boolean validate() {
@@ -115,6 +113,7 @@ public class SignupActivity extends AppCompatActivity {
         String name = etname.getText().toString();
         String email = etemail.getText().toString();
         String password = etpass.getText().toString();
+
 
         if (name.isEmpty() || name.length() < 3) {
             etname.setError("at least 3 characters");
@@ -150,8 +149,8 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Sign-up failed", Toast.LENGTH_LONG).show();
+    public void onSignupFailed(String error) {
+        Toast.makeText(getBaseContext(), error, Toast.LENGTH_LONG).show();
 
         btnsign.setEnabled(true);
     }
@@ -173,10 +172,12 @@ public class SignupActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(String... params) {
+
             try {
-                URL url = new URL("http://brime.tk/register.php");
+
+                URL url = new URL("http://api.brime.tk/register.php");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + URLEncoder.encode(encryptSHA512(password), "UTF-8");
+                String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + hashText(password);
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("USER-AGENT", "Brime Android App");
                 connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
@@ -193,6 +194,13 @@ public class SignupActivity extends AppCompatActivity {
                     responseOutput.append(line);
                 }
                 Log.i("response", responseOutput.toString());
+                if (responseOutput.toString().equals("Registration Successful")) {
+                    onSignupSuccess();
+                    progressDialog.dismiss();
+                } else {
+                    onSignupFailed(responseOutput.toString());
+                    progressDialog.dismiss();
+                }
                 br.close();
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
