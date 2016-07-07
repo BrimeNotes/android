@@ -77,10 +77,10 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-        }/** else if (id == R.id.action_exit) {
+        } else if (id == R.id.action_exit) {
             finish();
             System.exit(0);
-         }**/
+        }
         return super.onOptionsItemSelected(item);
     }
 

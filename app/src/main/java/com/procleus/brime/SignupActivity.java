@@ -34,6 +34,7 @@ public class SignupActivity extends AppCompatActivity {
     buttons btnsign;
     textview loginlink;
     ProgressDialog progressDialog;
+    int responseOp;
     private GoogleApiClient client;
 
     public static String convertByteToHex(byte data[]) {
@@ -96,12 +97,24 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
         btnsign.setEnabled(false);
-        progressDialog = new ProgressDialog(SignupActivity.this, R.style.AppTheme2);
+        progressDialog = new ProgressDialog(SignupActivity.this, R.style.Dialog);
         //String name = etname.getText().toString();
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account");
         progressDialog.show();
         new PostClass(this).execute();
+        //Crash fix by nervehammer
+         new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        if(responseOp==1) {
+                            onSignupSuccess();
+                        }else
+                        onSignupFailed("Data Validation error");
+                        progressDialog.dismiss();
+                    }
+                }, 3000);
+
 
 
     }
@@ -194,11 +207,9 @@ public class SignupActivity extends AppCompatActivity {
                 }
                 Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().equals("Registration Successful")) {
-                    onSignupSuccess();
-                    progressDialog.dismiss();
+                    responseOp=1;
                 } else {
-                    onSignupFailed(responseOutput.toString());
-                    progressDialog.dismiss();
+                  responseOp=2;
                 }
                 br.close();
             } catch (MalformedURLException e) {
