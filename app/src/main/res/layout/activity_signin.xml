@@ -84,7 +84,7 @@
                     style="@style/textInput"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_horizontal"
-                    android:hint="USERNAME"
+                    android:hint="EMAIL"
 
                     />
                 <com.procleus.brime.edittext
@@ -147,17 +147,16 @@
                 >
 
             <com.procleus.brime.buttons
+                android:id="@+id/log_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/textbtn_dark_cornered"
                 android:gravity="center"
-                android:onClick="logIn"
                 android:text="LOGIN"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
-                android:textSize="20sp" 
-                android:id="@+id/log_btn"/>
+                android:textSize="20sp" />
 
             </RelativeLayout>
             <LinearLayout

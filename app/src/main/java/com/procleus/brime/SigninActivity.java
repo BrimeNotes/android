@@ -203,7 +203,6 @@ public class SigninActivity extends AppCompatActivity {
 
     public void logIn() {
 
-        new PostClass(this).execute();
         progressDialog = new ProgressDialog(SigninActivity.this, R.style.Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Login ...");
@@ -275,8 +274,7 @@ public class SigninActivity extends AppCompatActivity {
                     responseOutput.append(line);
                 }
                 Log.i("response", responseOutput.toString());
-                // TODO need to fix,else condition executes everytime
-                if (responseOutput.toString().equals("Logged_in")) {
+                if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
                     responseOp=1;
                 } else {
                     responseOp=2;    

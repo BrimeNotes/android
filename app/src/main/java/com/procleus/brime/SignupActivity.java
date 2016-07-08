@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -205,7 +204,7 @@ public class SignupActivity extends AppCompatActivity {
                 while ((line = br.readLine()) != null) {
                     responseOutput.append(line);
                 }
-                Log.i("response", responseOutput.toString());
+                //Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().equals("Registration Successful")) {
                     responseOp=1;
                 } else {
