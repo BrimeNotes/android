@@ -156,7 +156,8 @@
                 android:text="LOGIN"
                 android:textAlignment="center"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20sp" 
+                android:id="@+id/log_btn"/>
 
             </RelativeLayout>
             <LinearLayout

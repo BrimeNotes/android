@@ -1,5 +1,6 @@
 package com.procleus.brime;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -38,7 +39,10 @@ import java.util.List;
 public class SigninActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "SignInActivity";
+    ProgressDialog progressDialog;
+    int responseOp;
     buttons b ;
+    edittext etun, etpass;
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager callbackManager;
 
@@ -64,6 +68,9 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        //login resource bind
+        etun=(edittext)findViewById(R.id.editText);
+        etpass=(edittext)findViewById(R.id.editText2);
 
         textview tv = (textview) findViewById(R.id.textView3);
         tv.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +90,14 @@ public class SigninActivity extends AppCompatActivity {
                 Intent i = new Intent(SigninActivity.this,SignupActivity.class);
                 startActivity(i);
                 finish();
+            }
+        });
+
+        buttons btlog=(buttons)findViewById(R.id.log_btn);
+        btlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logIn();
             }
         });
 
@@ -187,17 +202,45 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     public void logIn() {
+
         new PostClass(this).execute();
+        progressDialog = new ProgressDialog(SigninActivity.this, R.style.Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Login ...");
+        progressDialog.show();
+        new PostClass(this).execute();
+             new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        if(responseOp==1) {
+                            onLogInSuccess();
+                        }else
+                             onLogInFailed("Data Validation error");
+                        progressDialog.dismiss();
+                    }
+                }, 3000);
+
+    }
+
+     public void onLogInSuccess() {
+        Toast.makeText(getBaseContext(), "Logged in successfully", Toast.LENGTH_LONG).show();
+        finish();
+        Intent i = new Intent(SigninActivity.this, MainActivity.class);
+        startActivity(i);
+
+    }
+
+    public void onLogInFailed(String error) {
+        Toast.makeText(getBaseContext(), error, Toast.LENGTH_LONG).show();
+
     }
 
     private class PostClass extends AsyncTask<String, Void, Void> {
 
         private final Context context;
-        /**
-         * Fetch data here
-         */
-        String email;
-        String password;
+        //data for login
+        String email = etun.getText().toString();
+        String password = etpass.getText().toString();
 
         public PostClass(Context c) {
 
@@ -232,10 +275,11 @@ public class SigninActivity extends AppCompatActivity {
                     responseOutput.append(line);
                 }
                 Log.i("response", responseOutput.toString());
-                if (responseOutput.toString().equals("Logged in Successfully")) {
-
+                // TODO need to fix,else condition executes everytime
+                if (responseOutput.toString().equals("Logged_in")) {
+                    responseOp=1;
                 } else {
-
+                    responseOp=2;    
                 }
                 br.close();
             } catch (MalformedURLException e) {
