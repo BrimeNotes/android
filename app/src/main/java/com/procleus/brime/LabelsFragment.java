@@ -23,13 +23,13 @@ public class LabelsFragment extends Fragment{
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.labels_gragment, container, false);
         Button addLabel = (Button) v.findViewById(R.id.add_label);
-        addLabel.setOnClickListener(new View.OnClickListener() {
+        /*addLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddLabel.class);
                 startActivity(intent);
             }
-        });
+        });*/
         listView = (ListView)v.findViewById(R.id.listView);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, labels);
         listView.setAdapter(arrayAdapter);

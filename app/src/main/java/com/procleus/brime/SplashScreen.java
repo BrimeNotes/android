@@ -10,7 +10,7 @@ import android.transition.Fade;
 
 public class SplashScreen extends Activity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 1000;
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
     SharedPreferences sharedPreferences = null;
 
 
