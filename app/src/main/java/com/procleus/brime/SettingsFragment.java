@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Created by Utkarsh on 07-07-2016.
@@ -21,7 +20,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.settings_fragment,container,false);
+       final View v = inflater.inflate(R.layout.settings_fragment,container,false);
         ListView lv = (ListView)v.findViewById(R.id.listView);
 
         ArrayAdapter<String> ar = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,settingsOptions);
@@ -29,13 +28,30 @@ public class SettingsFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+             switch (position)
+             {
+                 case 0:
+                     Intent i = new Intent(v.getContext(),SettingsClickedAcitvity.class);
+                     getActivity().startActivity(i);
+                     break;
 
-            /*    Intent i = new Intent(getContext(),SettingsClickedAcitvity.class);
-                i.putExtra("Id",position);
-                startActivity(i);*/
+                 case 1:
+                     Intent i1 = new Intent(getActivity(),SettingsClickedActivity2.class);
+                     getActivity().startActivity(i1);break;
+
+                 case 2:
+                     Intent i2 = new Intent(v.getContext(),SettingsClickedActivity3.class);
+                     getActivity().startActivity(i2);
+
+                 case 3:
+                     Intent i3 = new Intent(v.getContext(),SettingsClickedActivity4.class);
+                     getActivity().startActivity(i3);
+             }
 
             }
         });
+
+
 
         // Inflate the layout for this fragment
         return v;
