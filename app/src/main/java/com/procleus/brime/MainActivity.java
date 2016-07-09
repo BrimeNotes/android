@@ -139,13 +139,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            Toast.makeText(MainActivity.this, "You cannot Exit", Toast.LENGTH_SHORT).show();
-        }*/
-        //Getting fragment from stack when pressed back button 
+        //Getting fragment from stack when pressed back button
         //if all fragments popped then if back pressed twice performs exit
        
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -173,12 +167,16 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    //Added settitle function nervehammer
+    public void setActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
     }
 
     @Override
@@ -208,21 +206,15 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new PublicFragment();
 
         if (id == R.id.nav_public_notes) {
-            getSupportActionBar().setTitle("Public Notes");
             fragment = new PublicFragment();
-
         } else if (id == R.id.nav_private_notes) {
-            getSupportActionBar().setTitle("Private Notes");
             fragment = new PrivateFragment();
 
         } else if (id == R.id.nav_labels) {
-            getSupportActionBar().setTitle("Labels");
             fragment = new LabelsFragment();
         } else if (id == R.id.nav_trash) {
-            getSupportActionBar().setTitle("Trash");
             fragment = new TrashFragment();
         } else if (id == R.id.nav_settings) {
-            getSupportActionBar().setTitle("Settings");
             fragment = new SettingsFragment();
         } else if (id == R.id.nav_sync) {
 
