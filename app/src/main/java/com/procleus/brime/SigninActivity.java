@@ -116,7 +116,8 @@ public class SigninActivity extends AppCompatActivity {
                 if(profile!=null)
 
                 {
-                    Toast.makeText(getApplicationContext(), profile.getFirstName()+profile.getLastName(), Toast.LENGTH_SHORT).show();
+                    Intent i =new Intent(SigninActivity.this,MainActivity.class);
+                    startActivity(i);
                 }
 
             }
@@ -189,8 +190,8 @@ public class SigninActivity extends AppCompatActivity {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            Toast.makeText(SigninActivity.this,acct.getDisplayName(),Toast.LENGTH_LONG).show();
+          GoogleSignInAccount acct = result.getSignInAccount();
+            //Toast.makeText(SigninActivity.this,acct.getDisplayName(),Toast.LENGTH_LONG).show();
             Intent i = new Intent(SigninActivity.this, MainActivity.class);
             startActivity(i);
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
