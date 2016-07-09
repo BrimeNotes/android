@@ -9,15 +9,15 @@
         android:layout_height="match_parent"
         android:src="@drawable/splash_back"
         android:scaleType="centerCrop"
-        android:alpha="0.3" />
-    <ImageView android:id="@+id/splashscreen"
+        android:alpha="0.2" />
+    <ImageView
+        android:id="@+id/splashscreen_logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/logo_alt"
         android:layout_gravity="center"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-       />
+        />
 
 
 </RelativeLayout>

@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3395ff">
-
+    android:orientation="vertical"
+    android:background="#ff4d4d"
+    android:weightSum="1"
+    android:gravity="center">
     <LinearLayout
+        android:layout_weight="0.2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/ic_discount" />
-
-        <TextView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_cloud_upload_black_24dp"
+            android:tint="@color/colorPrimary"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"
+            android:layout_margin="8dp"/>
+        <com.procleus.brime.textview
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ThirdSlide Title"
+            android:text="NEVER LOST"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_weight="0.8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp">
 
-        <TextView
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/get_started_cloud"
+            />
+        <com.procleus.brime.textview
+            android:layout_marginTop="14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="Slide 3 Description"
+            android:textSize="24sp"
+            android:textStyle="bold"
             android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="16dp" />
+            android:textColor="@color/textColorInputHint"
+            android:text="Your Notes\nSynced to the\nCloud "
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
