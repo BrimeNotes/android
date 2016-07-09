@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Notes extends SQLiteOpenHelper {
@@ -36,7 +38,19 @@ public class Notes extends SQLiteOpenHelper {
         db.close();
     }
 
-    public textNote getTextNoteById(int id) {
+    public void updateTextNote(int i, String n) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE textNotes set note = '" + n + "', edited = now() WHERE id='" + i + "'");
+        db.close();
+    }
+
+    public void deleteTextNote(int i) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM textNotes WHERE id='" + i + "'");
+        db.close();
+    }
+
+    public TextNote getTextNoteById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query("textNotes", new String[]{"id", "note", "created", "edited", "owner"}, "id = " + id, null, null, null, null);
@@ -44,14 +58,31 @@ public class Notes extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
         }
-        textNote note;
+        TextNote note;
         try {
-            note = new textNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+            note = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
         } catch (Exception e) {
-            note = new textNote(0, "Error Fetching Note", Timestamp.valueOf("0"), Timestamp.valueOf("0"), 0);
+            note = new TextNote(0, "Error Fetching Note", Timestamp.valueOf("0"), Timestamp.valueOf("0"), 0);
             Log.e("Exception", e.toString());
         }
         return note;
+    }
+
+    public List<TextNote> getTextNoteByOwner(int o) {
+        List textNotesList = new ArrayList<TextNote>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query("textNotes", new String[]{"id", "note", "created", "edited", "owner"}, "owner = " + o, null, null, null, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    TextNote textNote = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+                    textNotesList.add(textNote);
+                } while (cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.e("Exception", e.toString());
+        }
+        return textNotesList;
     }
 
 }
