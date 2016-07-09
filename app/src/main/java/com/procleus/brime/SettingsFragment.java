@@ -17,7 +17,7 @@ import android.widget.ListView;
  */
 public class SettingsFragment extends Fragment {
 
-    public static String[] settingsOptions = new String[]{"Account Info","Change Password","Share App","Sign Out", "FAQ", "About Us"};
+    public static String[] settingsOptions = new String[]{"Account Info","Change Password","Share App","Sign Out", "About Us"};
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
