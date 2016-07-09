@@ -19,7 +19,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private static final int TIME_DELAY = 2000;
+    private static long back_pressed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +53,40 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             Toast.makeText(MainActivity.this, "You cannot Exit", Toast.LENGTH_SHORT).show();
+        }*/
+        //Getting fragment from stack when pressed back button 
+        //if all fragments popped then if back pressed twice performs exit
+       
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        if (fragmentManager.getBackStackEntryCount()==0) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                int fragments = fragmentManager.getBackStackEntryCount();
+                if (fragments > 0) {
+                    super.onBackPressed();
+                } else {
+                    if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+                        super.onBackPressed();
+                    } else {
+                        Toast.makeText(getBaseContext(), "Press once again to exit!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    back_pressed = System.currentTimeMillis();
+                }
+            }
+        } else {
+            fragmentManager.popBackStack();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,6 +120,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = new PublicFragment();
+
         if (id == R.id.nav_public_notes) {
             getSupportActionBar().setTitle("Public Notes");
             fragment = new PublicFragment();
@@ -116,8 +145,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+        //adding fragments to stack
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).addToBackStack(null).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
