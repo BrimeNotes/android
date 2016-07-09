@@ -32,6 +32,11 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_margin="8dp"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_weight="0.8"
@@ -49,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/textColorInputHint"
             android:text="Note Your\nMemories along with\nthe moments"

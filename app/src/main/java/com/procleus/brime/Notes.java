@@ -50,7 +50,7 @@ public class Notes extends SQLiteOpenHelper {
         db.close();
     }
 
-    public TextNote getTextNoteById(int id) {
+    public textNote getTextNoteById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query("textNotes", new String[]{"id", "note", "created", "edited", "owner"}, "id = " + id, null, null, null, null);
@@ -58,24 +58,24 @@ public class Notes extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
         }
-        TextNote note;
+        textNote note;
         try {
-            note = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+            note = new textNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
         } catch (Exception e) {
-            note = new TextNote(0, "Error Fetching Note", Timestamp.valueOf("0"), Timestamp.valueOf("0"), 0);
+            note = new textNote(0, "Error Fetching Note", Timestamp.valueOf("0"), Timestamp.valueOf("0"), 0);
             Log.e("Exception", e.toString());
         }
         return note;
     }
 
-    public List<TextNote> getTextNoteByOwner(int o) {
-        List textNotesList = new ArrayList<TextNote>();
+    public List<textNote> getTextNoteByOwner(int o) {
+        List textNotesList = new ArrayList<textNote>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query("textNotes", new String[]{"id", "note", "created", "edited", "owner"}, "owner = " + o, null, null, null, null);
         try {
             if (cursor.moveToFirst()) {
                 do {
-                    TextNote textNote = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+                    textNote textNote = new textNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
                     textNotesList.add(textNote);
                 } while (cursor.moveToNext());
             }
