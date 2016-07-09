@@ -33,4 +33,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_action_add" />
 
+    <include layout="@layout/fab_actions_layout" />
+
 </android.support.design.widget.CoordinatorLayout>
