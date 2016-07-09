@@ -1,5 +1,6 @@
 package com.procleus.brime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -218,9 +219,11 @@ public class MainActivity extends AppCompatActivity
             fragment = new SettingsFragment();
         } else if (id == R.id.nav_sync) {
 
+        } else if (id == R.id.nav_explore) {
+            Intent intent = new Intent(MainActivity.this, GetStartedActivity.class);
+            intent.putExtra("from", "mainActivity");
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
         //adding fragments to stack

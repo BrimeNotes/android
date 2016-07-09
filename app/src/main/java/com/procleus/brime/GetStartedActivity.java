@@ -9,6 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,9 +64,18 @@ public class GetStartedActivity extends AppCompatActivity{
                 if (current < layouts.length) {
                     viewPager.setCurrentItem(current);
                 } else {
-                    Intent intent = new Intent(GetStartedActivity.this, SignupActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Bundle extras = getIntent().getExtras();
+                    String from = extras.getString("from").trim();
+                    Log.i("from", from);
+                    if (from.contains("mainActivity")) {
+                        Intent backToIntent = new Intent(GetStartedActivity.this, MainActivity.class);
+                        startActivity(backToIntent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(GetStartedActivity.this, SignupActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });
@@ -73,8 +83,17 @@ public class GetStartedActivity extends AppCompatActivity{
         buttonSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GetStartedActivity.this, SigninActivity.class);
-                startActivity(intent);
+                Bundle extras = getIntent().getExtras();
+                String from = extras.getString("from").trim();
+                Log.i("from", from);
+                if (from.contains("mainActivity")) {
+                    Intent backToIntent = new Intent(GetStartedActivity.this, MainActivity.class);
+                    startActivity(backToIntent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(GetStartedActivity.this, SigninActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
