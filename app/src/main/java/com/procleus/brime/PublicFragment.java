@@ -15,6 +15,7 @@ public class PublicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainActivity) getActivity()).setActionBarTitle("Public Notes");
         if(isEmptyPublic == true){
             return inflater.inflate(R.layout.empty_notes, container, false);
         }

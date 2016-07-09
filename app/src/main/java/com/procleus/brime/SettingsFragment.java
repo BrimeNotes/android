@@ -24,6 +24,7 @@ public class SettingsFragment extends Fragment {
 
        final View v = inflater.inflate(R.layout.settings_fragment,container,false);
         ListView lv = (ListView)v.findViewById(R.id.listView);
+        ((MainActivity) getActivity()).setActionBarTitle("Settings");
 
         ArrayAdapter<String> ar = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,settingsOptions);
         lv.setAdapter(ar);

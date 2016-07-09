@@ -1,6 +1,7 @@
 package com.procleus.brime;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +14,7 @@ import android.widget.ListView;
 /**
  * Created by Ujjwal on 07-07-2016.
  */
-public class LabelsFragment extends Fragment{
+public class LabelsFragment extends Fragment {
 
     private static ListView listView;
     public static String[] labels = new String[]{"Inspiration", "Personal", "Work"};
@@ -21,6 +22,7 @@ public class LabelsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainActivity) getActivity()).setActionBarTitle("Labels");
         View v =inflater.inflate(R.layout.labels_gragment, container, false);
         Button addLabel = (Button) v.findViewById(R.id.add_label);
         /*addLabel.setOnClickListener(new View.OnClickListener() {

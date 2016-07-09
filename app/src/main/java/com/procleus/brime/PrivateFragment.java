@@ -15,6 +15,7 @@ public class PrivateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainActivity) getActivity()).setActionBarTitle("Private Notes");
         if(isEmptyPrivate == true){
             return inflater.inflate(R.layout.empty_notes, container, false);
         }
