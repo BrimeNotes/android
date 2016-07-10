@@ -65,12 +65,13 @@ public class GetStartedActivity extends AppCompatActivity{
                     viewPager.setCurrentItem(current);
                 } else {
                     Bundle extras = getIntent().getExtras();
-                    String from = extras.getString("from").trim();
-                    Log.i("from", from);
-                    if (from.contains("mainActivity")) {
-                        Intent backToIntent = new Intent(GetStartedActivity.this, MainActivity.class);
-                        startActivity(backToIntent);
-                        finish();
+                    if (extras != null) {
+                        String from = extras.getString("from").trim();
+                        if (from.contains("mainActivity")) {
+                            Intent backToIntent = new Intent(GetStartedActivity.this, MainActivity.class);
+                            startActivity(backToIntent);
+                            finish();
+                        }
                     } else {
                         Intent intent = new Intent(GetStartedActivity.this, SignupActivity.class);
                         startActivity(intent);
