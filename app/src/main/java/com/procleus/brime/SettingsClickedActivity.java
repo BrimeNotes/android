@@ -29,10 +29,9 @@ public class SettingsClickedActivity extends AppCompatActivity {
             // Share App
         } else if (position == 3) {
             // Sign Out
-        } else if (position == 5) {
-            // FAQ
-        } else if (position == 6) {
-            // About Us
+        } else if (position == 4) {
+            getSupportActionBar().setTitle("About Us");
+            fragment = new AboutUsFragment();
         }
         //adding fragments to stack
         FragmentManager fragmentManager = getSupportFragmentManager();
