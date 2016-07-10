@@ -60,7 +60,7 @@ public class Notes extends SQLiteOpenHelper {
         }
         TextNote note;
         try {
-            note = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+            note = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), Timestamp.valueOf(cursor.getString(3)), Timestamp.valueOf(cursor.getString(4)), Integer.parseInt(cursor.getString(5)));
         } catch (Exception e) {
             note = new TextNote(0, "Error Fetching Note", "Error", Timestamp.valueOf("0"), Timestamp.valueOf("0"), 0);
             Log.e("Exception", e.toString());
@@ -69,15 +69,20 @@ public class Notes extends SQLiteOpenHelper {
     }
 
     public List<TextNote> getTextNoteByOwner(int o) {
+        //Log.e("Error","1Nothing fetched");
         List textNotesList = new ArrayList<TextNote>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query("textNotes", new String[]{"id", "note", "title", "created", "edited", "owner"}, "owner = " + o, null, null, null, null);
         try {
             if (cursor.moveToFirst()) {
                 do {
-                    TextNote textNote = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), Timestamp.valueOf(cursor.getString(2)), Timestamp.valueOf(cursor.getString(3)), Integer.parseInt(cursor.getString(4)));
+                    Log.e("Fetched", String.valueOf(Integer.parseInt(cursor.getString(0))));
+                    TextNote textNote = new TextNote(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2), Timestamp.valueOf(cursor.getString(3)), Timestamp.valueOf(cursor.getString(4)), Integer.parseInt(cursor.getString(5)));
                     textNotesList.add(textNote);
+                    //Log.i("success","fetched");
                 } while (cursor.moveToNext());
+            } else {
+                // Log.e("Error","Nothing fetched");
             }
         } catch (Exception e) {
             Log.e("Exception", e.toString());

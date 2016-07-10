@@ -2,16 +2,15 @@ package com.procleus.brime;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.Fragment;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,9 +21,9 @@ import java.util.List;
  */
 public class PublicFragment extends Fragment {
     final boolean isEmptyPublic = false;
+    ImageView mImageView;    //reference to the ImageView
+    int xDim, yDim;        //stores ImageView dimensions
     private View view;
-    ImageView mImageView;	//reference to the ImageView
-    int xDim, yDim;		//stores ImageView dimensions
     private bitmapCreate bitmap;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,17 +37,13 @@ public class PublicFragment extends Fragment {
             mImageView = (ImageView)view.findViewById(R.id.empty_avatar);
             xDim=300;
             yDim=300;
-            mImageView.setImageBitmap(bitmap.decodeSampledBitmapFromResource(getResources(), R.drawable.empty_buddy, xDim, yDim));
+            mImageView.setImageBitmap(bitmapCreate.decodeSampledBitmapFromResource(getResources(), R.drawable.empty_buddy, xDim, yDim));
             return view;
         }
         else {
 
             CustomObject c1 = new CustomObject();
-            ArrayList<CustomObject> objects = new ArrayList<CustomObject>();
-
-
-
-
+            ArrayList<CustomObject> objects = new ArrayList<>();
 
 /*Mudit see this */
       /*
@@ -58,14 +53,14 @@ public class PublicFragment extends Fragment {
 
 
             Notes tn = new Notes(getContext());
-            List<TextNote> textNote = (List)tn.getTextNoteByOwner(1);
+            List<TextNote> textNote = tn.getTextNoteByOwner(1);
+            //Log.i("id",String.valueOf(textNote.get(2).id));
             Iterator itr = textNote.iterator();
 
 
             while(itr.hasNext())
             {
                 TextNote tnote = (TextNote)itr.next();
-
                 c1.add(tnote.title,tnote.note);
                 Log.i("DAYAM",tnote.title+tnote.note);
                 objects.add(c1);
@@ -73,8 +68,6 @@ public class PublicFragment extends Fragment {
             CustomAdapter customAdapter = new CustomAdapter(getContext(),objects);
             ListView listView = (ListView)v.findViewById(R.id.listView);
             listView.setAdapter(customAdapter);
-
-
             return v;
         }
 
@@ -117,11 +110,6 @@ public class PublicFragment extends Fragment {
         private LayoutInflater inflater;
         private ArrayList<CustomObject> objects;
 
-        private class ViewHolder {
-            TextView textView1;
-            TextView textView2;
-        }
-
         public CustomAdapter(Context context, ArrayList<CustomObject> objects) {
             inflater = LayoutInflater.from(context);
             this.objects = objects;
@@ -153,6 +141,11 @@ public class PublicFragment extends Fragment {
             holder.textView1.setText(objects.get(position).getProp1());
             holder.textView2.setText(objects.get(position).getProp2());
             return convertView;
+        }
+
+        private class ViewHolder {
+            TextView textView1;
+            TextView textView2;
         }
     }
 
