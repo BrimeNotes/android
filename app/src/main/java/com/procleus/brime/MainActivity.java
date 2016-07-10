@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity
     private static long back_pressed;
     private FloatingActionButton fab,fab1,fab2,fab3;
     private Animation show_fab,hide_fab,rotate_fab_forward,rotate_fab_backward;
+    SharedPreferences sharedPreferences = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("com.procleus.brime", MODE_PRIVATE);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView =  navigationView.getHeaderView(0);
+        final TextView profile = (TextView)hView.findViewById(R.id.name);
+        String name = sharedPreferences.getString("emailpref", "Guest");
+        profile.setText(name);
+        
         Fragment fragment = new PublicFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
