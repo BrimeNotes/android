@@ -50,7 +50,7 @@ public class PublicFragment extends Fragment {
     }
 
     public void fillList() {
-        CustomObject c1 = new CustomObject();
+
         ArrayList<CustomObject> objects = new ArrayList<>();
         /**
          *
@@ -65,13 +65,15 @@ public class PublicFragment extends Fragment {
 
         while (itr.hasNext()) {
             TextNote tnote = (TextNote) itr.next();
+            CustomObject c1 = new CustomObject();
             c1.add(tnote.title, tnote.note);
-            Log.i("DAYAM", tnote.title + tnote.note);
             objects.add(c1);
+
         }
         CustomAdapter customAdapter = new CustomAdapter(getContext(), objects);
         ListView listView = (ListView) v.findViewById(R.id.listView);
         listView.setAdapter(customAdapter);
+
     }
 
 
@@ -98,11 +100,11 @@ public class PublicFragment extends Fragment {
 
 
         public String getProp1() {
-            return prop1;
+            return this.prop1;
         }
 
         public String getProp2() {
-            return prop2;
+            return this.prop2;
         }
     }
 
@@ -141,6 +143,7 @@ public class PublicFragment extends Fragment {
             }
             holder.textView1.setText(objects.get(position).getProp1());
             holder.textView2.setText(objects.get(position).getProp2());
+
             return convertView;
         }
 
