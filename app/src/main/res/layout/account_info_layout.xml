@@ -12,7 +12,10 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp" >
+        android:paddingBottom="8dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp">
         <TextView
             android:layout_width="wrap_content"
             android:paddingRight="10dp"
@@ -29,7 +32,10 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:paddingBottom="10dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
         android:layout_height="wrap_content" >
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +53,10 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:paddingBottom="10dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
         android:layout_height="wrap_content" >
         <TextView
             android:layout_width="wrap_content"
@@ -65,11 +74,14 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:paddingBottom="10dp"
+        android:paddingBottom="8dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
         android:layout_height="wrap_content" >
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:paddingBottom="10dp"
             android:layout_height="wrap_content" >
             <TextView
@@ -83,16 +95,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:id="@+id/dob"
-                android:text="Date oF Birth :"
-                android:paddingBottom="10dp"
-                android:textSize="20sp" />
+                android:hint="Date Pick"
+                android:onClick="showDatePickerDialog"
+                android:id="@+id/date_picker"/>
         </LinearLayout>
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="106dp"
-            android:id="@+id/datePicker" />
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
