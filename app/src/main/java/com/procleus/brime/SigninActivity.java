@@ -99,6 +99,8 @@ public class SigninActivity extends AppCompatActivity {
                 logIn();
             }
         });
+
+
         //FBcode
         final List<String> permissionNeeds = Arrays.asList("user_friends","user_photos","email");
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -202,19 +204,7 @@ public class SigninActivity extends AppCompatActivity {
                 }
             }, 3000);
     }
-    public void autoLogIn() {
-        new AutoPostClass(this).execute();
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        if (responseOp == 1) {
-                            onLogInSuccess();
-                        } else
-                            onLogInFailed("Data Validation error");
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
-    }
+
      public void onLogInSuccess() {
 
          Toast.makeText(getBaseContext(), "Logged in successfully", Toast.LENGTH_LONG).show();
@@ -282,53 +272,5 @@ public class SigninActivity extends AppCompatActivity {
             return null;
         }
     }
-    private class AutoPostClass extends AsyncTask<String, Void, Void> {
-        private final Context context;
-        //fetch data from sharedPref session
 
-        String email=session.getString(emailpref,null);
-        String password=session.getString(passwordpref,null);
-
-        public AutoPostClass(Context c) {
-            this.context = c;
-        }
-        protected void onPreExecute() {
-        }
-        @Override
-        protected Void doInBackground(String... params) {
-            try {
-                URL url = new URL("http://api.brime.tk/login.php");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + password;
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("USER-AGENT", "Brime Android App");
-                connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
-                connection.setDoOutput(true);
-                DataOutputStream dStream = new DataOutputStream(connection.getOutputStream());
-                dStream.writeBytes(urlParameters);
-                dStream.flush();
-                dStream.close();
-                //int responseCode = connection.getResponseCode();
-                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line = "";
-                StringBuilder responseOutput = new StringBuilder();
-                while ((line = br.readLine()) != null) {
-                    responseOutput.append(line);
-                }
-                Log.i("AutoResponse", responseOutput.toString());
-                if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
-                    responseOp = 1;
-                } else {
-                    responseOp = 2;
-                    //TODO Delete data from shared pref
-                }
-                br.close();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
 }
