@@ -21,6 +21,7 @@ public class CreateNotes extends AppCompatActivity {
         EditText title = (EditText) findViewById(R.id.noteTitle);
         EditText note = (EditText) findViewById(R.id.note);
         tn.insertTextNote(note.getText().toString(), title.getText().toString(), 1);
+        finish();
         Log.i(title.getText().toString(), note.getText().toString());
     }
 }
