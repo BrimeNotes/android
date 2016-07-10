@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -40,19 +38,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SigninActivity extends AppCompatActivity {
+    public static final String PREF = "com.procleus.brime";
+    public static final String emailpref = "null";
+    public static final String passwordpref = "nopassKey";
+    public static final String loggedin = "IsLoggedIn";
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "SignInActivity";
+    public SharedPreferences session;
     ProgressDialog progressDialog;
     int responseOp;
     buttons b ;
     edittext etun, etpass;
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager callbackManager;
-    public static final String PREF="com.procleus.brime";
-    public static final String emailpref = "null" ;
-    public static final String passwordpref = "nopassKey";
-    public static final String loggedin="IsLoggedIn";
-    public SharedPreferences session;
 
     public static String convertByteToHex(byte data[]) {
         StringBuffer hexData = new StringBuffer();
@@ -262,6 +260,7 @@ public class SigninActivity extends AppCompatActivity {
                 }
                 Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
+
                     responseOp=1;
                     // Save data in shared pref
                     session = getSharedPreferences(PREF,Context.MODE_PRIVATE);
@@ -316,10 +315,9 @@ public class SigninActivity extends AppCompatActivity {
                 while ((line = br.readLine()) != null) {
                     responseOutput.append(line);
                 }
-                Log.i("response", responseOutput.toString());
+                Log.i("AutoResponse", responseOutput.toString());
                 if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
                     responseOp = 1;
-
                 } else {
                     responseOp = 2;
                     //TODO Delete data from shared pref
