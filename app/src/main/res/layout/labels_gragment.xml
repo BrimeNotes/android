@@ -10,11 +10,4 @@
         android:background="#7ff7f3f3"
         android:padding="5dp"
         android:elevation="5dp" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Label"
-        android:id="@+id/add_label"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
 </RelativeLayout>
