@@ -54,4 +54,8 @@ public class SettingsClickedActivity extends AppCompatActivity {
         Intent i= new Intent(SettingsClickedActivity.this,SigninActivity.class);
         startActivity(i);
     }
+     public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
 }
