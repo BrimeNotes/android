@@ -1,5 +1,6 @@
 package com.procleus.brime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -69,7 +70,8 @@ public class MainActivity extends AppCompatActivity
                 animateFAB();
                 break;
             case R.id.fab_1:
-
+                Intent i = new Intent(MainActivity.this,CreateNotes.class);
+                startActivity(i);
                 Log.d("Fab clicked ", "Fab 1");
                 break;
             case R.id.fab_2:
