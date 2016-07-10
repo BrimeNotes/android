@@ -21,7 +21,7 @@ public class SettingsClickedActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         int position;
         position = Integer.parseInt(extras.getString("a"));
-        Fragment fragment = null;
+        Fragment fragment = new AccountInfoFragment();
         if (position == 0) {
             getSupportActionBar().setTitle("Account Info");
             fragment = new AccountInfoFragment();
