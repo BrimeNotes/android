@@ -29,9 +29,9 @@ public class SettingsClickedActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Change Password");
             fragment = new ChangePasswordFragment();
         } else if (position == 2) {
-            // Share App
-        } else if (position == 3) {
             Sign_Out();
+        } else if (position == 3) {
+            //Shareapp
         } else if (position == 4) {
             getSupportActionBar().setTitle("About Us");
             fragment = new AboutUsFragment();
