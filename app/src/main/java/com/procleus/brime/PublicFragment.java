@@ -23,13 +23,14 @@ public class PublicFragment extends Fragment {
     final boolean isEmptyPublic = false;
     ImageView mImageView;    //reference to the ImageView
     int xDim, yDim;        //stores ImageView dimensions
+    View v;
     private View view;
     private bitmapCreate bitmap;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =inflater.inflate(R.layout.public_fragment,container,false);
+        v = inflater.inflate(R.layout.public_fragment, container, false);
 
         ((MainActivity) getActivity()).setActionBarTitle("Public Notes");
         if(isEmptyPublic == true){
@@ -41,33 +42,6 @@ public class PublicFragment extends Fragment {
             return view;
         }
         else {
-
-            CustomObject c1 = new CustomObject();
-            ArrayList<CustomObject> objects = new ArrayList<>();
-
-/*Mudit see this */
-      /*
-      * if textNote in line 61 is recieving values perfectly
-      *
-      * */
-
-
-            Notes tn = new Notes(getContext());
-            List<TextNote> textNote = tn.getTextNoteByOwner(1);
-            //Log.i("id",String.valueOf(textNote.get(2).id));
-            Iterator itr = textNote.iterator();
-
-
-            while(itr.hasNext())
-            {
-                TextNote tnote = (TextNote)itr.next();
-                c1.add(tnote.title,tnote.note);
-                Log.i("DAYAM",tnote.title+tnote.note);
-                objects.add(c1);
-            }
-            CustomAdapter customAdapter = new CustomAdapter(getContext(),objects);
-            ListView listView = (ListView)v.findViewById(R.id.listView);
-            listView.setAdapter(customAdapter);
             return v;
         }
 
@@ -75,11 +49,38 @@ public class PublicFragment extends Fragment {
 
     }
 
+    public void fillList() {
+        CustomObject c1 = new CustomObject();
+        ArrayList<CustomObject> objects = new ArrayList<>();
+        /**
+         *
+         * Check this Swagstik
+         *
+         * **/
+        Notes tn = new Notes(getContext());
+        List<TextNote> textNote = tn.getTextNoteByOwner(1);
+        //Log.i("id",String.valueOf(textNote.get(2).id));
+        Iterator itr = textNote.iterator();
 
+
+        while (itr.hasNext()) {
+            TextNote tnote = (TextNote) itr.next();
+            c1.add(tnote.title, tnote.note);
+            Log.i("DAYAM", tnote.title + tnote.note);
+            objects.add(c1);
+        }
+        CustomAdapter customAdapter = new CustomAdapter(getContext(), objects);
+        ListView listView = (ListView) v.findViewById(R.id.listView);
+        listView.setAdapter(customAdapter);
+    }
 
 
     /*CUSTOM ADAPTER IMPLEMENTATION*/
-
+    @Override
+    public void onResume() {
+        fillList();
+        super.onResume();
+    }
 
 
     public class CustomObject {
