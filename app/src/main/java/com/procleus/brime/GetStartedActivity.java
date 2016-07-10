@@ -84,12 +84,13 @@ public class GetStartedActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Bundle extras = getIntent().getExtras();
-                String from = extras.getString("from").trim();
-                Log.i("from", from);
-                if (from.contains("mainActivity")) {
-                    Intent backToIntent = new Intent(GetStartedActivity.this, MainActivity.class);
-                    startActivity(backToIntent);
-                    finish();
+                if (extras != null) {
+                    String from = extras.getString("from").trim();
+                    if (from.contains("mainActivity")) {
+                        Intent backToIntent = new Intent(GetStartedActivity.this, MainActivity.class);
+                        startActivity(backToIntent);
+                        finish();
+                    }
                 } else {
                     Intent intent = new Intent(GetStartedActivity.this, SigninActivity.class);
                     startActivity(intent);
