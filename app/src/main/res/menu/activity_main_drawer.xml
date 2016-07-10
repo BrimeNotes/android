@@ -30,7 +30,7 @@
         <menu>
             <item
                 android:id="@+id/nav_explore"
-                android:icon="@drawable/ic_explore_black_24dp"
+                android:icon="@drawable/ic_cloud_upload_black_24dp"
                 android:title="Explore" />
             <item
                 android:id="@+id/nav_share"

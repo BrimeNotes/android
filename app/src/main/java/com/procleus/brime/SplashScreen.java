@@ -2,6 +2,7 @@ package com.procleus.brime;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -11,13 +12,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.content.SharedPreferences;
 import android.transition.Fade;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 public class SplashScreen extends Activity {
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
-    SharedPreferences sharedPreferences = null;
+    SharedPreferences sharedPreferences;
     ImageView mImageView;	//reference to the ImageView
     int xDim, yDim;		//stores ImageView dimensions
     private bitmapCreate bitmap;
@@ -27,6 +29,7 @@ public class SplashScreen extends Activity {
 
         sharedPreferences = getSharedPreferences("com.procleus.brime", MODE_PRIVATE);
         setContentView(R.layout.activity_splash);
+
 
         /*
         View decorView = getWindow().getDecorView();
@@ -50,8 +53,7 @@ public class SplashScreen extends Activity {
                     finish();
                 }
                 else {
-                    Intent mainIntent = new Intent(SplashScreen.this,SigninActivity.class);
-                    startActivity(mainIntent);
+                    preLogInCheck();
                     finish();
                 }
             }
@@ -64,5 +66,15 @@ public class SplashScreen extends Activity {
         sharedPreferences = getSharedPreferences("com.procleus.brime", MODE_PRIVATE);
     }
 
-
+    public void preLogInCheck(){
+        //== Support Offline Session==
+        SharedPreferences clogin = getApplicationContext().getSharedPreferences(SigninActivity.PREF, MODE_PRIVATE);
+        if(clogin.getBoolean("loggedin", false)){
+            Intent i=new Intent(SplashScreen.this,MainActivity.class);
+            startActivity(i);
+        }else{
+            Intent mainIntent = new Intent(SplashScreen.this,SigninActivity.class);
+            startActivity(mainIntent);
+        }
+    }
 }

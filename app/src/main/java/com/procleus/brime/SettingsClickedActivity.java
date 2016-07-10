@@ -1,6 +1,8 @@
 package com.procleus.brime;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,7 +30,7 @@ public class SettingsClickedActivity extends AppCompatActivity {
         } else if (position == 2) {
             // Share App
         } else if (position == 3) {
-            // Sign Out
+            Sign_Out();
         } else if (position == 4) {
             getSupportActionBar().setTitle("About Us");
             fragment = new AboutUsFragment();
@@ -41,5 +43,15 @@ public class SettingsClickedActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    public void Sign_Out(){
+        SharedPreferences sharedpreferences = getSharedPreferences(SigninActivity.PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear();
+        editor.commit();
+        finish();
+        Intent i= new Intent(SettingsClickedActivity.this,SigninActivity.class);
+        startActivity(i);
     }
 }

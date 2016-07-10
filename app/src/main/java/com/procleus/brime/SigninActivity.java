@@ -3,11 +3,14 @@ package com.procleus.brime;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -45,6 +48,12 @@ public class SigninActivity extends AppCompatActivity {
     edittext etun, etpass;
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager callbackManager;
+    public static final String PREF="com.procleus.brime";
+    public static final String emailpref = "null" ;
+    public static final String passwordpref = "nopassKey";
+    public static final String loggedin="IsLoggedIn";
+    public SharedPreferences session;
+
     public static String convertByteToHex(byte data[]) {
         StringBuffer hexData = new StringBuffer();
         for (int byteIndex = 0; byteIndex < data.length; byteIndex++)
@@ -102,6 +111,10 @@ public class SigninActivity extends AppCompatActivity {
                 AccessToken accessToken = loginResult.getAccessToken();
                 Profile profile = Profile.getCurrentProfile();
                 if(profile!=null){
+                    //support local session in app when login through FB
+                    session = getSharedPreferences(PREF,Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=session.edit();
+                    editor.putBoolean("loggedin",true);
                     Intent i =new Intent(SigninActivity.this,MainActivity.class);
                     startActivity(i);
                 }
@@ -160,6 +173,10 @@ public class SigninActivity extends AppCompatActivity {
             // Signed in successfully, show authenticated UI.
           GoogleSignInAccount acct = result.getSignInAccount();
             //Toast.makeText(SigninActivity.this,acct.getDisplayName(),Toast.LENGTH_LONG).show();
+            //support local session in app when login through FB
+            session = getSharedPreferences(PREF,Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor=session.edit();
+            editor.putBoolean("loggedin",true);
             Intent i = new Intent(SigninActivity.this, MainActivity.class);
             startActivity(i);
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
@@ -201,15 +218,16 @@ public class SigninActivity extends AppCompatActivity {
                 }, 3000);
     }
      public void onLogInSuccess() {
-        Toast.makeText(getBaseContext(), "Logged in successfully", Toast.LENGTH_LONG).show();
-        finish();
-        Intent i = new Intent(SigninActivity.this, MainActivity.class);
-        startActivity(i);
+
+         Toast.makeText(getBaseContext(), "Logged in successfully", Toast.LENGTH_LONG).show();
+         finish();
+         Intent i = new Intent(SigninActivity.this, MainActivity.class);
+         startActivity(i);
     }
     public void onLogInFailed(String error) {
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_LONG).show();
-
     }
+
     private class PostClass extends AsyncTask<String, Void, Void> {
         private final Context context;
         //data for login
@@ -245,7 +263,14 @@ public class SigninActivity extends AppCompatActivity {
                 Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
                     responseOp=1;
-                    //TODO Save data in shared pref
+                    // Save data in shared pref
+                    session = getSharedPreferences(PREF,Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=session.edit();
+                    //editor.putString(ID, );
+                    editor.putString("emailpref",email);
+                    editor.putString("passwordpref",hashText(password));
+                    editor.putBoolean("loggedin",true);
+                    editor.commit();
                 } else {
                     responseOp=2;    
                 }
@@ -260,10 +285,11 @@ public class SigninActivity extends AppCompatActivity {
     }
     private class AutoPostClass extends AsyncTask<String, Void, Void> {
         private final Context context;
-        //data for login
-        //TODO : Fetch fuckin data from fuckin shared pref
-        String email;
-        String password;
+        //fetch data from sharedPref session
+
+        String email=session.getString(emailpref,null);
+        String password=session.getString(passwordpref,null);
+
         public AutoPostClass(Context c) {
             this.context = c;
         }
@@ -293,6 +319,7 @@ public class SigninActivity extends AppCompatActivity {
                 Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
                     responseOp = 1;
+
                 } else {
                     responseOp = 2;
                     //TODO Delete data from shared pref
