@@ -22,13 +22,13 @@ public class Notes extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTextNotesTable = "CREATE TABLE textNotes (id int primary key AUTO_INCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner int)";
+        String createTextNotesTable = "CREATE TABLE textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer)";
         db.execSQL(createTextNotesTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String createTextNotesTable = "CREATE TABLE if not exists textNotes (id int primary key AUTO_INCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner int)";
+        String createTextNotesTable = "CREATE TABLE if not exists textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer)";
         db.execSQL(createTextNotesTable);
     }
 
