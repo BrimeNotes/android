@@ -198,10 +198,14 @@ public class SigninActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
             new Runnable() {
                 public void run() {
-                    if(responseOp==1) {
+                    if (responseOp==1) {
                         onLogInSuccess();
-                    }else
-                         onLogInFailed("Data Validation error");
+                    } else if (responseOp == 3) {
+                        onLogInFailed("Email Id not verified");
+                    } else {
+                        onLogInFailed("Data Validation error");
+                    }
+
                     progressDialog.dismiss();
                 }
             }, 3000);
@@ -250,19 +254,21 @@ public class SigninActivity extends AppCompatActivity {
                 while ((line = br.readLine()) != null) {
                     responseOutput.append(line);
                 }
-                Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
 
-                    responseOp=1;
+                    responseOp = 1;
                     // Save data in shared pref
-                    session = getSharedPreferences(PREF,Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor=session.edit();
+                    session = getSharedPreferences(PREF, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = session.edit();
                     //editor.putString(ID, );
-                    editor.putString("emailpref",email);
-                    editor.putString("passwordpref",hashText(password));
-                    editor.putBoolean("loggedin",true);
+                    editor.putString("emailpref", email);
+                    editor.putString("passwordpref", hashText(password));
+                    editor.putBoolean("loggedin", true);
                     editor.commit();
-                } else {
+                } else if (responseOutput.toString().replaceAll(" ", "").equals("Notverified")) {
+                    responseOp=3;
+                }
+                else {
                     responseOp=2;    
                 }
                 br.close();
