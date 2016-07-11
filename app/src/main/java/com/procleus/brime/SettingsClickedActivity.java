@@ -44,6 +44,8 @@ public class SettingsClickedActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
+
     }
 
     public void Sign_Out(){

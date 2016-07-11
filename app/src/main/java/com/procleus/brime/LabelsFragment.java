@@ -24,7 +24,7 @@ public class LabelsFragment extends Fragment {
         // Inflate the layout for this fragment
         ((MainActivity) getActivity()).setActionBarTitle("Labels");
         View v =inflater.inflate(R.layout.labels_gragment, container, false);
-        Button addLabel = (Button) v.findViewById(R.id.add_label);
+        //Button addLabel = (Button) v.findViewById(R.id.add_label);
         /*addLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -178,6 +178,7 @@ public class SigninActivity extends AppCompatActivity {
             session = getSharedPreferences(PREF,Context.MODE_PRIVATE);
             SharedPreferences.Editor editor=session.edit();
             editor.putBoolean("loggedin",true);
+            editor.commit();
             Intent i = new Intent(SigninActivity.this, MainActivity.class);
             startActivity(i);
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
