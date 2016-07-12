@@ -47,19 +47,19 @@ public class CustomDialogBox extends Dialog implements View.OnClickListener{
 
 
                     Toast.makeText(getContext(), "Public segment", Toast.LENGTH_SHORT).show();
-                    ((CreateNotes)c).create(v);
+                    ((CreateNotes)c).check();
                     c.finish();
                 }
                 else if(id==R.id.radioButtonprivate){
 
                     /**********///***/*/*/*/*/*/*// PRivate Segment
+
                     Toast.makeText(getContext(), "Private segment", Toast.LENGTH_SHORT).show();
                     c.finish();
 
                 }
                 else
                 {
-
                     ///******None selected param
 
                     Toast.makeText(getContext(), "Please choose Access Method", Toast.LENGTH_SHORT).show();
