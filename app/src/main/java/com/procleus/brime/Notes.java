@@ -25,12 +25,44 @@ public class Notes extends SQLiteOpenHelper {
         String createTextNotesTable = "CREATE TABLE textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer,label text)";
         Log.d("Sql Query Create :",createTextNotesTable);
         db.execSQL(createTextNotesTable);
+        String createLabelTable = "CREATE TABLE label (label text)";
+        Log.d("Sql Query Create :",createLabelTable);
+        db.execSQL(createLabelTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String createTextNotesTable = "CREATE TABLE if not exists textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer,label text)";
         db.execSQL(createTextNotesTable);
+        String createLabelTable = "CREATE TABLE label (label text)";
+        db.execSQL(createLabelTable);
+    }
+
+    public void insertLabel(String l){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query="INSERT INTO label VALUES('" + l + "')";
+        db.execSQL(query);
+        Log.d("Sql Query insert  ",query);
+        db.close();
+
+    }
+
+    public ArrayList<String> retrieveLabel(){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<String> ArrayLis = new ArrayList<String>();
+        String query="select * from label";
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do {
+                ArrayLis.add(cursor.getString(0));
+
+                Log.d("Student Label Name ", cursor.getString(0));
+            }while (cursor.moveToNext());
+        }
+
+        return ArrayLis;
     }
 
     public void insertTextNote(String n, String t,String a, int o,String l) {

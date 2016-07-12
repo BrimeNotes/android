@@ -18,11 +18,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CreateNotes extends AppCompatActivity {
 
     SharedPreferences sharedPreferences = null;
+    ArrayList<String>  labelsRetrieved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,25 @@ public class CreateNotes extends AppCompatActivity {
                 R.array.lables_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+
+        /*/This is Database Spinner Retreival*/
+        /* Spinner getting Data from dataBase*/
+
+        final Notes tn =new Notes(CreateNotes.this);
+
+
+
+        labelsRetrieved = new ArrayList<String>();
+        labelsRetrieved=tn.retrieveLabel();
+
+
+        ArrayAdapter<String> my_adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, labelsRetrieved);
+
+        my_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(my_adapter);
+
 
         negative.setOnClickListener(new View.OnClickListener() {
             @Override
