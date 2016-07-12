@@ -3,6 +3,9 @@ package com.procleus.brime;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +29,22 @@ public class PublicFragment extends Fragment {
     View v;
     private View view;
     private bitmapCreate bitmap;
+
+    // == == Card View Variables = == = ==
+
+    Notes helpher;
+    List<NotesModel> dbList;
+    RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    //====== Card View === == = == =
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.public_fragment, container, false);
+       final View v = inflater.inflate(R.layout.public_fragment, container, false);
 
         ((MainActivity) getActivity()).setActionBarTitle("Public Notes");
         if(isEmptyPublic == true){
@@ -39,24 +53,49 @@ public class PublicFragment extends Fragment {
             xDim=300;
             yDim=300;
             mImageView.setImageBitmap(bitmapCreate.decodeSampledBitmapFromResource(getResources(), R.drawable.empty_buddy, xDim, yDim));
-            return view;
+
         }
         else {
-            return v;
+            view = inflater.inflate(R.layout.public_fragment, container, false);
+            initialiseList();
         }
-
-
-
+     return view;
+    }
+    @Override
+    public void onResume() {
+        initialiseList();
+        super.onResume();
     }
 
+    public void initialiseList(){
+        helpher = new Notes(getContext());
+        dbList= new ArrayList<NotesModel>();
+        dbList = helpher.getDataFromDB("public",0);
+
+
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recycleview_public);
+
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new RecyclerAdapter(getContext(),dbList);
+        DefaultItemAnimator anim = new DefaultItemAnimator();
+        anim.setAddDuration(500);
+        anim.setRemoveDuration(700);
+        mRecyclerView.setItemAnimator(anim);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+/** ============================= Swastik Implementation ==========================
     public void fillList() {
 
         ArrayList<CustomObject> objects = new ArrayList<>();
-        /**
-         *
-         * Check this Swagstik
-         *
-         * **/
+
+         //Check this Swagstik
+
         Notes tn = new Notes(getContext());
         List<TextNote> textNote = tn.getTextNoteByOwner(1);
         //Log.i("id",String.valueOf(textNote.get(2).id));
@@ -77,7 +116,7 @@ public class PublicFragment extends Fragment {
     }
 
 
-    /*CUSTOM ADAPTER IMPLEMENTATION*/
+    //CUSTOM ADAPTER IMPLEMENTATION
     @Override
     public void onResume() {
         fillList();
@@ -152,5 +191,6 @@ public class PublicFragment extends Fragment {
             TextView textView2;
         }
     }
+    **/
 
 }

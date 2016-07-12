@@ -77,6 +77,11 @@
         <activity
             android:name=".CreateNotes"
             android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".EditNotes"
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppThemeEditNotes"/>
 
         <receiver android:name=".textNotesWidget">
             <intent-filter>

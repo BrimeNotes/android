@@ -10,4 +10,6 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
+    <string name="create_note_hint">Note Title</string>
+    <string name="create_note_desc_hint">What is on your mind?</string>
 </resources>

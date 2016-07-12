@@ -22,28 +22,45 @@ public class Notes extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTextNotesTable = "CREATE TABLE textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer)";
+        String createTextNotesTable = "CREATE TABLE textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer)";
+        Log.d("Sql Query Create :",createTextNotesTable);
         db.execSQL(createTextNotesTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String createTextNotesTable = "CREATE TABLE if not exists textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer)";
+        String createTextNotesTable = "CREATE TABLE if not exists textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer)";
         db.execSQL(createTextNotesTable);
     }
 
     public void insertTextNote(String n, String t, int o) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("INSERT INTO textNotes(note,title,owner) VALUES('" + n + "','" + t + "'," + o + ")");
+        String query="INSERT INTO textNotes(note,title,owner,accessType,isDeleted) VALUES('" + n + "','" + t + "'," + o + ",'public',0)";
+        db.execSQL(query);
+        Log.d("Sql Query insert  ",query);
         db.close();
     }
 
-    public void updateTextNote(int i, String n, String t) {
+    /*public void updateTextNote(int id, String n, String t) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE textNotes set note = '" + n + "', title = '" + t + "', edited = now() WHERE id='" + i + "'");
+        db.execSQL("UPDATE textNotes set note = '" + n + "', title = '" + t + "', edited = now() WHERE id='" + id + "'");
+        db.close();
+    }*/
+    public void accessChange(int id,String access) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE textNotes set accessType = '"+ access +"' WHERE id='" + id + "'";
+        db.execSQL(query);
+        Log.d("Sql Query Access  ", query);
         db.close();
     }
-
+    public void moveToTrash(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE textNotes set isDeleted = 1  WHERE id='" + id + "'";
+        db.execSQL(query);
+        Log.d("Sql Query Trash  ", query);
+        db.close();
+    }
+    /*
     public void deleteTextNote(int i) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM textNotes WHERE id='" + i + "'");
@@ -89,5 +106,39 @@ public class Notes extends SQLiteOpenHelper {
         }
         return textNotesList;
     }
+*/
+    /* Retrive  data from database */
+    public List<NotesModel> getDataFromDB(String type,int trashVal){
+        List<NotesModel> modelList = new ArrayList<NotesModel>();
+        String query;
+        if (type == "both"){
+            query = "select * from textNotes where isDeleted ="+trashVal ;
+        }
+        else
+        {
+            query = "select * from textNotes where isDeleted ="+trashVal+" AND accessType = '"+type+"'";
+        }
+        Log.d("Sql Query get :",query);
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()){
+            do {
+                NotesModel model = new NotesModel();
+                model.setId(cursor.getInt(0));
+                model.setTitle(cursor.getString(2));
+                model.setDesc(cursor.getString(1));
+                model.setAccess_type(cursor.getString(6));
+                model.setIsDeleted(cursor.getInt(7));
+                modelList.add(model);
+                Log.d("Student Data Name ",cursor.getInt(0)+" title :  "+ cursor.getString(2) +" access type : "+ cursor.getString(5) +" Trash Val "+cursor.getInt(6));
+            }while (cursor.moveToNext());
+        }
+
+        Log.d("student data", modelList.toString());
+
+        return modelList;
+    }
+
 
 }
