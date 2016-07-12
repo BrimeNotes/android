@@ -24,6 +24,12 @@ public class CreateNotes extends AppCompatActivity {
     }
 
     public void create(View v) {
+        CustomDialogBox cdd =new CustomDialogBox(this);
+        cdd.show();
+    }
+
+    public void check()
+    {
         Notes tn = new Notes(this);
         EditText title = (EditText) findViewById(R.id.noteTitle);
         EditText note = (EditText) findViewById(R.id.note);
