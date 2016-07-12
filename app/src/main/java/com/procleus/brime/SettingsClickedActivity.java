@@ -51,11 +51,15 @@ public class SettingsClickedActivity extends AppCompatActivity {
     public void Sign_Out(){
         SharedPreferences sharedpreferences = getSharedPreferences(SigninActivity.PREF, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.clear();
+        editor.remove("emailpref");
+        editor.remove("passwordpref");
+        editor.remove("loggedin");
         editor.commit();
-        finish();
-        Intent i= new Intent(SettingsClickedActivity.this,SigninActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(this, SigninActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
+          finish();
     }
      public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();

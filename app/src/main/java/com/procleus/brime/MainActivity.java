@@ -1,5 +1,6 @@
 package com.procleus.brime;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,8 +34,7 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton fab,fab1,fab2,fab3;
     private Animation show_fab,hide_fab,rotate_fab_forward,rotate_fab_backward;
     SharedPreferences sharedPreferences = null;
-   private NavigationView navigationView;
-    private boolean setpfashome;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
         getSupportActionBar().setTitle("Public Notes");
     }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -99,7 +101,38 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    /* Function for Animation of Fab */
+    
+    //nervehammer
+     public void runDia(){
+        // Alert Dialog
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("OOPS... you are not logged in.\n\nPlease login to access this feature");
+        alertDialogBuilder.setNeutralButton("Login", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                //finish();
+                Intent i = new Intent(MainActivity.this, SigninActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setCancelable(true);
+        alertDialog.show();
+    }
+
+    public void popBack(){
+
+            String name = getSupportFragmentManager().getBackStackEntryAt(0).getName();
+            getSupportFragmentManager().popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            navigationView.getMenu().findItem(R.id.nav_public_notes).setChecked(true);
+
+    }
+/* Function for Animation of Fab */
     public void animateFAB(){
 
         if(isFabOpen){
@@ -166,14 +199,12 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         }
         if (fragments > 0) {
-
-            String name = getSupportFragmentManager().getBackStackEntryAt(0).getName();
-            getSupportFragmentManager().popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+           popBack();
             navigationView.getMenu().findItem(R.id.nav_public_notes).setChecked(true);
         }
         else {
             if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
-                super.onBackPressed();
+                 android.os.Process.killProcess(android.os.Process.myPid());
             } else {
                 Toast.makeText(getBaseContext(), "Press once again to exit!",
                         Toast.LENGTH_SHORT).show();
@@ -224,6 +255,7 @@ public void displayView(int viewId) {
     switch (viewId) {
         case R.id.nav_public_notes:
             fragment = new PublicFragment();
+             navigationView.getMenu().findItem(R.id.nav_public_notes).setChecked(true);
             break;
         case R.id.nav_private_notes:
             fragment = new PrivateFragment();
@@ -237,11 +269,15 @@ public void displayView(int viewId) {
         case R.id.nav_settings:
             fragment = new SettingsFragment();
             break;
-        case R.id.nav_sync:setpfashome=false;
+        case R.id.nav_sync:
             break;
-        case R.id.nav_share:setpfashome=false;
+        case R.id.nav_share:
             break;
         case R.id.nav_explore:
+ 		       DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        	     if (drawer.isDrawerOpen(GravityCompat.START)) {
+                 drawer.closeDrawer(GravityCompat.START);
+             }
             Intent intent = new Intent(MainActivity.this, GetStartedActivity.class);
             intent.putExtra("from", "mainActivity");
             startActivity(intent);
@@ -250,17 +286,34 @@ public void displayView(int viewId) {
             break;
     }
     if (fragment != null) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout, fragment).addToBackStack(null);
-        ft.commit();
-    }
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    drawer.closeDrawer(GravityCompat.START);
-}
+       if (viewId == R.id.nav_public_notes) {
+           FragmentTransaction ft = getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout, fragment).addToBackStack("home");
+             ft.commit();
+         }/*else if(viewId==R.id.nav_private_notes){
+             FragmentTransaction ft = getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout, fragment).addToBackStack("private");
+             ft.commit();
+         }*/
+         else {
+             FragmentTransaction ft = getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout, fragment).addToBackStack(null);
+             ft.commit();
+         }
+         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer.closeDrawer(GravityCompat.START);
+      }
+   }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        displayView(item.getItemId());
-        return true;
-    }
-
+       if(sharedPreferences.getBoolean("loggedin", false)) {
+             displayView(item.getItemId());
+         }else {
+             if(item.getItemId()==R.id.nav_private_notes){
+                 runDia();
+             }
+             else displayView(item.getItemId());
+         }
+          return true;
+      }
 }
+
+

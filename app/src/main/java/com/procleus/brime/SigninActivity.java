@@ -118,6 +118,7 @@ public class SigninActivity extends AppCompatActivity {
                     editor.commit();
                     Intent i =new Intent(SigninActivity.this,MainActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
             @Override

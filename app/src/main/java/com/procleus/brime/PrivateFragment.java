@@ -50,40 +50,19 @@ public class PrivateFragment extends Fragment  {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.private_fragment,container,false);
         ((MainActivity) getActivity()).setActionBarTitle("Private Notes");
-        sharedPreferences = this.getActivity().getSharedPreferences("com.procleus.brime", Context.MODE_PRIVATE);
-        Boolean bool = sharedPreferences.getBoolean("loggedin", false);
-
-        if (bool == true) {
-            // Alert Dialog
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
-            alertDialogBuilder.setMessage("OOPS... you are not logged in.\n\nPlease login to access this feature");
-            alertDialogBuilder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface arg0, int arg1) {
-                    Intent i = new Intent(view.getContext(), SigninActivity.class);
-                    startActivity(i);
-                }
-            });
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.setCancelable(false);
-            alertDialog.show();
-
-        } else {
             if(isEmptyPrivate == true){
-                view = inflater.inflate(R.layout.empty_notes, container, false);
-                mImageView = (ImageView)view.findViewById(R.id.empty_avatar);
-                xDim=300;
-                yDim=300;
-                mImageView.setImageBitmap(bitmap.decodeSampledBitmapFromResource(getResources(), R.drawable.empty_buddy, xDim, yDim));
-                return view;
-            }
-            else {
+            view = inflater.inflate(R.layout.empty_notes, container, false);
+            mImageView = (ImageView)view.findViewById(R.id.empty_avatar);
+            xDim=300;
+            yDim=300;
+            mImageView.setImageBitmap(bitmap.decodeSampledBitmapFromResource(getResources(), R.drawable.empty_buddy, xDim, yDim));
+            return view;
+        }
+        else {
 
                 view = inflater.inflate(R.layout.private_fragment, container, false);
                 initialiseList();
-
            }
-        }
         return view;
     }
 
