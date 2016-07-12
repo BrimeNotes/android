@@ -43,6 +43,7 @@ public class AccountInfoFragment extends Fragment {
                     EditText last_name = (EditText) v.findViewById(R.id.last_name);
                     first_name.setText(firstName);
                     last_name.setText(lastName);
+
                 }
                 catch (Exception e)
                 {

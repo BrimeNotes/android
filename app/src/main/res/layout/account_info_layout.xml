@@ -26,10 +26,24 @@
         android:gravity="center_horizontal">
 
         <EditText
-            android:id="@+id/fullname"
+            android:id="@+id/first_name"
             style="@style/textInput"
             android:layout_centerHorizontal="true"
             android:hint="FirstName"
+
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/last_name"
+            style="@style/textInput"
+            android:layout_centerHorizontal="true"
+            android:hint="LastName"
 
             />
     </android.support.design.widget.TextInputLayout>
@@ -41,7 +55,7 @@
         android:gravity="center_horizontal">
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/Email"
             style="@style/textInput"
             android:layout_centerHorizontal="true"
             android:hint="Email"
