@@ -1,6 +1,5 @@
 package com.procleus.brime;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,6 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     private boolean isFabOpen = false;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton fab,fab1,fab2,fab3;
     private Animation show_fab,hide_fab,rotate_fab_forward,rotate_fab_backward;
     SharedPreferences sharedPreferences = null;
+   private NavigationView navigationView;
+    private boolean setpfashome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +64,13 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View hView =  navigationView.getHeaderView(0);
         final TextView profile = (TextView)hView.findViewById(R.id.name);
         String name = sharedPreferences.getString("emailpref", "Guest");
         profile.setText(name);
-        
+
         Fragment fragment = new PublicFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
@@ -89,6 +92,10 @@ public class MainActivity extends AppCompatActivity
 
                 Log.d("Fab Clicked ", "Fab 2");
                 break;
+            case R.id.fab_3:
+                runVoiceRecord();
+                break;
+
         }
     }
 
@@ -152,34 +159,35 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        //Getting fragment from stack when pressed back button
-        //if all fragments popped then if back pressed twice performs exit
-       
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         FragmentManager fragmentManager = getSupportFragmentManager();
+        int fragments = fragmentManager.getBackStackEntryCount();
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        if (fragments > 0) {
 
-        if (fragmentManager.getBackStackEntryCount()==0) {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
+            String name = getSupportFragmentManager().getBackStackEntryAt(0).getName();
+            getSupportFragmentManager().popBackStack(name, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            navigationView.getMenu().findItem(R.id.nav_public_notes).setChecked(true);
+        }
+        else {
+            if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+                super.onBackPressed();
             } else {
-                int fragments = fragmentManager.getBackStackEntryCount();
-                if (fragments > 0) {
-                    super.onBackPressed();
-                } else {
-                    if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
-                        super.onBackPressed();
-                    } else {
-                        Toast.makeText(getBaseContext(), "Press once again to exit!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    back_pressed = System.currentTimeMillis();
-                }
+                Toast.makeText(getBaseContext(), "Press once again to exit!",
+                        Toast.LENGTH_SHORT).show();
             }
-        } else {
-            fragmentManager.popBackStack();
+            back_pressed = System.currentTimeMillis();
         }
     }
 
+
+
+    //voice record function
+    public void runVoiceRecord(){
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -200,10 +208,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Fragment fragment = new SettingsFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
-            getSupportActionBar().setTitle("Settings");
+           displayView(R.id.nav_settings);
+            navigationView.getMenu().findItem(R.id.nav_settings).setChecked(true);
         } else if (id == R.id.action_exit) {
             finish();
             System.exit(0);
@@ -211,39 +217,49 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Fragment fragment = new PublicFragment();
+//added nerverhammer
+public void displayView(int viewId) {
 
-        if (id == R.id.nav_public_notes) {
+    Fragment fragment = null;
+    switch (viewId) {
+        case R.id.nav_public_notes:
             fragment = new PublicFragment();
-        } else if (id == R.id.nav_private_notes) {
+            break;
+        case R.id.nav_private_notes:
             fragment = new PrivateFragment();
-
-        } else if (id == R.id.nav_labels) {
+            break;
+        case R.id.nav_labels:
             fragment = new LabelsFragment();
-        } else if (id == R.id.nav_trash) {
+            break;
+        case R.id.nav_trash:
             fragment = new TrashFragment();
-        } else if (id == R.id.nav_settings) {
+            break;
+        case R.id.nav_settings:
             fragment = new SettingsFragment();
-        } else if (id == R.id.nav_sync) {
-
-        } else if (id == R.id.nav_explore) {
+            break;
+        case R.id.nav_sync:setpfashome=false;
+            break;
+        case R.id.nav_share:setpfashome=false;
+            break;
+        case R.id.nav_explore:
             Intent intent = new Intent(MainActivity.this, GetStartedActivity.class);
             intent.putExtra("from", "mainActivity");
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        }
-        //adding fragments to stack
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).addToBackStack(null).commit();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+            break;
+        default:
+            break;
+    }
+    if (fragment != null) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout, fragment).addToBackStack(null);
+        ft.commit();
+    }
+    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    drawer.closeDrawer(GravityCompat.START);
+}
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        displayView(item.getItemId());
         return true;
     }
 

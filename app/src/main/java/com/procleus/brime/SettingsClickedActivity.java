@@ -41,7 +41,7 @@ public class SettingsClickedActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.activity_settings_relative, fragment).addToBackStack(null).commit();
     }
 
-    @Override
+   @Override
     public void onBackPressed() {
         super.onBackPressed();
         finish();
