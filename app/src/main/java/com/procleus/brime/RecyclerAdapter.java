@@ -43,6 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         // create ViewHolder
 
         ViewHolder viewHolder = new ViewHolder(itemLayoutView);
+
         return viewHolder;
     }
     private void setAnimation(View viewToAnimate, int position)
@@ -144,7 +145,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         dbList.remove(pos);
         notifyItemRemoved(pos);
         notifyItemRangeChanged(pos, dbList.size());
-
 
     }
     public void deleteNotes(int pos){
