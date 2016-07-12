@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 /**
@@ -14,6 +16,7 @@ import android.widget.Toast;
  */
 public class CustomDialogBox extends Dialog implements View.OnClickListener{
 
+    Spinner spinner;
     public Activity c;
     public Dialog d;
     public Button yes, no;
@@ -32,6 +35,18 @@ public class CustomDialogBox extends Dialog implements View.OnClickListener{
         no = (Button) findViewById(R.id.btn_no);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
+
+        spinner = (Spinner) findViewById(R.id.spinner);
+// Create an ArrayAdapter using the string array and a default spinner layout
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.lables_array, android.R.layout.simple_spinner_item);
+
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
     }
 
     @Override

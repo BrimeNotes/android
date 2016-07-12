@@ -13,15 +13,11 @@
     <string name="create_note_hint">Note Title</string>
     <string name="create_note_desc_hint">What is on your mind?</string>
 
-        <string-array name="planets_array">
-            <item>Mercury</item>
-            <item>Venus</item>
-            <item>Earth</item>
-            <item>Mars</item>
-            <item>Jupiter</item>
-            <item>Saturn</item>
-            <item>Uranus</item>
-            <item>Neptune</item>
+        <string-array name="lables_array">
+            <item>Lable1</item>
+            <item>Lable2</item>
+            <item>Lable3</item>
+            <item>Lable4</item>
         </string-array>
 
 

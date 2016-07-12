@@ -33,6 +33,7 @@ public class CreateNotes extends AppCompatActivity {
         Notes tn = new Notes(this);
         EditText title = (EditText) findViewById(R.id.noteTitle);
         EditText note = (EditText) findViewById(R.id.note);
+
         String note_desc,note_title;
         note_desc = note.getText().toString();
        // note_desc = note_desc.replaceAll("'", "\'");
