@@ -78,7 +78,9 @@ public class Notes extends SQLiteOpenHelper {
 
     public void updateTextNote(int id, String n , String t) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE textNotes set note = '" + n + "', title = '" + t + "'  WHERE id = " + id +"");
+        String query ="UPDATE textNotes set note = '" + n + "', title = '" + t + "'  WHERE id = " + id ;
+        db.execSQL(query);
+        Log.d("Sql Query Access  ", query);
         db.close();
     }
 

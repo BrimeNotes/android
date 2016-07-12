@@ -26,7 +26,7 @@ public class EditNotes extends AppCompatActivity {
     List<NotesModel> dbList;
     EditText note,title;
     Boolean SAVE_NOTE_ACTIVE = false;
-    static int _id = 0 ;
+    static Integer _id = 0 ;
     static String _access_type ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +76,7 @@ public class EditNotes extends AppCompatActivity {
         note.setFocusableInTouchMode(true);
         note.setFocusable(true);
     }
-    public void initialiseNotes(int id,String accessVal){
+    public void initialiseNotes(Integer id,String accessVal){
         helper = new Notes(this);
         dbList= new ArrayList<NotesModel>();
         dbList = helper.getDataFromDB(accessVal,0);
@@ -88,9 +88,15 @@ public class EditNotes extends AppCompatActivity {
             note.setText(desc_str);
         }
     }
-    public void saveNotes(View v,int id){
+    public void saveNotes(View v,Integer id){
 
+        /** Here Id Auto Increments starting from 1 while Adapter initialises from 0
+         * Therefore Previous Notes get Edit
+         * TO Solve it id=id+1
+         */
+        id=id+1;
 
+       // Log.d("ID VAL gjhkjhjkhkj :",id.toString());
         helper.updateTextNote(id,note.getText().toString(),title.getText().toString());
         Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_LONG).show();
 
