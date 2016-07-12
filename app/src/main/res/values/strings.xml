@@ -14,10 +14,9 @@
     <string name="create_note_desc_hint">What is on your mind?</string>
 
         <string-array name="lables_array">
-            <item>Lable1</item>
-            <item>Lable2</item>
-            <item>Lable3</item>
-            <item>Lable4</item>
+            <item>Inspiration</item>
+            <item>Personal</item>
+            <item>Work</item>
         </string-array>
 
 
