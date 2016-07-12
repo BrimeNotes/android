@@ -12,10 +12,12 @@ public class NotesModel {
     private String time;
     private String access_type;
     private int isDeleted;
+    private String Label;
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -50,5 +52,12 @@ public class NotesModel {
 
     public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public void setLable(String label) {
+        this.Label=label;
+    }
+    public String getLabel(){
+        return this.Label;
     }
 }
