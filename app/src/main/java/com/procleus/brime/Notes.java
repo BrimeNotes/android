@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,35 +22,33 @@ public class Notes extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTextNotesTable = "CREATE TABLE textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer)";
+        String createTextNotesTable = "CREATE TABLE textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer,label text)";
         Log.d("Sql Query Create :",createTextNotesTable);
         db.execSQL(createTextNotesTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String createTextNotesTable = "CREATE TABLE if not exists textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer)";
+        String createTextNotesTable = "CREATE TABLE if not exists textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer,label text)";
         db.execSQL(createTextNotesTable);
     }
 
-    public void insertTextNote(String n, String t,String a, int o) {
+    public void insertTextNote(String n, String t,String a, int o,String l) {
         n = n.replaceAll("'", "''");
         t = t.replaceAll("'", "''");
         a = a.replaceAll("'", "''");
         SQLiteDatabase db = this.getWritableDatabase();
-        String query="INSERT INTO textNotes(note,title,owner,accessType,isDeleted) VALUES('" + n + "','" + t + "'," + o +  ",'" + a + "',0)";
+        String query="INSERT INTO textNotes(note,title,owner,accessType,isDeleted,label) VALUES('" + n + "','" + t + "'," + o +  ",'" + a + "',0,'"+ l + "')";
         db.execSQL(query);
         Log.d("Sql Query insert  ",query);
         db.close();
     }
 
-    public void updateTextNote(int id, String n, String t) {
-        n = n.replaceAll("'", "''");
-        t = t.replaceAll("'", "''");
+    /*public void updateTextNote(int id, String n, String t) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE textNotes set note = '" + n + "', title = '" + t + "', edited = now() WHERE id='" + id + "'");
         db.close();
-    }
+    }*/
     public void accessChange(int id,String access) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -136,8 +135,10 @@ public class Notes extends SQLiteOpenHelper {
                 model.setDesc(cursor.getString(1));
                 model.setAccess_type(cursor.getString(6));
                 model.setIsDeleted(cursor.getInt(7));
+                model.setLable(cursor.getString(8));
                 modelList.add(model);
-                Log.d("Student Data Name ",cursor.getInt(0)+" title :  "+ cursor.getString(2) +" access type : "+ cursor.getString(5) +" Trash Val "+cursor.getInt(6));
+
+                Log.d("Student Data Name ",cursor.getInt(0)+" title :  "+ cursor.getString(2) +" access type :Walal "+ cursor.getString(5) +" Trash Val "+cursor.getInt(6) + "Label Val" + cursor.getString(8));
             }while (cursor.moveToNext());
         }
 
