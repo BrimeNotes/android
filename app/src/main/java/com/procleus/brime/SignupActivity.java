@@ -4,11 +4,14 @@ package com.procleus.brime;
  * Created by suraj on 04-07-2016.
  */
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
@@ -28,6 +31,8 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 
 public class SignupActivity extends AppCompatActivity {
+    NotificationCompat.Builder notif;
+    private static final int uniqueid=456;
 
     edittext etname, etemail, etpass;
     buttons btnsign;
@@ -157,6 +162,19 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(i);
 
     }
+    private void Notif() {
+        notif = new NotificationCompat.Builder(SignupActivity.this);
+        notif.setAutoCancel(true);
+        notif.setSmallIcon(R.drawable.empty_buddy);
+        notif.setContentTitle("Registration_Successful");
+        notif.setWhen(System.currentTimeMillis());
+        notif.setContentText("You Verified your Email");
+        Intent i =new Intent(SignupActivity.this,MainActivity.class);
+        PendingIntent pi= PendingIntent.getActivity(SignupActivity.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        notif.setContentIntent(pi);
+        NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(uniqueid,notif.build());
+    }
 
     public void onSignupFailed(String error) {
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_LONG).show();
@@ -205,6 +223,7 @@ public class SignupActivity extends AppCompatActivity {
                 //Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().equals("Registration Successful")) {
                     responseOp=1;
+                    Notif();
                 } else {
                   responseOp=2;
                 }
