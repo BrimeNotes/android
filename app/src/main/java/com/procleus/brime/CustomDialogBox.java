@@ -70,6 +70,7 @@ public class CustomDialogBox extends Dialog implements View.OnClickListener{
                     /**********///***/*/*/*/*/*/*// PRivate Segment
 
                     Toast.makeText(getContext(), "Private segment", Toast.LENGTH_SHORT).show();
+                    ((CreateNotes)c).check2();
                     c.finish();
 
                 }

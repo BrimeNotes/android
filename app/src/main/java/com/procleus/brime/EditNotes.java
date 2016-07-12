@@ -87,5 +87,6 @@ public class EditNotes extends AppCompatActivity {
     }
     public void saveNotes(View v,int id){
         Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_LONG).show();
+        finish();
     }
 }

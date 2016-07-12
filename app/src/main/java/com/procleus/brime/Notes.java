@@ -33,9 +33,9 @@ public class Notes extends SQLiteOpenHelper {
         db.execSQL(createTextNotesTable);
     }
 
-    public void insertTextNote(String n, String t, int o) {
+    public void insertTextNote(String n, String t,String a, int o) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query="INSERT INTO textNotes(note,title,owner,accessType,isDeleted) VALUES('" + n + "','" + t + "'," + o + ",'public',0)";
+        String query="INSERT INTO textNotes(note,title,owner,accessType,isDeleted) VALUES('" + n + "','" + t + "'," + o +  ",'" + a + "',0)";
         db.execSQL(query);
         Log.d("Sql Query insert  ",query);
         db.close();
@@ -47,11 +47,13 @@ public class Notes extends SQLiteOpenHelper {
         db.close();
     }*/
     public void accessChange(int id,String access) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE textNotes set accessType = '"+ access +"' WHERE id='" + id + "'";
         db.execSQL(query);
         Log.d("Sql Query Access  ", query);
         db.close();
+
     }
     public void moveToTrash(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
