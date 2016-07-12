@@ -80,25 +80,20 @@
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".EditNotes"
-            android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:theme="@style/AppThemeEditNotes"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppThemeEditNotes" />
 
-        <receiver android:name=".textNotesWidget">
+
+        <receiver android:name=".Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/text_notes_widget_info" />
+                android:resource="@xml/widget_info" />
         </receiver>
-
-        <activity android:name=".textNotesWidgetConfigureActivity">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

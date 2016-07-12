@@ -7,18 +7,18 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Brime</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
     <string name="create_note_hint">Note Title</string>
     <string name="create_note_desc_hint">What is on your mind?</string>
 
-        <string-array name="lables_array">
-            <item>Lable1</item>
-            <item>Lable2</item>
-            <item>Lable3</item>
-            <item>Lable4</item>
-        </string-array>
+    <string-array name="lables_array">
+        <item>Lable1</item>
+        <item>Lable2</item>
+        <item>Lable3</item>
+        <item>Lable4</item>
+    </string-array>
 
 
-    </resources>
+</resources>

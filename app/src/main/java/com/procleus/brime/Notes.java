@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +33,9 @@ public class Notes extends SQLiteOpenHelper {
     }
 
     public void insertTextNote(String n, String t,String a, int o) {
+        n = n.replaceAll("'", "''");
+        t = t.replaceAll("'", "''");
+        a = a.replaceAll("'", "''");
         SQLiteDatabase db = this.getWritableDatabase();
         String query="INSERT INTO textNotes(note,title,owner,accessType,isDeleted) VALUES('" + n + "','" + t + "'," + o +  ",'" + a + "',0)";
         db.execSQL(query);
@@ -41,11 +43,13 @@ public class Notes extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*public void updateTextNote(int id, String n, String t) {
+    public void updateTextNote(int id, String n, String t) {
+        n = n.replaceAll("'", "''");
+        t = t.replaceAll("'", "''");
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("UPDATE textNotes set note = '" + n + "', title = '" + t + "', edited = now() WHERE id='" + id + "'");
         db.close();
-    }*/
+    }
     public void accessChange(int id,String access) {
 
         SQLiteDatabase db = this.getWritableDatabase();
