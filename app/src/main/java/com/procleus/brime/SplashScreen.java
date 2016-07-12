@@ -67,7 +67,6 @@ public class SplashScreen extends Activity {
                 }
                 else {
                     preLogInCheck();
-                    finish();
                 }
             }
         }, SPLASH_DISPLAY_LENGTH);
@@ -85,13 +84,16 @@ public class SplashScreen extends Activity {
        if(clogin.getBoolean("loggedin", false) && isNetworkAvailable()){
            new AutoPostClass(this).execute();
        }
-       else if(clogin.getBoolean("loggedin", false)){
+       else if(clogin.getBoolean("loggedin", false) &&!isNetworkAvailable()){
            Intent mainIntent = new Intent(SplashScreen.this,MainActivity.class);
-            startActivity(mainIntent);
+           startActivity(mainIntent);
+           finish();
        }
         else{
+
            Intent mainIntent = new Intent(SplashScreen.this,SigninActivity.class);
            startActivity(mainIntent);
+           finish();
        }
     }
     private boolean isNetworkAvailable() {
@@ -137,10 +139,13 @@ public class SplashScreen extends Activity {
                 if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
                     Intent i =new Intent(SplashScreen.this,MainActivity.class);
                     startActivity(i);
+                    finish();
                 } else {
                     //Delete data from shared pref
                     SharedPreferences.Editor editor = clogin.edit();
-                    editor.clear();
+                    editor.remove("emailpref");
+                    editor.remove("passwordpref");
+                    editor.remove("loggedin");
                     editor.commit();
 
                 }

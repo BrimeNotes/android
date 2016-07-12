@@ -29,7 +29,7 @@ public class CreateNotes extends AppCompatActivity {
     }
 
     public void create(View v, Boolean isLoggedIn) {
-        CustomDialogBox cdd =new CustomDialogBox(this, isLoggedIn);
+        CustomDialogBox cdd =new CustomDialogBox(this,isLoggedIn);
         cdd.show();
     }
 
