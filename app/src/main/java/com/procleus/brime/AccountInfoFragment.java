@@ -53,6 +53,7 @@ public class AccountInfoFragment extends Fragment {
         Email = (EditText) v.findViewById(R.id.Email);
         name = sharedPreferences.getString("emailpref", "Guest");
         Email.setText(name);
+        Email.setEnabled(false);
         url = "http://api.brime.tk/ShowUser.php?email=" + name;
         new JSONParse(v).execute();
         FloatingActionButton floatingActionButton = (FloatingActionButton) v.findViewById(R.id.fab);
