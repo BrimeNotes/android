@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.transition.Explode;
 import android.transition.Transition;
@@ -86,7 +89,11 @@ public class EditNotes extends AppCompatActivity {
         }
     }
     public void saveNotes(View v,int id){
+
+
+        helper.updateTextNote(id,note.getText().toString(),title.getText().toString());
         Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_LONG).show();
+
         finish();
     }
 }

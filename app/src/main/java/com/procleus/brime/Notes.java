@@ -76,11 +76,12 @@ public class Notes extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*public void updateTextNote(int id, String n, String t) {
+    public void updateTextNote(int id, String n , String t) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE textNotes set note = '" + n + "', title = '" + t + "', edited = now() WHERE id='" + id + "'");
+        db.execSQL("UPDATE textNotes set note = '" + n + "', title = '" + t + "'  WHERE id = " + id +"");
         db.close();
-    }*/
+    }
+
     public void accessChange(int id,String access) {
 
         SQLiteDatabase db = this.getWritableDatabase();
