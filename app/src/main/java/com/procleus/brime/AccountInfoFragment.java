@@ -34,10 +34,11 @@ public class AccountInfoFragment extends Fragment {
     EditText Email;
     EditText first_name;
     EditText last_name;
-    //textview birthDate;
+    EditText birthDate;
     String name;
     String firstName = "";
     String lastName = "";
+    String bdate;
     String updatedFirstName;
     String updatedLastName;
     String updatedBirthDate = "1996-06-25";
@@ -66,8 +67,7 @@ public class AccountInfoFragment extends Fragment {
                 progressDialog.show();
                 updatedFirstName = first_name.getText().toString();
                 updatedLastName = last_name.getText().toString();
-            //    birthDate = (textview) v.findViewById(R.id.date_picker);
-//                updatedBirthDate = birthDate.getText().toString();
+                updatedBirthDate = birthDate.getText().toString();
                 new UpdateUser(v).execute();
                 new android.os.Handler().postDelayed(
                         new Runnable() {
@@ -107,10 +107,13 @@ public class AccountInfoFragment extends Fragment {
                 json = json.getJSONObject("user");
                 firstName = json.getString("firstName");
                 lastName = json.getString("lastName");
+                bdate = json.getString("birthDate");
                 first_name = (EditText) v.findViewById(R.id.first_name);
                 last_name = (EditText) v.findViewById(R.id.last_name);
+                birthDate = (EditText) v.findViewById(R.id.date_picker);
                 first_name.setText(firstName);
                 last_name.setText(lastName);
+                birthDate.setText(bdate);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
