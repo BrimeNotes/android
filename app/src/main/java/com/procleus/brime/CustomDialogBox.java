@@ -54,9 +54,9 @@ public class CustomDialogBox extends Dialog implements View.OnClickListener{
 
         switch (v.getId()) {
             case R.id.btn_yes:
-                RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup);
+                RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup1);
                 int id = rg.getCheckedRadioButtonId();
-                if(id==R.id.radioButtonpublic)
+                if(id==R.id.radioPublic)
                 {
                     //************////****//***/**/Public segement
 
@@ -65,7 +65,7 @@ public class CustomDialogBox extends Dialog implements View.OnClickListener{
                     ((CreateNotes)c).check();
                     c.finish();
                 }
-                else if(id==R.id.radioButtonprivate){
+                else if(id==R.id.radioPrivate){
 
                     /**********///***/*/*/*/*/*/*// PRivate Segment
 
