@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ import java.security.MessageDigest;
  * Created by Ujjwal on 07-07-2016.
  */
 public class ChangePasswordFragment extends Fragment {
-    Button buttonChange;
+    FloatingActionButton buttonChange;
     EditText oldPassword;
     EditText newPassword;
     String oldPasswordValue;
@@ -44,7 +45,7 @@ public class ChangePasswordFragment extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences("com.procleus.brime", Context.MODE_PRIVATE);
         View v = inflater.inflate(R.layout.change_password_layout, container, false);
         name = sharedPreferences.getString("emailpref", "Guest");
-        buttonChange = (Button) v.findViewById(R.id.button);
+        buttonChange = (FloatingActionButton) v.findViewById(R.id.button);
         oldPassword = (EditText) v.findViewById(R.id.old_password);
         newPassword = (EditText) v.findViewById(R.id.new_password);
         buttonChange.setOnClickListener(new View.OnClickListener() {
