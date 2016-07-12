@@ -34,6 +34,9 @@ public class Notes extends SQLiteOpenHelper {
     }
 
     public void insertTextNote(String n, String t,String a, int o,String l) {
+        n = n.replaceAll("'", "''");
+        t = t.replaceAll("'", "''");
+        a = a.replaceAll("'", "''");
         SQLiteDatabase db = this.getWritableDatabase();
         String query="INSERT INTO textNotes(note,title,owner,accessType,isDeleted,label) VALUES('" + n + "','" + t + "'," + o +  ",'" + a + "',0,'"+ l + "')";
         db.execSQL(query);
