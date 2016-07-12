@@ -2,6 +2,7 @@ package com.procleus.brime;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.widget.EditText;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -26,32 +29,38 @@ public class AccountInfoFragment extends Fragment {
         Email = (EditText) v.findViewById(R.id.Email);
         final String name = sharedPreferences.getString("emailpref", "Guest");
         Email.setText(name);
-        Thread thread = new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    url = "http://api.brime.tk/ShowUser.php?email=" + name;
-                    String firstName;
-                    JSONParser jParser = new JSONParser();
-                    JSONObject json = jParser.getJSONFromUrl(url).getJSONObject("user");
-                    firstName = json.getString("firstName");
-                    String lastName = json.getString("lastName");
-                    EditText first_name = (EditText) v.findViewById(R.id.first_name);
-                    EditText last_name = (EditText) v.findViewById(R.id.last_name);
-                    first_name.setText(firstName);
-                    last_name.setText(lastName);
-
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+        url = "http://api.brime.tk/ShowUser.php?email=" + name;
+        new JSONParse(v).execute();
         return v;
+    }
+    private class JSONParse extends AsyncTask<String, String, JSONObject> {
+        View v;
+        protected JSONParse(View v) {
+            this.v = v;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected JSONObject doInBackground(String... args) {
+            JSONParser jParser = new JSONParser();
+            JSONObject json = jParser.getJSONFromUrl(url);
+            return json;
+        }
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+                json = json.getJSONObject("user");
+                String firstName = json.getString("firstName");
+                String lastName = json.getString("lastName");
+                EditText first_name = (EditText) v.findViewById(R.id.first_name);
+                EditText last_name = (EditText) v.findViewById(R.id.last_name);
+                first_name.setText(firstName);
+                last_name.setText(lastName);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
