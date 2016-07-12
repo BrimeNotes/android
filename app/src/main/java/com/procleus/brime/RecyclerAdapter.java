@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +25,6 @@ import java.util.List;
  * Created by syedaamir on 11-07-2016.
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>  {
-
     static List<NotesModel> dbList;
     static Context context;
     RecyclerAdapter(Context context, List<NotesModel> dbList ){
@@ -95,13 +96,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             del_notes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteNotes(getLayoutPosition());
+                    deleteNotes(getLayoutPosition(),v);
                 }
             });
             acces_specify_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    changeAccess(getLayoutPosition());
+                    changeAccess(getLayoutPosition(),v);
                 }
             });
 
@@ -130,15 +131,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
     }
-    public void changeAccess(int pos){
+    public void changeAccess(int pos,View v){
         Notes tn = new Notes(context);
         String access = dbList.get(pos).getAccess_type();
         Log.d("Access Value" ,access);
         if( access.equals("public")){
+
             tn.accessChange(dbList.get(pos).getId(),"private");
+            Snackbar snackbar = Snackbar
+                    .make(v, "Moved To Private", Snackbar.LENGTH_LONG);
+            snackbar.show();
         }
         else {
+
             tn.accessChange(dbList.get(pos).getId(),"public");
+            Snackbar snackbar = Snackbar
+                    .make(v, "Moved To Public", Snackbar.LENGTH_LONG);
+            snackbar.show();
         }
       //  Toast.makeText(RecyclerAdapter.context, "Access "+ dbList.get(pos).getAccess_type()+" dbList. title "+dbList.get(pos).getTitle(),Toast.LENGTH_LONG).show();
         dbList.remove(pos);
@@ -147,9 +156,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
     }
-    public void deleteNotes(int pos){
+    public void deleteNotes(int pos,View v){
+        Snackbar snackbar = Snackbar
+                .make(v, "Nootes Moved to Trash", Snackbar.LENGTH_LONG)
+                /*.setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Notes Restored!", Snackbar.LENGTH_SHORT);
+                        snackbar1.show();
+                    }
+                })
+                */;
+
+        snackbar.show();
+        int id = dbList.get(pos).getId();
         Notes tn = new Notes(context);
-        tn.moveToTrash(dbList.get(pos).getId());
+        tn.moveToTrash(id);
         dbList.remove(pos);
         notifyItemRemoved(pos);
         notifyItemRangeChanged(pos, dbList.size());

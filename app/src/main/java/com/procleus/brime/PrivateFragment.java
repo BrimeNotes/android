@@ -27,7 +27,6 @@ import java.util.List;
  */
 public class PrivateFragment extends Fragment  {
     final boolean isEmptyPrivate = false;
-    private View view;
     ImageView mImageView;	//reference to the ImageView
     int xDim, yDim;		//stores ImageView dimensions
     private bitmapCreate bitmap;
@@ -37,6 +36,7 @@ public class PrivateFragment extends Fragment  {
 
     Notes helpher;
     List<NotesModel> dbList;
+    private View view;
     RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -48,19 +48,19 @@ public class PrivateFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View v = inflater.inflate(R.layout.private_fragment,container,false);
+        view = inflater.inflate(R.layout.private_fragment,container,false);
         ((MainActivity) getActivity()).setActionBarTitle("Private Notes");
         sharedPreferences = this.getActivity().getSharedPreferences("com.procleus.brime", Context.MODE_PRIVATE);
         Boolean bool = sharedPreferences.getBoolean("loggedin", false);
 
         if (bool == true) {
             // Alert Dialog
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext());
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
             alertDialogBuilder.setMessage("OOPS... you are not logged in.\n\nPlease login to access this feature");
             alertDialogBuilder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
-                    Intent i = new Intent(v.getContext(), SigninActivity.class);
+                    Intent i = new Intent(view.getContext(), SigninActivity.class);
                     startActivity(i);
                 }
             });
