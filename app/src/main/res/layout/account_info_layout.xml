@@ -63,34 +63,22 @@
             />
     </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content" >
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:paddingBottom="10dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" >
-            <com.procleus.brime.textview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:text="Date oF Birth :"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
-                android:textSize="20sp" />
-            <com.procleus.brime.textview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Date Pick"
-                android:onClick="showDatePickerDialog"
-                android:id="@+id/date_picker"/>
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/date_picker"
+            style="@style/textInput"
+            android:layout_centerHorizontal="true"
+            android:hint="Date of Birth"
+            android:text="YYYY-MM-DD"
+            android:inputType="none"
+            android:clickable="true"
+            android:onClick="showDatePickerDialog"
+            />
+    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>
 
