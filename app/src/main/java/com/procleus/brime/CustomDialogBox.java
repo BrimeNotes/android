@@ -20,22 +20,33 @@ public class CustomDialogBox extends Dialog implements View.OnClickListener{
     public Activity c;
     public Dialog d;
     public Button yes, no;
+    Boolean isLoggedIn;
 
-    public CustomDialogBox(Activity context) {
+    public CustomDialogBox(Activity context, Boolean isLoggedIn) {
         super(context);
         c=context;
-
+        this.isLoggedIn = isLoggedIn;
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog);
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         yes = (Button) findViewById(R.id.btn_yes);
         no = (Button) findViewById(R.id.btn_no);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
-
+        if (!isLoggedIn) {
+            for (int i = 0; i < radioGroup.getChildCount(); i++) {
+                radioGroup.getChildAt(i).setEnabled(false);
+            }
+        } else {
+            for (int i = 0; i < radioGroup.getChildCount(); i++) {
+                radioGroup.getChildAt(i).setEnabled(true);
+            }
+        }
         spinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
 
