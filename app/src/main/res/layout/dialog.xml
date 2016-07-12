@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:minWidth="350dp"
-    android:minHeight="150dp"
-    android:padding="8dp"
-    android:background="@drawable/dialog_background"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="150dp"
+    android:background="#ffffff"
     android:orientation="vertical"
-    android:weightSum="12"
-
-    >
+    android:weightSum="12">
 
 
     <com.procleus.brime.textview
         android:id="@+id/txt_dia"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:paddingLeft="5dp"
-        android:paddingTop="5dp"
-        android:text="Do You want to save Data?"
+        android:paddingTop="16dp"
+        android:text="SAVE YOUR NOTE"
         android:textColor="#f9661c"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textAlignment="center"
+        />
 
 
     <LinearLayout
@@ -31,41 +27,52 @@
         android:layout_height="0dp"
         android:layout_weight="4"
         android:orientation="horizontal"
-        android:weightSum="10">
-
+        android:weightSum="10"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
         <RadioGroup
-            android:layout_width="0dp"
+            android:id="@+id/radioGroup1"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:id="@+id/radioGroup"
-            android:orientation="horizontal">
-
-
-            <RadioButton
-                android:id="@+id/radioButtonpublic"
-                android:textColor="#f9661c"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Public" />
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
 
             <RadioButton
-                android:textColor="#f9661c"
-                android:id="@+id/radioButtonprivate"
-                android:layout_width="wrap_content"
+                android:id="@+id/radioPublic"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rbtn_selector"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Public"
+                android:textColor="@drawable/rbtn_textcolor_selector" />
+
+            <RadioButton
+                android:id="@+id/radioPrivate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rbtn_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="5dp"
                 android:text="Private"
-                />
+                android:textColor="@drawable/rbtn_textcolor_selector" />
         </RadioGroup>
+
+
 
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="0dp"
-            android:gravity="center_vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4.53"
-
+            android:spinnerMode="dropdown"
             />
 
 
@@ -75,6 +82,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingRight="5dp"
         android:paddingLeft="5dp"
         android:layout_gravity="center|bottom"
         android:layout_weight="4"
