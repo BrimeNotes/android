@@ -8,23 +8,27 @@ import android.view.View;
 import android.widget.EditText;
 
 public class CreateNotes extends AppCompatActivity {
+    
+    SharedPreferences sharedPreferences = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getApplicationContext().getSharedPreferences("com.procleus.brime", MODE_PRIVATE);
         setContentView(R.layout.activity_create_notes);
         getSupportActionBar().hide();
         final FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab_create_notes);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                create(v);
+                Boolean isLoggedIn = sharedPreferences.getBoolean("loggedin", false);
+                create(v, isLoggedIn);
             }
         });
 
     }
 
-    public void create(View v) {
-        CustomDialogBox cdd =new CustomDialogBox(this);
+    public void create(View v, Boolean isLoggedIn) {
+        CustomDialogBox cdd =new CustomDialogBox(this, isLoggedIn);
         cdd.show();
     }
 
