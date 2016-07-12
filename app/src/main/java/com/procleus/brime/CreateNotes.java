@@ -18,7 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.Date;
 
 public class CreateNotes extends AppCompatActivity {
 
