@@ -121,6 +121,9 @@ public class CreateNotes extends AppCompatActivity {
                             note_desc = note.getText().toString();
                             // note_desc = note_desc.replaceAll("'", "\'");
                             note_title = title.getText().toString();
+                            if (note_title.replace(" ", "").length() == 0 ) {
+                                note_title = (new Date()).toString();
+                            }
                             // note_title = note_title.replaceAll("'", "\'");
                             tn.insertTextNote(note_desc, note_title, "public", 1,String.valueOf(parent.getItemAtPosition(position)));
                             Log.i("hello", note_title + "   " + note_desc);
@@ -143,6 +146,9 @@ public class CreateNotes extends AppCompatActivity {
                             note_desc = note.getText().toString();
                             // note_desc = note_desc.replaceAll("'", "\'");
                             note_title = title.getText().toString();
+                            if (note_title.replace(" ", "").length() == 0 ) {
+                                note_title = (new Date()).toString();
+                            }
                             // note_title = note_title.replaceAll("'", "\'");
                             tn.insertTextNote(note_desc, note_title, "private", 1,String.valueOf(parent.getItemAtPosition(position)));
                             Log.i("hello", note_title + "   " + note_desc);
