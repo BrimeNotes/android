@@ -1,33 +1,23 @@
 package com.procleus.brime;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
-import android.transition.Explode;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EditNotes extends AppCompatActivity {
+    static Integer _id = 0, _pos = 0;
+    static String _access_type = "";
     Notes helper;
     List<NotesModel> dbList;
     EditText note,title;
     Boolean SAVE_NOTE_ACTIVE = false;
-    static Integer _id = 0, _pos = 0;
-    static String _access_type ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +88,6 @@ public class EditNotes extends AppCompatActivity {
          * Therefore Previous Notes get Edit
          * TO Solve it id=id+1
          */
-        id=id+1;
 
        // Log.d("ID VAL gjhkjhjkhkj :",id.toString());
         helper.updateTextNote(id,note.getText().toString(),title.getText().toString());
