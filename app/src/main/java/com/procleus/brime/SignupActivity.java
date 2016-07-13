@@ -4,8 +4,6 @@ package com.procleus.brime;
  * Created by suraj on 04-07-2016.
  */
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
@@ -31,9 +30,8 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 
 public class SignupActivity extends AppCompatActivity {
-    NotificationCompat.Builder notif;
     private static final int uniqueid=456;
-
+    NotificationCompat.Builder notif;
     edittext etname, etemail, etpass;
     buttons btnsign;
     textview loginlink;
@@ -112,7 +110,7 @@ public class SignupActivity extends AppCompatActivity {
                         if(responseOp==1) {
                             onSignupSuccess();
                         }else
-                        onSignupFailed("Now please verify your Email");
+                            onSignupFailed("Sign up Error, Please try again later");
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -156,14 +154,15 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         btnsign.setEnabled(true);
         setResult(RESULT_OK, null);
-        Toast.makeText(getBaseContext(), "Account created successfully", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getBaseContext(), "Account created successfully, Please verify your email", Toast.LENGTH_LONG).show();
+        notif();
         Intent i = new Intent(SignupActivity.this, SigninActivity.class);
         startActivity(i);
         finish();
 
     }
     //Notification after verifying email
+    /*
     private void Notif() {
         notif = new NotificationCompat.Builder(SignupActivity.this);
         notif.setAutoCancel(true);
@@ -176,6 +175,13 @@ public class SignupActivity extends AppCompatActivity {
         notif.setContentIntent(pi);
         NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         nm.notify(uniqueid,notif.build());
+    }
+    */
+    public void notif() {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        mBuilder.setContentTitle("Registration Successful");
+        mBuilder.setContentText("Thanks for choosing Brime, Please verify your email.");
     }
 
     public void onSignupFailed(String error) {
@@ -221,12 +227,12 @@ public class SignupActivity extends AppCompatActivity {
                 while ((line = br.readLine()) != null) {
                     responseOutput.append(line);
                 }
-                //Log.i("response", responseOutput.toString());
+                Log.i("response", responseOutput.toString());
                 if (responseOutput.toString().equals("Registration Successful")) {
                     responseOp=1;
-                    Notif();
+
                 } else {
-                  responseOp=2;
+                    responseOp = 2;
                 }
                 br.close();
             } catch (MalformedURLException e) {
