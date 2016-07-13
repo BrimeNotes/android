@@ -254,7 +254,7 @@ public void displayView(int viewId) {
     Fragment fragment = null;
     switch (viewId) {
         case R.id.nav_public_notes:
-            fragment = new PublicFragment();
+             fragment = new PublicFragment();
              navigationView.getMenu().findItem(R.id.nav_public_notes).setChecked(true);
             break;
         case R.id.nav_private_notes:

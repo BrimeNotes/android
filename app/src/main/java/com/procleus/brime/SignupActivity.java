@@ -112,7 +112,7 @@ public class SignupActivity extends AppCompatActivity {
                         if(responseOp==1) {
                             onSignupSuccess();
                         }else
-                        onSignupFailed("Data Validation error");
+                        onSignupFailed("Now please verify your Email");
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -157,18 +157,20 @@ public class SignupActivity extends AppCompatActivity {
         btnsign.setEnabled(true);
         setResult(RESULT_OK, null);
         Toast.makeText(getBaseContext(), "Account created successfully", Toast.LENGTH_LONG).show();
-        finish();
+
         Intent i = new Intent(SignupActivity.this, SigninActivity.class);
         startActivity(i);
+        finish();
 
     }
+    //Notification after verifying email
     private void Notif() {
         notif = new NotificationCompat.Builder(SignupActivity.this);
         notif.setAutoCancel(true);
-        notif.setSmallIcon(R.drawable.empty_buddy);
+        notif.setSmallIcon(R.mipmap.ic_launcher);
         notif.setContentTitle("Registration_Successful");
         notif.setWhen(System.currentTimeMillis());
-        notif.setContentText("You Verified your Email");
+        notif.setContentText("Thanks for choosing Brime \nYour Email has been verified ");
         Intent i =new Intent(SignupActivity.this,MainActivity.class);
         PendingIntent pi= PendingIntent.getActivity(SignupActivity.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
         notif.setContentIntent(pi);
@@ -178,7 +180,6 @@ public class SignupActivity extends AppCompatActivity {
 
     public void onSignupFailed(String error) {
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_LONG).show();
-
         btnsign.setEnabled(true);
     }
 

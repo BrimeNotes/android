@@ -158,7 +158,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
     public void deleteNotes(int pos,View v){
         Snackbar snackbar = Snackbar
-                .make(v, "Nootes Moved to Trash", Snackbar.LENGTH_LONG)
+                .make(v, "Note Moved to Trash", Snackbar.LENGTH_LONG)
                 /*.setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
