@@ -22,6 +22,9 @@
 
 
     <style name="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -46,6 +49,16 @@
         <item name="android:textColor" >@color/textColorInput</item>
         <item name="android:textColorHint" >@color/textColorInputHint</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:ems">10</item>
+        <item name="android:backgroundTint">#dafa5223</item>
+
+    </style>
+    <style name="textInputLeftAlign" >
+        <item name="android:textSize" >@dimen/textInputSize</item>
+        <item name="android:layout_width" >match_parent</item>
+        <item name="android:layout_height" >50dp</item>
+        <item name="android:textColor" >@color/textColorInput</item>
+        <item name="android:textColorHint" >@color/textColorInputHint</item>
         <item name="android:ems">10</item>
         <item name="android:backgroundTint">#dafa5223</item>
 

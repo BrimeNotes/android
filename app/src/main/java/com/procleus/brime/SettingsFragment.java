@@ -34,21 +34,21 @@ public class SettingsFragment extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences("com.procleus.brime", Context.MODE_PRIVATE);
         settingsOptions.add("Account Info");
         settingsOptions.add("Change Password");
+        settingsOptions.add("Share App");
+        settingsOptions.add("About Us");
         Boolean bool = sharedPreferences.getBoolean("loggedin", false);
         if (bool == false) {
             settingsOptions.add("Log In");
         } else {
             settingsOptions.add("SignOut");
         }
-        settingsOptions.add("Share App");
-        settingsOptions.add("About Us");
 
         ArrayAdapter<String> ar = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,settingsOptions);
         lv.setAdapter(ar);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (settingsOptions.get(2).equals("Log In")) {
+                if (settingsOptions.get(4).equals("Log In")) {
                     Intent i = new Intent(v.getContext(), SigninActivity.class);
                     startActivity(i);
                 } else {

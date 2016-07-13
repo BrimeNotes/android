@@ -3,18 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="About Us"
-        android:id="@+id/textView11"
-        android:textSize="@dimen/abc_text_size_headline_material"
-        android:textIsSelectable="false"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"/>
 
     <TextView
         android:layout_width="match_parent"

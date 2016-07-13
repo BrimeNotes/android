@@ -13,11 +13,10 @@
     <string name="create_note_hint">Note Title</string>
     <string name="create_note_desc_hint">What is on your mind?</string>
 
-        <string-array name="lables_array">
-            <item>Inspiration</item>
-            <item>Personal</item>
-            <item>Work</item>
-        </string-array>
+    <string-array name="lables_array">
+        <item>Inspiration</item>
+        <item>Personal</item>
+        <item>Work</item>
+    </string-array>
 
-
-    </resources>
+</resources>

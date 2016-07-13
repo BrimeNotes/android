@@ -3,29 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="#efefef"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addLabelInputLayout"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="#efefef"
+        android:layout_alignParentTop="true">
+        <com.procleus.brime.edittext
+            style="@style/textInputLeftAlign"
+            android:layout_weight="9"
+            android:hint="Add Label"
+            android:paddingLeft="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addLabelInput"
+            />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/addLabelBtn"
+            android:padding="8dp"
+            android:background="@null"
+            android:src="@drawable/ic_action_add"/>
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listLabel"
-        android:layout_margin="10dp"
-        android:background="#7ff7f3f3"
-        android:padding="5dp"
-        android:elevation="5dp" />
+        android:background="#ffffff"
+        android:padding="8dp"
+        android:layout_below="@id/addLabelInputLayout"
+         />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_label"
-        app:fabSize="normal"
-        app:backgroundTint="@color/colorPrimary"
-        android:layout_width="wrap_content"
-        android:background="#f99639"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_discount"
-        android:layout_marginLeft="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

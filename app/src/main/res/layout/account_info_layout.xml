@@ -8,18 +8,11 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="10dp"
+    android:padding="18dp"
     android:background="#f7f7f7"
-    android:elevation="5dp">
-    <com.procleus.brime.textview
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="ACCOUNT INFO"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        />
+    >
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +20,7 @@
 
         <EditText
             android:id="@+id/first_name"
-            style="@style/textInput"
+            style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
             android:hint="FirstName"
 
@@ -41,7 +34,7 @@
 
         <EditText
             android:id="@+id/last_name"
-            style="@style/textInput"
+            style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
             android:hint="LastName"
 
@@ -56,7 +49,7 @@
 
         <EditText
             android:id="@+id/Email"
-            style="@style/textInput"
+            style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
             android:hint="Email"
 
@@ -70,7 +63,7 @@
 
         <EditText
             android:id="@+id/date_picker"
-            style="@style/textInput"
+            style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
             android:hint="Date of Birth"
             android:text="YYYY-MM-DD"
