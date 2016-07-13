@@ -28,7 +28,7 @@ public class Widget extends AppWidgetProvider {
     }
 
     public static PendingIntent actionPendingIntent(Context context) {
-        Intent intent = new Intent(context, PublicFragment.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.setAction("LAUNCH_ACTIVITY");
         return PendingIntent.getActivity(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
