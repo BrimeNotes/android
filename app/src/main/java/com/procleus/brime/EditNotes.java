@@ -81,6 +81,7 @@ public class EditNotes extends AppCompatActivity {
             note.setText(desc_str);
         }
     }
+
     public void saveNotes(View v, Integer id, Integer pos) {
 
         /** Here Id Auto Increments starting from 1 while Adapter initialises from 0
