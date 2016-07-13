@@ -123,7 +123,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         //    context.startActivity(intent);
             Intent intent = new Intent(context,EditNotes.class);
             Bundle extras = new Bundle();
-            extras.putInt("id", getAdapterPosition());
+            extras.putInt("pos", getAdapterPosition());
+            extras.putInt("id", dbList.get(getAdapterPosition()).getId());
             extras.putString("access_type", dbList.get(getAdapterPosition()).getAccess_type());
             intent.putExtras(extras);
             context.startActivity(intent);

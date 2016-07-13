@@ -26,8 +26,9 @@ public class EditNotes extends AppCompatActivity {
     List<NotesModel> dbList;
     EditText note,title;
     Boolean SAVE_NOTE_ACTIVE = false;
-    static Integer _id = 0 ;
+    static Integer _id = 0, _pos = 0;
     static String _access_type ="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,8 @@ public class EditNotes extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         _id = bundle.getInt("id");
         _access_type = bundle.getString("access_type");
-        initialiseNotes(_id,_access_type);
+        _pos = bundle.getInt("pos");
+        initialiseNotes(_id, _access_type, _pos);
 
         final FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab_edit_notes);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +61,7 @@ public class EditNotes extends AppCompatActivity {
 
                 }
                 else{
-                    saveNotes(v,_id);
+                    saveNotes(v, _id, _pos);
                 }
             }
         });
@@ -76,19 +78,21 @@ public class EditNotes extends AppCompatActivity {
         note.setFocusableInTouchMode(true);
         note.setFocusable(true);
     }
-    public void initialiseNotes(Integer id,String accessVal){
+
+    public void initialiseNotes(Integer id, String accessVal, Integer pos) {
         helper = new Notes(this);
         dbList= new ArrayList<NotesModel>();
         dbList = helper.getDataFromDB(accessVal,0);
 
         if(dbList.size()>0){
-            String title_str= dbList.get(id).getTitle();
-            String desc_str=dbList.get(id).getDesc();
+            String title_str = dbList.get(pos).getTitle();
+            String desc_str = dbList.get(pos).getDesc();
             title.setText(title_str);
             note.setText(desc_str);
         }
     }
-    public void saveNotes(View v,Integer id){
+
+    public void saveNotes(View v, Integer id, Integer pos) {
 
         /** Here Id Auto Increments starting from 1 while Adapter initialises from 0
          * Therefore Previous Notes get Edit

@@ -214,11 +214,16 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             new Runnable() {
                 public void run() {
                     if (responseOp==1) {
+                        notif();
                         onLogInSuccess();
                     } else if (responseOp == 3) {
+                        fnotif();
                         onLogInFailed("Email Id not verified");
+
                     } else {
+                        fnotif();
                         onLogInFailed("Data Validation error");
+
                     }
 
                     progressDialog.dismiss();
@@ -256,7 +261,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         mBuilder.setContentTitle("Log in Successful");
         mBuilder.setContentText("Logged in from " + longi + " , " + lati);
         mBuilder.setSmallIcon(R.drawable.logo);
-        int mNotificationId = 001;
+        int mNotificationId = 4848;
 // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -270,7 +275,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         mBuilder.setContentTitle("Log in Failed");
         mBuilder.setContentText("Logged in tried from " + longi + " , " + lati);
         mBuilder.setSmallIcon(R.drawable.logo);
-        int mNotificationId = 001;
+        int mNotificationId = 4848;
 // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
