@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +25,9 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -37,7 +41,7 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.List;
 
-public class SigninActivity extends AppCompatActivity {
+public class SigninActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     public static final String PREF = "com.procleus.brime";
     public static final String emailpref = "null";
     public static final String passwordpref = "nopassKey";
@@ -45,6 +49,8 @@ public class SigninActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "SignInActivity";
     public SharedPreferences session;
+    Location mLastLocation = null;
+    String longi, lati;
     ProgressDialog progressDialog;
     int responseOp;
     buttons b ;
@@ -99,7 +105,13 @@ public class SigninActivity extends AppCompatActivity {
                 logIn();
             }
         });
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
 
+        mGoogleApiClient.connect();
 
         //FBcode
         final List<String> permissionNeeds = Arrays.asList("user_friends","user_photos","email");
@@ -145,6 +157,7 @@ public class SigninActivity extends AppCompatActivity {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 //.enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(LocationServices.API)
                 .build();
         b = (buttons)findViewById(R.id.google_signin_btn);
         b.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +226,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
      public void onLogInSuccess() {
-
+         notif();
          Toast.makeText(getBaseContext(), "Logged in successfully", Toast.LENGTH_LONG).show();
          finish();
          Intent i = new Intent(SigninActivity.this, MainActivity.class);
@@ -221,6 +234,36 @@ public class SigninActivity extends AppCompatActivity {
     }
     public void onLogInFailed(String error) {
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_LONG).show();
+        mGoogleApiClient.disconnect();
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            longi = String.valueOf(mLastLocation.getLatitude());
+            lati = String.valueOf(mLastLocation.getLongitude());
+        }
+
+    }
+
+    public void notif() {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        mBuilder.setContentTitle("Log in Successful");
+        mBuilder.setContentText("Logged in from " + longi + " , " + lati);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
     }
 
     private class PostClass extends AsyncTask<String, Void, Void> {
