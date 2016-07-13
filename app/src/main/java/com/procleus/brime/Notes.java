@@ -34,19 +34,20 @@ public class Notes extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String createTextNotesTable = "CREATE TABLE if not exists textNotes (id INTEGER PRIMARY KEY AUTOINCREMENT, note text, title text, created TIMESTAMP default CURRENT_TIMESTAMP, edited TIMESTAMP default CURRENT_TIMESTAMP, owner integer,accessType text,isDeleted integer,label text)";
         db.execSQL(createTextNotesTable);
-        String createLabelTable = "CREATE TABLE label (label text)";
+        String createLabelTable = "CREATE TABLE if not exists label (label text)";
         db.execSQL(createLabelTable);
     }
 
     public void insertLabel(String l){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        String query="INSERT INTO label VALUES('" + l + "')";
+        String query="INSERT INTO label  VALUES('" + l + "')";
         db.execSQL(query);
         Log.d("Sql Query insert  ",query);
         db.close();
 
     }
+
 
     public ArrayList<String> retrieveLabel(){
 
@@ -100,13 +101,18 @@ public class Notes extends SQLiteOpenHelper {
         Log.d("Sql Query Trash  ", query);
         db.close();
     }
-    /*
-    public void deleteTextNote(int i) {
+
+    public void deleteTextNote(String i) {
+
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM textNotes WHERE id='" + i + "'");
+        String query="DELETE FROM label WHERE label='" + i + "'";
+        db.execSQL(query);
+        query = "UPDATE textNotes set isDeleted = 1  WHERE label='" + i + "'";
+        db.execSQL(query);
+        Log.i("BOOM",query);
         db.close();
     }
-
+/*
     public TextNote getTextNoteById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -181,6 +187,38 @@ public class Notes extends SQLiteOpenHelper {
 
         return modelList;
     }
+
+
+    public List<NotesModel> getDataFromDBWithLabel(String label){
+        List<NotesModel> modelList = new ArrayList<NotesModel>();
+        String query;
+
+        query = "select * from textNotes where label ='"+label+"'";
+
+        Log.d("Sql Query get :",query);
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()){
+            do {
+                NotesModel model = new NotesModel();
+                model.setId(cursor.getInt(0));
+                model.setTitle(cursor.getString(2));
+                model.setDesc(cursor.getString(1));
+                model.setAccess_type(cursor.getString(6));
+                model.setIsDeleted(cursor.getInt(7));
+                model.setLable(cursor.getString(8));
+                modelList.add(model);
+
+                Log.d("Student Data Name ",cursor.getInt(0)+" title :  "+ cursor.getString(2) +" access type :Walal "+ cursor.getString(5) +" Trash Val "+cursor.getInt(6) + "Label Val" + cursor.getString(8));
+            }while (cursor.moveToNext());
+        }
+
+        Log.d("student data", modelList.toString());
+
+        return modelList;
+    }
+
 
 
 }

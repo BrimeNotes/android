@@ -98,6 +98,7 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
+        <activity android:name=".Label_Open"></activity>
     </application>
 
 </manifest>

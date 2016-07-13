@@ -11,28 +11,16 @@
         android:id="@+id/txt_dia"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="6"
         android:paddingLeft="5dp"
         android:paddingTop="16dp"
-        android:text="ADD LABEL"
+        android:text="ARE YOU SURE YOU WANT TO DELETE?\nCORRESPONDING NOTES WILL BE TRASHED"
         android:textColor="#f9661c"
         android:textSize="15sp"
         android:textStyle="bold"
         android:textAlignment="center"
         />
 
-
-    <com.procleus.brime.edittext
-        android:textAlignment="center"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:backgroundTint="#fa7006"
-
-        android:hint="New Label"
-        android:id="@+id/label_editText"
-        android:layout_gravity="center_horizontal"
-         />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -41,14 +29,14 @@
         android:paddingRight="5dp"
         android:paddingLeft="5dp"
         android:layout_gravity="center|bottom"
-        android:layout_weight="4"
+        android:layout_weight="6"
         android:background="#ffffff"
         android:gravity="center"
         android:orientation="horizontal">
 
 
         <com.procleus.brime.buttons
-            android:id="@+id/btn_yes"
+            android:id="@+id/btn_yes_label"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:background="@android:color/white"
@@ -59,7 +47,7 @@
             android:textStyle="bold" />
 
         <com.procleus.brime.buttons
-            android:id="@+id/btn_no"
+            android:id="@+id/btn_no_label"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:background="@android:color/white"
