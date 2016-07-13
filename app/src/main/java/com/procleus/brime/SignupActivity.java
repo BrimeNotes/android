@@ -4,6 +4,7 @@ package com.procleus.brime;
  * Created by suraj on 04-07-2016.
  */
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -109,8 +110,12 @@ public class SignupActivity extends AppCompatActivity {
                     public void run() {
                         if(responseOp==1) {
                             onSignupSuccess();
-                        }else
+                        } else {
+                            fnotif();
+                            Log.i("Function called0", "yep");
                             onSignupFailed("Sign up Error, Please try again later");
+                        }
+
                         progressDialog.dismiss();
                     }
                 }, 3000);
@@ -182,6 +187,29 @@ public class SignupActivity extends AppCompatActivity {
         mBuilder.setSmallIcon(R.drawable.logo);
         mBuilder.setContentTitle("Registration Successful");
         mBuilder.setContentText("Thanks for choosing Brime, Please verify your email.");
+        mBuilder.setSmallIcon(R.drawable.logo);
+        int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+    }
+
+    public void fnotif() {
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        mBuilder.setContentTitle("Registration Failed");
+        mBuilder.setContentText("Account registration failed, please try again later");
+        mBuilder.setSmallIcon(R.drawable.logo);
+        int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+        Log.i("Fucntion ran", "yes");
     }
 
     public void onSignupFailed(String error) {

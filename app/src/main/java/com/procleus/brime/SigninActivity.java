@@ -1,5 +1,6 @@
 package com.procleus.brime;
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -254,6 +255,27 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         mBuilder.setSmallIcon(R.drawable.logo);
         mBuilder.setContentTitle("Log in Successful");
         mBuilder.setContentText("Logged in from " + longi + " , " + lati);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+    }
+
+    public void fnotif() {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        mBuilder.setContentTitle("Log in Failed");
+        mBuilder.setContentText("Logged in tried from " + longi + " , " + lati);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        int mNotificationId = 001;
+// Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+// Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 
     @Override
