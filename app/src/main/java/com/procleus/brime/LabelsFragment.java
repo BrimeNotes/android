@@ -120,6 +120,8 @@ public class LabelsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Notes tn = new Notes(getContext());
+        labelsRetrieved = tn.retrieveLabel();
         listView = (ListView) getView().findViewById(R.id.listLabel);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, labelsRetrieved);
         listView.setAdapter(arrayAdapter);
@@ -203,7 +205,7 @@ public class LabelsFragment extends Fragment {
             ArrayList<String> labelsRetrieved = new ArrayList<String>();
             labelsRetrieved = nt.retrieveLabel();
             listView = (ListView) getView().findViewById(R.id.listLabel);
-            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, labelsRetrieved);
+             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, labelsRetrieved);
             listView.setAdapter(arrayAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -211,7 +213,6 @@ public class LabelsFragment extends Fragment {
 
                     Intent i = new Intent(getActivity(), Label_Open.class);
                     i.putExtra("label", String.valueOf(parent.getItemAtPosition(position)));
-
                     Toast.makeText(getActivity(), "Inside in label" + ":" + String.valueOf(parent.getItemAtPosition(position)), Toast.LENGTH_SHORT).show();
                     startActivity(i);
 
