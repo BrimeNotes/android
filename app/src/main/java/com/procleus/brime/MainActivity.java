@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity
                 Log.d("Fab Clicked ", "Fab 2");
                 break;
             case R.id.fab_3:
-                runVoiceRecord();
+                Intent i1 = new Intent(MainActivity.this,CreateAudioNotes.class);
+                startActivity(i1);
                 break;
 
         }
@@ -215,10 +216,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    //voice record function
-    public void runVoiceRecord(){
 
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

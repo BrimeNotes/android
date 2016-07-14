@@ -98,7 +98,8 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <activity android:name=".Label_Open"></activity>
+        <activity android:name=".Label_Open" />
+        <activity android:name=".CreateAudioNotes"></activity>
     </application>
 
 </manifest>

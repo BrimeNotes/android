@@ -24,7 +24,7 @@ public class Label_Open extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_label__open);
-
+        getSupportActionBar().hide();
 
         Bundle mainData = getIntent().getExtras();
         String label = mainData.getString("label");
@@ -33,13 +33,13 @@ public class Label_Open extends AppCompatActivity {
     }
 
 
-    public void initialiseList(String label){
+    public void initialiseList(String label) {
 
         helpher = new Notes(this);
-        dbList= new ArrayList<NotesModel>();
+        dbList = new ArrayList<NotesModel>();
         dbList = helpher.getDataFromDBWithLabel(label);
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.recycleview_label);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycleview_label);
 
         mRecyclerView.setHasFixedSize(true);
 
@@ -48,7 +48,7 @@ public class Label_Open extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new RecyclerAdapter(this,dbList);
+        mAdapter = new RecyclerAdapter(this, dbList);
         DefaultItemAnimator anim = new DefaultItemAnimator();
         anim.setAddDuration(500);
         anim.setRemoveDuration(700);
@@ -63,12 +63,18 @@ public class Label_Open extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new RecyclerAdapter(this,dbList);
+        mAdapter = new RecyclerAdapter(this, dbList);
         DefaultItemAnimator anim = new DefaultItemAnimator();
         anim.setAddDuration(500);
         anim.setRemoveDuration(700);
         mRecyclerView.setItemAnimator(anim);
         mRecyclerView.setAdapter(mAdapter);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

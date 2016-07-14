@@ -193,7 +193,7 @@ public class Notes extends SQLiteOpenHelper {
         List<NotesModel> modelList = new ArrayList<NotesModel>();
         String query;
 
-        query = "select * from textNotes where label ='"+label+"'";
+        query = "select * from textNotes where label ='"+label+"' AND isDeleted = 0";
 
         Log.d("Sql Query get :",query);
         SQLiteDatabase db = this.getWritableDatabase();
