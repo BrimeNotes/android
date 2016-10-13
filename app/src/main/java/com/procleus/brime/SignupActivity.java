@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -222,7 +224,7 @@ public class SignupActivity extends AppCompatActivity {
         private final Context context;
         String email = etemail.getText().toString();
         String password = etpass.getText().toString();
-
+        String username = etname.getText().toString();
         public PostClass(Context c) {
 
             this.context = c;
@@ -237,9 +239,9 @@ public class SignupActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://api.brime.tk/register.php");
+                URL url = new URL("http://api.brime.tk/register");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + hashText(password);
+                String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + hashText(password) + "&username=" + username;
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("USER-AGENT", "Brime Android App");
                 connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
@@ -256,12 +258,17 @@ public class SignupActivity extends AppCompatActivity {
                     responseOutput.append(line);
                 }
                 Log.i("response", responseOutput.toString());
-                if (responseOutput.toString().equals("Registration Successful")) {
-                    responseOp=1;
+                try {
+                    JSONObject reader = new JSONObject(responseOutput.toString());
+                    String message = reader.get("message").toString();
+                    Log.i("Message", message);
+                    if (message.equals("Registered Successfully")) {
+                        responseOp = 1;
+                    } else {
+                        responseOp = 2;
+                    }
+                } catch (Exception e) { }
 
-                } else {
-                    responseOp = 2;
-                }
                 br.close();
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
