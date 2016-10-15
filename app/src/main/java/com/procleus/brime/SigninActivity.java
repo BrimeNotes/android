@@ -30,6 +30,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -70,6 +72,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         try {
             final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
             sha512.update(textToHash.getBytes());
+            Log.i("hashText", convertByteToHex(sha512.digest()));
             return convertByteToHex(sha512.digest());
         } catch (Exception e) {
             return textToHash;
@@ -307,7 +310,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         @Override
         protected Void doInBackground(String... params) {
             try {
-                URL url = new URL("http://api.brime.tk/login.php");
+                URL url = new URL("http://api.brime.tk/login");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + hashText(password);
                 connection.setRequestMethod("POST");
@@ -325,22 +328,28 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                 while ((line = br.readLine()) != null) {
                     responseOutput.append(line);
                 }
-                if (responseOutput.toString().replaceAll(" ", "").equals("Loggedin")) {
+                Log.i("qwqw", responseOutput.toString());
+                try {
+                    JSONObject reader = new JSONObject(responseOutput.toString());
+                    String message = reader.get("message").toString();
+                    Log.i("Message", message);
+                    if (message.equals("Logged in")) {
+                        responseOp = 1;
 
-                    responseOp = 1;
-                    // Save data in shared pref
-                    session = getSharedPreferences(PREF, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = session.edit();
-                    //editor.putString(ID, );
-                    editor.putString("emailpref", email);
-                    editor.putString("passwordpref", hashText(password));
-                    editor.putBoolean("loggedin", true);
-                    editor.commit();
-                } else if (responseOutput.toString().replaceAll(" ", "").equals("Notverified")) {
-                    responseOp=3;
-                }
-                else {
-                    responseOp=2;    
+                        session = getSharedPreferences(PREF, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = session.edit();
+                        //editor.putString(ID, );
+                        editor.putString("emailpref", email);
+                        editor.putString("passwordpref", hashText(password));
+                        editor.putBoolean("loggedin", true);
+                        editor.commit();
+                    } else if (message.equals("user is not verified")){
+                        responseOp = 3;
+                    } else {
+                        responseOp = 2;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 br.close();
             } catch (MalformedURLException e) {
@@ -351,5 +360,4 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             return null;
         }
     }
-
 }

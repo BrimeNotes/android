@@ -1,9 +1,5 @@
 package com.procleus.brime;
 
-/**
- * Created by suraj on 04-07-2016.
- */
-
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,11 +22,14 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+
 
 public class SignupActivity extends AppCompatActivity {
     private static final int uniqueid=456;
@@ -60,7 +59,6 @@ public class SignupActivity extends AppCompatActivity {
         }
 
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +92,6 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup() {
-
         if (!validate()) {
             onSignupFailed("Data Validation Error");
             return;
@@ -117,13 +114,9 @@ public class SignupActivity extends AppCompatActivity {
                             Log.i("Function called0", "yep");
                             onSignupFailed("Sign up Error, Please try again later");
                         }
-
                         progressDialog.dismiss();
                     }
                 }, 3000);
-
-
-
     }
 
     public boolean validate() {
@@ -132,7 +125,6 @@ public class SignupActivity extends AppCompatActivity {
         String name = etname.getText().toString();
         String email = etemail.getText().toString();
         String password = etpass.getText().toString();
-
 
         if (name.isEmpty() || name.length() < 3) {
             etname.setError("at least 3 characters");
@@ -238,7 +230,6 @@ public class SignupActivity extends AppCompatActivity {
         protected Void doInBackground(String... params) {
 
             try {
-
                 URL url = new URL("http://api.brime.tk/register");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 String urlParameters = "email=" + URLEncoder.encode(email, "UTF-8") + "&p=" + hashText(password) + "&username=" + username;
@@ -267,14 +258,11 @@ public class SignupActivity extends AppCompatActivity {
                     } else {
                         responseOp = 2;
                     }
-                } catch (Exception e) { }
-
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 br.close();
-            } catch (MalformedURLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             return null;
