@@ -72,7 +72,6 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         try {
             final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
             sha512.update(textToHash.getBytes());
-            Log.i("hashText", convertByteToHex(sha512.digest()));
             return convertByteToHex(sha512.digest());
         } catch (Exception e) {
             return textToHash;
@@ -328,7 +327,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                 while ((line = br.readLine()) != null) {
                     responseOutput.append(line);
                 }
-                Log.i("qwqw", responseOutput.toString());
+                Log.i("response", responseOutput.toString());
                 try {
                     JSONObject reader = new JSONObject(responseOutput.toString());
                     String message = reader.get("message").toString();
@@ -342,7 +341,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                         editor.putString("emailpref", email);
                         editor.putString("passwordpref", hashText(password));
                         editor.putBoolean("loggedin", true);
-                        editor.commit();
+                        editor.apply();
                     } else if (message.equals("user is not verified")){
                         responseOp = 3;
                     } else {
