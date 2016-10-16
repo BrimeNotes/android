@@ -18,6 +18,15 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -131,6 +140,43 @@ public class CreateNotes extends AppCompatActivity {
                                 note_title = (new Date()).toString();
                             }
                             tn.insertTextNote(note_desc, note_title, "private", 1,String.valueOf(parent.getItemAtPosition(position)));
+
+                            /**
+                             * Adding note to the server
+                             */
+                            try {
+                                URL url = new URL("http://api.brime.tk/notes/add");
+                                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                                String author = getApplicationContext().getSharedPreferences("com.procleus.brime", MODE_PRIVATE).getString("emailpref", "error");
+                                String urlParameters = "title=" + note_title+ "&content=" + note_desc + "&label=" + String.valueOf(parent.getItemAtPosition(position)) + "&author=" + author;
+                                connection.setRequestMethod("POST");
+                                connection.setRequestProperty("USER-AGENT", "Brime Android App");
+                                connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
+                                connection.setDoOutput(true);
+                                DataOutputStream dStream = new DataOutputStream(connection.getOutputStream());
+                                dStream.writeBytes(urlParameters);
+                                dStream.flush();
+                                dStream.close();
+                                //int responseCode = connection.getResponseCode();
+                                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                                String line = "";
+                                StringBuilder responseOutput = new StringBuilder();
+                                while ((line = br.readLine()) != null) {
+                                    responseOutput.append(line);
+                                }
+                                Log.i("response", responseOutput.toString());
+                                try {
+                                    JSONObject reader = new JSONObject(responseOutput.toString());
+                                    String message = reader.get("message").toString();
+                                    Toast.makeText(CreateNotes.this, message, Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                br.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
                             Log.i("hello", note_title + "   " + note_desc);
                             finish();
                             Toast.makeText(CreateNotes.this, "Private segment", Toast.LENGTH_SHORT).show();
