@@ -14,13 +14,13 @@ These instructions will get you a copy of the project up and running on your loc
 * **Mudit Gupta**
 * **Suraj Rawat**
 
-See also the list of [contributors](https://github.com/imujjwal96/prelimQuiz/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/imujjwal96/Brime/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the AGPL v3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 
-Report Bugs: https://github.com/imujjwal96/prelimQuiz/issues
+Report Bugs: https://github.com/imujjwal96/Brime/issues
 
 
 
