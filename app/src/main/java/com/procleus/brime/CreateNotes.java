@@ -1,9 +1,11 @@
 package com.procleus.brime;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +56,62 @@ public class CreateNotes extends AppCompatActivity {
         CustomDialog(v, isLoggedIn);
     }
 
-    private void CustomDialog(View v,final Boolean isLoggedIn) {
+    private class Csnote extends AsyncTask<String, Void, Void> {
+
+        private final Context context;
+
+
+        public Csnote(Context c) {
+
+            this.context = c;
+        }
+
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            String note_title=params[0];
+            String note_desc=params[1];
+            String label=params[2];
+            try {
+                URL url = new URL("http://api.brime.tk/notes/add");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                String author = getApplicationContext().getSharedPreferences("com.procleus.brime", MODE_PRIVATE).getString("emailpref", "error");
+                String urlParameters = "title=" + note_title+ "&content=" + note_desc + "&label=" + label + "&author=" + author;
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("USER-AGENT", "Brime Android App");
+                connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
+                connection.setDoOutput(true);
+                DataOutputStream dStream = new DataOutputStream(connection.getOutputStream());
+                dStream.writeBytes(urlParameters);
+                dStream.flush();
+                dStream.close();
+                //int responseCode = connection.getResponseCode();
+                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = "";
+                StringBuilder responseOutput = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    responseOutput.append(line);
+                }
+                Log.i("response", responseOutput.toString());
+                try {
+                    JSONObject reader = new JSONObject(responseOutput.toString());
+                    String message = reader.get("message").toString();
+                    Toast.makeText(CreateNotes.this, message, Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+        private void CustomDialog(View v,final Boolean isLoggedIn) {
         final Dialog dialog = new Dialog(CreateNotes.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -141,42 +198,13 @@ public class CreateNotes extends AppCompatActivity {
                             }
                             tn.insertTextNote(note_desc, note_title, "private", 1,String.valueOf(parent.getItemAtPosition(position)));
 
+
                             /**
                              * Adding note to the server
+                             * AsyncTask use to offload Mainthread.
                              */
-                            try {
-                                URL url = new URL("http://api.brime.tk/notes/add");
-                                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                                String author = getApplicationContext().getSharedPreferences("com.procleus.brime", MODE_PRIVATE).getString("emailpref", "error");
-                                String urlParameters = "title=" + note_title+ "&content=" + note_desc + "&label=" + String.valueOf(parent.getItemAtPosition(position)) + "&author=" + author;
-                                connection.setRequestMethod("POST");
-                                connection.setRequestProperty("USER-AGENT", "Brime Android App");
-                                connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
-                                connection.setDoOutput(true);
-                                DataOutputStream dStream = new DataOutputStream(connection.getOutputStream());
-                                dStream.writeBytes(urlParameters);
-                                dStream.flush();
-                                dStream.close();
-                                //int responseCode = connection.getResponseCode();
-                                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                                String line = "";
-                                StringBuilder responseOutput = new StringBuilder();
-                                while ((line = br.readLine()) != null) {
-                                    responseOutput.append(line);
-                                }
-                                Log.i("response", responseOutput.toString());
-                                try {
-                                    JSONObject reader = new JSONObject(responseOutput.toString());
-                                    String message = reader.get("message").toString();
-                                    Toast.makeText(CreateNotes.this, message, Toast.LENGTH_SHORT).show();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                br.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
+                                new Csnote(CreateNotes.this).execute(note_title,note_desc,String.valueOf(parent.getItemAtPosition(position)));
+//
                             Log.i("hello", note_title + "   " + note_desc);
                             finish();
                             Toast.makeText(CreateNotes.this, "Private segment", Toast.LENGTH_SHORT).show();
