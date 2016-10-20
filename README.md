@@ -1,4 +1,6 @@
 # Brime
+
+[![Join the chat at https://gitter.im/Brime-app/Lobby](https://badges.gitter.im/Brime-app/Lobby.svg)](https://gitter.im/Brime-app/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Brime is an open source, simple and powerful self-hosted note taking application that lets an organisation to have its notes stored on its own servers preventing any outside element to get access to the private data of the organization. It has a beautifully designed interface following the trending Material Design.
 
 ## Getting Started
