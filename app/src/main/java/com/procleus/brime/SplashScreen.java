@@ -1,22 +1,15 @@
 package com.procleus.brime;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.content.SharedPreferences;
-import android.transition.Fade;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 
 import java.io.BufferedReader;

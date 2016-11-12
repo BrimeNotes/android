@@ -25,9 +25,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 
-/**
- * Created by Ujjwal on 07-07-2016.
- */
 public class ChangePasswordFragment extends Fragment {
     FloatingActionButton buttonChange;
     EditText oldPassword;

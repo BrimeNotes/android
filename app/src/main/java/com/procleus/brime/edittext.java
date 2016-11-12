@@ -5,16 +5,12 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-/**
- * Created by syedaamir on 03-07-2016.
- */
 public class edittext extends EditText {
 
     public edittext(Context context) {
-    super(context);
-    setFont();
-
-}
+        super(context);
+        setFont();
+    }
 
     public edittext(Context context, AttributeSet attrs) {
         super(context, attrs);

@@ -26,9 +26,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-/**
- * Created by Ujjwal on 07-07-2016.
- */
 public class AccountInfoFragment extends Fragment {
     private static String url;
     EditText Email;

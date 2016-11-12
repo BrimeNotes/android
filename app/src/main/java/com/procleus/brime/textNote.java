@@ -2,9 +2,6 @@ package com.procleus.brime;
 
 import java.sql.Timestamp;
 
-/**
- * Created by mudit on 08/07/2016.
- */
 public class TextNote {
     public int id;
     public String note;

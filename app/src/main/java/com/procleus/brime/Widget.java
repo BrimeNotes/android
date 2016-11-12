@@ -8,9 +8,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class Widget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,

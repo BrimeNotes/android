@@ -4,9 +4,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-/**
- * Created by syedsaad on 09-07-2016.
- */
 public class bitmapCreate {
     //Load a bitmap from a resource with a target size
     static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {

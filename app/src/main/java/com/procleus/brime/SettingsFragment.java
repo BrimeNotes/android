@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +14,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Ujjwal on 07-07-2016.
- */
 public class SettingsFragment extends Fragment {
 
     ArrayList<String> settingsOptions = new ArrayList<String>();
