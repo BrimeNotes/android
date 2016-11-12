@@ -1,9 +1,5 @@
 package com.procleus.brime;
 
-/**
- * Created by syedaamir on 11-07-2016.
- */
-
 public class NotesModel {
     private int id;
     private String title;

@@ -5,14 +5,11 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.Button;
 
-/**
- * Created by syedaamir on 03-07-2016.
- */public class buttons extends Button {
+public class buttons extends Button {
 
     public buttons(Context context) {
         super(context);
         setFont();
-
     }
 
     public buttons(Context context, AttributeSet attrs) {
@@ -30,6 +27,5 @@ import android.widget.Button;
         setTypeface(normal, Typeface.NORMAL);
        /* Button bt = (Button)findViewById(R.id.login_button);
         bt.setTypeface(normal,Typeface.NORMAL);*/
-
     }
 }
