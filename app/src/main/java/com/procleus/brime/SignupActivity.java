@@ -38,14 +38,25 @@ public class SignupActivity extends AppCompatActivity {
     int responseOp;
     private GoogleApiClient client;
 
+
+    /**
+     * Converts Byte to Hexadecimal
+     * @param data Byte data
+     * @return hexadecimal data
+     */
     public static String convertByteToHex(byte data[]) {
         StringBuffer hexData = new StringBuffer();
-        for (int byteIndex = 0; byteIndex < data.length; byteIndex++)
+        for (int byteIndex = 0; byteIndex < data.length; byteIndex++) {
             hexData.append(Integer.toString((data[byteIndex] & 0xff) + 0x100, 16).substring(1));
-
+        }
         return hexData.toString();
     }
 
+    /**
+     * Encrypts a text
+     * @param textToHash text to be encrypted
+     * @return encryted text
+     */
     public static String hashText(String textToHash) {
         try {
             final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
@@ -88,40 +99,47 @@ public class SignupActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    /**
+     * Registers a user with valid credentials
+     */
     public void signup() {
-        if (!validate()) {
+        String name = etname.getText().toString();
+        String email = etemail.getText().toString();
+        String password = etpass.getText().toString();
+        if (!validate(name, email, password)) {
             onSignupFailed("Data Validation Error");
             return;
         }
         btnsign.setEnabled(false);
         progressDialog = new ProgressDialog(SignupActivity.this, R.style.Dialog);
-        //String name = etname.getText().toString();
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account");
         progressDialog.show();
         new PostClass(this).execute();
-        //Crash fix by nervehammer
-         new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        if(responseOp==1) {
-                            onSignupSuccess();
-                        } else {
-                            fnotif();
-                            Log.i("Function called0", "yep");
-                            onSignupFailed("Sign up Error, Please try again later");
-                        }
-                        progressDialog.dismiss();
+        new android.os.Handler().postDelayed(
+            new Runnable() {
+                public void run() {
+                    if(responseOp==1) {
+                        onSignupSuccess();
+                    } else {
+                        fnotif();
+                        Log.i("Function called0", "yep");
+                        onSignupFailed("Sign up Error, Please try again later");
                     }
-                }, 3000);
+                    progressDialog.dismiss();
+                }
+            }, 3000);
     }
 
-    public boolean validate() {
+    /**
+     * Validates the inputted user's credentials on Signup
+     * @param name  a non empty non-numeric string of length greater than or equal to 3.
+     * @param email a non empty email address
+     * @param password a non empty string with minimum length of 8 characters
+     * @return true if the credentials are validated else false
+     */
+    public boolean validate(String name, String email, String password) {
         boolean valid = true;
-
-        String name = etname.getText().toString();
-        String email = etemail.getText().toString();
-        String password = etpass.getText().toString();
 
         if (name.isEmpty() || name.length() < 3) {
             etname.setError("at least 3 characters");
@@ -147,6 +165,10 @@ public class SignupActivity extends AppCompatActivity {
         return valid;
     }
 
+    /**
+     * Toast a successful signup message.
+     * Shifts from Signup activity to Signin activity
+     */
     public void onSignupSuccess() {
         btnsign.setEnabled(true);
         setResult(RESULT_OK, null);
@@ -155,24 +177,8 @@ public class SignupActivity extends AppCompatActivity {
         Intent i = new Intent(SignupActivity.this, SigninActivity.class);
         startActivity(i);
         finish();
+    }
 
-    }
-    //Notification after verifying email
-    /*
-    private void Notif() {
-        notif = new NotificationCompat.Builder(SignupActivity.this);
-        notif.setAutoCancel(true);
-        notif.setSmallIcon(R.mipmap.ic_launcher);
-        notif.setContentTitle("Registration_Successful");
-        notif.setWhen(System.currentTimeMillis());
-        notif.setContentText("Thanks for choosing Brime \nYour Email has been verified ");
-        Intent i =new Intent(SignupActivity.this,MainActivity.class);
-        PendingIntent pi= PendingIntent.getActivity(SignupActivity.this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        notif.setContentIntent(pi);
-        NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        nm.notify(uniqueid,notif.build());
-    }
-    */
     public void notif() {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setSmallIcon(R.drawable.logo);
@@ -180,10 +186,8 @@ public class SignupActivity extends AppCompatActivity {
         mBuilder.setContentText("Thanks for choosing Brime, Please verify your email.");
         mBuilder.setSmallIcon(R.drawable.logo);
         int mNotificationId = 001;
-// Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 
@@ -195,14 +199,17 @@ public class SignupActivity extends AppCompatActivity {
         mBuilder.setContentText("Account registration failed, please try again later");
         mBuilder.setSmallIcon(R.drawable.logo);
         int mNotificationId = 001;
-// Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
         Log.i("Fucntion ran", "yes");
     }
 
+
+    /**
+     * Toast an error to the screen which caused a failed signup
+     * @param error the error string received when there is a failed signup
+     */
     public void onSignupFailed(String error) {
         Toast.makeText(getBaseContext(), error, Toast.LENGTH_LONG).show();
         btnsign.setEnabled(true);
