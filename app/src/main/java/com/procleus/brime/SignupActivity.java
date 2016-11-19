@@ -38,36 +38,6 @@ public class SignupActivity extends AppCompatActivity {
     int responseOp;
     private GoogleApiClient client;
 
-
-    /**
-     * Converts Byte to Hexadecimal
-     * @param data Byte data
-     * @return hexadecimal data
-     */
-    public static String convertByteToHex(byte data[]) {
-        StringBuffer hexData = new StringBuffer();
-        for (int byteIndex = 0; byteIndex < data.length; byteIndex++) {
-            hexData.append(Integer.toString((data[byteIndex] & 0xff) + 0x100, 16).substring(1));
-        }
-        return hexData.toString();
-    }
-
-    /**
-     * Encrypts a text
-     * @param textToHash text to be encrypted
-     * @return encryted text
-     */
-    public static String hashText(String textToHash) {
-        try {
-            final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
-            sha512.update(textToHash.getBytes());
-            return convertByteToHex(sha512.digest());
-        } catch (Exception e) {
-            return textToHash;
-        }
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +70,35 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     /**
+     * Converts Byte to Hexadecimal
+     * @param data Byte data
+     * @return hexadecimal data
+     */
+    public static String convertByteToHex(byte data[]) {
+        StringBuffer hexData = new StringBuffer();
+        for (int byteIndex = 0; byteIndex < data.length; byteIndex++) {
+            hexData.append(Integer.toString((data[byteIndex] & 0xff) + 0x100, 16).substring(1));
+        }
+        return hexData.toString();
+    }
+
+    /**
+     * Encrypts a text
+     * @param textToHash text to be encrypted
+     * @return encryted text
+     */
+    public static String hashText(String textToHash) {
+        try {
+            final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
+            sha512.update(textToHash.getBytes());
+            return convertByteToHex(sha512.digest());
+        } catch (Exception e) {
+            return textToHash;
+        }
+
+    }
+
+    /**
      * Registers a user with valid credentials
      */
     public void signup() {
@@ -111,24 +110,9 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
         btnsign.setEnabled(false);
-        progressDialog = new ProgressDialog(SignupActivity.this, R.style.Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account");
-        progressDialog.show();
+
         new PostClass(this).execute();
-        new android.os.Handler().postDelayed(
-            new Runnable() {
-                public void run() {
-                    if(responseOp==1) {
-                        onSignupSuccess();
-                    } else {
-                        fnotif();
-                        Log.i("Function called0", "yep");
-                        onSignupFailed("Sign up Error, Please try again later");
-                    }
-                    progressDialog.dismiss();
-                }
-            }, 3000);
+
     }
 
     /**
@@ -227,7 +211,10 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         protected void onPreExecute() {
-
+            progressDialog = new ProgressDialog(SignupActivity.this, R.style.Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Creating Account");
+            progressDialog.show();
         }
 
         @Override
@@ -270,6 +257,18 @@ public class SignupActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if(responseOp==1) {
+                onSignupSuccess();
+            } else {
+                fnotif();
+                Log.i("Function called0", "yep");
+                onSignupFailed("Sign up Error, Please try again later");
+            }
+            progressDialog.dismiss();
         }
     }
 
