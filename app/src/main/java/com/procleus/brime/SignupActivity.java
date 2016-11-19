@@ -42,7 +42,6 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        // Binding resources
         etname = (edittext) findViewById(R.id.input_name);
         etemail = (edittext) findViewById(R.id.input_email);
         etpass = (edittext) findViewById(R.id.input_password);
@@ -58,9 +57,8 @@ public class SignupActivity extends AppCompatActivity {
         loginlink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //link login activity
-                Intent isignu = new Intent(SignupActivity.this, SigninActivity.class);
-                startActivity(isignu);
+                Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,7 +83,7 @@ public class SignupActivity extends AppCompatActivity {
     /**
      * Encrypts a text
      * @param textToHash text to be encrypted
-     * @return encryted text
+     * @return encrypted text
      */
     public static String hashText(String textToHash) {
         try {
@@ -95,7 +93,6 @@ public class SignupActivity extends AppCompatActivity {
         } catch (Exception e) {
             return textToHash;
         }
-
     }
 
     /**
@@ -110,9 +107,7 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
         btnsign.setEnabled(false);
-
         new PostClass(this).execute();
-
     }
 
     /**

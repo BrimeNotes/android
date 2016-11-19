@@ -61,27 +61,10 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager callbackManager;
 
-    public static String convertByteToHex(byte data[]) {
-        StringBuffer hexData = new StringBuffer();
-        for (int byteIndex = 0; byteIndex < data.length; byteIndex++)
-            hexData.append(Integer.toString((data[byteIndex] & 0xff) + 0x100, 16).substring(1));
-
-        return hexData.toString();
-    }
-    public static String hashText(String textToHash) {
-        try {
-            final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
-            sha512.update(textToHash.getBytes());
-            return convertByteToHex(sha512.digest());
-        } catch (Exception e) {
-            return textToHash;
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        //login resource bind
         etun=(edittext)findViewById(R.id.editText);
         etpass=(edittext)findViewById(R.id.editText2);
         textview tv = (textview) findViewById(R.id.textView3);
@@ -164,10 +147,41 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             }
         });
     }
+
+    /**
+     * Converts Byte to Hexadecimal
+     * @param data Byte data
+     * @return hexadecimal data
+     */
+    public static String convertByteToHex(byte data[]) {
+        StringBuffer hexData = new StringBuffer();
+        for (int byteIndex = 0; byteIndex < data.length; byteIndex++) {
+            hexData.append(Integer.toString((data[byteIndex] & 0xff) + 0x100, 16).substring(1));
+        }
+        return hexData.toString();
+    }
+
+    /**
+     * Encrypts a text
+     * @param textToHash text to be encrypted
+     * @return encrypted text
+     */
+    public static String hashText(String textToHash) {
+        try {
+            final MessageDigest sha512 = MessageDigest.getInstance("SHA-512");
+            sha512.update(textToHash.getBytes());
+            return convertByteToHex(sha512.digest());
+        } catch (Exception e) {
+            return textToHash;
+        }
+    }
+
+
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -201,30 +215,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
     }
 
     public void logIn() {
-        progressDialog = new ProgressDialog(SigninActivity.this, R.style.Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Login ...");
-        progressDialog.show();
         new PostClass(this).execute();
-        new android.os.Handler().postDelayed(
-            new Runnable() {
-                public void run() {
-                    if (responseOp==1) {
-                        notif();
-                        onLogInSuccess();
-                    } else if (responseOp == 3) {
-                        fnotif();
-                        onLogInFailed("Email Id not verified");
-
-                    } else {
-                        fnotif();
-                        onLogInFailed("Data Validation error");
-
-                    }
-
-                    progressDialog.dismiss();
-                }
-            }, 3000);
     }
 
      public void onLogInSuccess() {
@@ -241,14 +232,12 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
 
     @Override
     public void onConnected(Bundle bundle) {
-
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
             longi = String.valueOf(mLastLocation.getLatitude());
             lati = String.valueOf(mLastLocation.getLongitude());
         }
-
     }
 
     public void notif() {
@@ -258,10 +247,8 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         mBuilder.setContentText("Logged in from " + longi + " , " + lati);
         mBuilder.setSmallIcon(R.drawable.logo);
         int mNotificationId = 4848;
-// Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 
@@ -272,10 +259,8 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
         mBuilder.setContentText("Logged in tried from " + longi + " , " + lati);
         mBuilder.setSmallIcon(R.drawable.logo);
         int mNotificationId = 4848;
-// Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-// Builds the notification and issues it.
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
     }
 
@@ -298,6 +283,10 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             this.context = c;
         }
         protected void onPreExecute() {
+            progressDialog = new ProgressDialog(SigninActivity.this, R.style.Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Login ...");
+            progressDialog.show();
         }
 
         @Override
@@ -351,6 +340,22 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (responseOp==1) {
+                notif();
+                onLogInSuccess();
+            } else if (responseOp == 3) {
+                fnotif();
+                onLogInFailed("Email Id not verified");
+
+            } else {
+                fnotif();
+                onLogInFailed("Data Validation error");
+            }
+            progressDialog.dismiss();
         }
     }
 }
