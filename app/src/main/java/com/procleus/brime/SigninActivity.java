@@ -101,13 +101,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                 startActivity(i);
             }
         });
-        buttons btlog=(buttons)findViewById(R.id.log_btn);
-        btlog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logIn();
-            }
-        });
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
