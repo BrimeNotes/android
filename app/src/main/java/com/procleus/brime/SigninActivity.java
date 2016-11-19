@@ -85,6 +85,14 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             }
         });
 
+        buttons btlog=(buttons)findViewById(R.id.log_btn);
+        btlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logIn();
+            }
+        });
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -238,6 +246,7 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
             longi = String.valueOf(mLastLocation.getLatitude());
             lati = String.valueOf(mLastLocation.getLongitude());
         }
+
     }
 
     public void notif() {
