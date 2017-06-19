@@ -69,7 +69,7 @@ public class GetStartedActivity extends AppCompatActivity{
                             finish();
                         }
                     } else {
-                        Intent intent = new Intent(GetStartedActivity.this, SignupActivity.class);
+                        Intent intent = new Intent(GetStartedActivity.this, SigninActivity.class);
                         startActivity(intent);
                         finish();
                     }
