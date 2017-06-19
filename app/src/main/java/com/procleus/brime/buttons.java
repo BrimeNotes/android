@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.Button;
 
-public class buttons extends Button {
+public class buttons extends android.support.v7.widget.AppCompatButton {
 
     public buttons(Context context) {
         super(context);
