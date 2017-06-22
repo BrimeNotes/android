@@ -84,7 +84,7 @@
                     android:layout_centerHorizontal="true"
 
                     android:gravity="center_horizontal"
-                    android:hint="EMAIL" />
+                    android:hint="USERNAME" />
 
                 <com.procleus.brime.edittext
                     android:id="@+id/editText2"
