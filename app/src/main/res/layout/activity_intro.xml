@@ -37,7 +37,7 @@
              android:layout_below="@id/image"
              android:id="@+id/view" />
 
-         <com.procleus.brime.textview
+         <com.procleus.brime.utils.CustomTextView
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
              android:text="BRIME"
@@ -47,7 +47,7 @@
              android:layout_centerHorizontal="true"
              android:id="@+id/textView2" />
 
-         <com.procleus.brime.textview
+         <com.procleus.brime.utils.CustomTextView
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
              android:text="NOTE TAKING MADE EASY"
@@ -70,7 +70,7 @@
         android:orientation="vertical"
         >
 
-            <com.procleus.brime.buttons
+            <com.procleus.brime.utils.CustomButton
                 android:layout_height="50dp"
                 android:layout_width="match_parent"
                 android:layout_centerInParent="true"
@@ -83,7 +83,7 @@
                 android:gravity="center"
                 android:layout_margin="16dp"
                 />
-                <com.procleus.brime.buttons
+                <com.procleus.brime.utils.CustomButton
                     android:layout_height="50dp"
                     android:layout_width="match_parent"
                     android:id="@+id/signinbtn"

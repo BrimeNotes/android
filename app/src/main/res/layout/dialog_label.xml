@@ -7,7 +7,7 @@
     android:weightSum="12">
 
 
-    <com.procleus.brime.textview
+    <com.procleus.brime.utils.CustomTextView
         android:id="@+id/txt_dia"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -35,7 +35,7 @@
         android:orientation="horizontal">
 
 
-        <com.procleus.brime.buttons
+        <com.procleus.brime.utils.CustomButton
             android:id="@+id/btn_yes_label"
             android:layout_width="100dp"
             android:layout_height="30dp"
@@ -46,7 +46,7 @@
 
             android:textStyle="bold" />
 
-        <com.procleus.brime.buttons
+        <com.procleus.brime.utils.CustomButton
             android:id="@+id/btn_no_label"
             android:layout_width="100dp"
             android:layout_height="30dp"
