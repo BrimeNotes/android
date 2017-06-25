@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.procleus.brime.R;
-import com.procleus.brime.data.NotesDbHelper;
+import com.procleus.brime.data.NotesDbHelperOld;
 import com.procleus.brime.models.NotesModel;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
 public class EditNotesActivity extends AppCompatActivity {
     static Integer _id = 0, _pos = 0;
     static String _access_type = "";
-    NotesDbHelper helper;
+    NotesDbHelperOld helper;
     List<NotesModel> dbList;
     EditText note,title;
     Boolean SAVE_NOTE_ACTIVE = false;
@@ -33,7 +33,7 @@ public class EditNotesActivity extends AppCompatActivity {
         title = (EditText) findViewById(R.id.noteTitle);
         title.setFocusable(false);
 
-        getSupportActionBar().setTitle("Edit NotesDbHelper");
+        getSupportActionBar().setTitle("Edit NotesDbHelperOld");
         getSupportActionBar().setElevation((float) 0.1);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -64,7 +64,7 @@ public class EditNotesActivity extends AppCompatActivity {
 
 
     public void editNotes(View v) {
-      //  NotesDbHelper tn = new NotesDbHelper(this);
+      //  NotesDbHelperOld tn = new NotesDbHelperOld(this);
        // TextView title = (TextView) findViewById(R.id.noteTitle);
         SAVE_NOTE_ACTIVE = true;
         title.setFocusableInTouchMode(true);
@@ -74,7 +74,7 @@ public class EditNotesActivity extends AppCompatActivity {
     }
 
     public void initialiseNotes(Integer id, String accessVal, Integer pos) {
-        helper = new NotesDbHelper(this);
+        helper = new NotesDbHelperOld(this);
         dbList= new ArrayList<NotesModel>();
         dbList = helper.getDataFromDB(accessVal,0);
 
@@ -89,7 +89,7 @@ public class EditNotesActivity extends AppCompatActivity {
     public void saveNotes(View v, Integer id, Integer pos) {
 
         /** Here Id Auto Increments starting from 1 while Adapter initialises from 0
-         * Therefore Previous NotesDbHelper get Edit
+         * Therefore Previous NotesDbHelperOld get Edit
          * TO Solve it id=id+1
          */
 

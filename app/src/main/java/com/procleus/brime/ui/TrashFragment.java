@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.procleus.brime.data.NotesDbHelper;
+import com.procleus.brime.data.NotesDbHelperOld;
 import com.procleus.brime.models.NotesModel;
 import com.procleus.brime.R;
 import com.procleus.brime.adapter.RecyclerAdapter;
@@ -29,7 +29,7 @@ public class TrashFragment extends Fragment  {
 
     // == == Card View Variables = == = ==
 
-    NotesDbHelper helpher;
+    NotesDbHelperOld helpher;
     List<NotesModel> dbList;
     RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -57,7 +57,7 @@ public class TrashFragment extends Fragment  {
     }
 
     public void initialiseList(){
-        helpher = new NotesDbHelper(getContext());
+        helpher = new NotesDbHelperOld(getContext());
         dbList= new ArrayList<NotesModel>();
         dbList = helpher.getDataFromDB("both",1);
 

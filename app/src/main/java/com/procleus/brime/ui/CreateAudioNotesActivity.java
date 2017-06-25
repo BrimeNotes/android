@@ -23,7 +23,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.procleus.brime.R;
-import com.procleus.brime.data.NotesDbHelper;
+import com.procleus.brime.data.NotesDbHelperOld;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,7 +100,7 @@ public class CreateAudioNotesActivity extends AppCompatActivity {
     }
 
 
-    /*Note s Creating Function Normal Like create NotesDbHelper*/
+    /*Note s Creating Function Normal Like create NotesDbHelperOld*/
 
     public void create(View v, Boolean isLoggedIn) {
         CustomDialog(v, isLoggedIn);
@@ -127,7 +127,7 @@ public class CreateAudioNotesActivity extends AppCompatActivity {
         /*/This is Database Spinner Retreival*/
         /* Spinner getting Data from dataBase*/
 
-        final NotesDbHelper tn =new NotesDbHelper(CreateAudioNotesActivity.this);
+        final NotesDbHelperOld tn =new NotesDbHelperOld(CreateAudioNotesActivity.this);
 
 
 
@@ -167,7 +167,7 @@ public class CreateAudioNotesActivity extends AppCompatActivity {
                             }
                         }
                         if (id == R.id.radioPublic) {
-                            NotesDbHelper tn = new NotesDbHelper(getApplicationContext());
+                            NotesDbHelperOld tn = new NotesDbHelperOld(getApplicationContext());
                             EditText title = (EditText) findViewById(R.id.noteTitle);
                             EditText note = (EditText) findViewById(R.id.note);
                             String note_desc, note_title;
@@ -182,7 +182,7 @@ public class CreateAudioNotesActivity extends AppCompatActivity {
                             Toast.makeText(CreateAudioNotesActivity.this, String.valueOf(parent.getItemAtPosition(position)), Toast.LENGTH_SHORT).show();
                             finish();
                         } else if (id == R.id.radioPrivate) {
-                            NotesDbHelper tn = new NotesDbHelper(CreateAudioNotesActivity.this);
+                            NotesDbHelperOld tn = new NotesDbHelperOld(CreateAudioNotesActivity.this);
                             EditText title = (EditText) findViewById(R.id.noteTitle);
                             EditText note = (EditText) findViewById(R.id.note);
                             String note_desc, note_title;

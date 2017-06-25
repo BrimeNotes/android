@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.procleus.brime.data.NotesDbHelper;
+import com.procleus.brime.data.NotesDbHelperOld;
 import com.procleus.brime.models.NotesModel;
 import com.procleus.brime.R;
 import com.procleus.brime.adapter.RecyclerAdapter;
@@ -29,7 +29,7 @@ public class PrivateFragment extends Fragment  {
 
     // == == Card View Variables = == = ==
 
-    NotesDbHelper helpher;
+    NotesDbHelperOld helpher;
     List<NotesModel> dbList;
     private View view;
     RecyclerView mRecyclerView;
@@ -44,7 +44,7 @@ public class PrivateFragment extends Fragment  {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.private_fragment,container,false);
-        ((MainActivity) getActivity()).setActionBarTitle("Private NotesDbHelper");
+        ((MainActivity) getActivity()).setActionBarTitle("Private NotesDbHelperOld");
             if(isEmptyPrivate == true){
             view = inflater.inflate(R.layout.empty_notes, container, false);
             mImageView = (ImageView)view.findViewById(R.id.empty_avatar);
@@ -68,7 +68,7 @@ public class PrivateFragment extends Fragment  {
     }
 
     public void initialiseList(){
-        helpher = new NotesDbHelper(getContext());
+        helpher = new NotesDbHelperOld(getContext());
         dbList= new ArrayList<NotesModel>();
         dbList = helpher.getDataFromDB("private",0);
 

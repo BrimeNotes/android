@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new PublicFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
-        getSupportActionBar().setTitle("Public NotesDbHelper");
+        getSupportActionBar().setTitle("Public NotesDbHelperOld");
     }
 
     @Override

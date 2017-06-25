@@ -19,7 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.procleus.brime.data.NotesDbHelper;
+import com.procleus.brime.data.NotesDbHelperOld;
 import com.procleus.brime.R;
 import com.procleus.brime.utils.CustomEditText;
 
@@ -37,7 +37,7 @@ public class LabelsFragment extends Fragment {
         // Inflate the layout for this fragment
         ((MainActivity) getActivity()).setActionBarTitle("Labels");
         final View v = inflater.inflate(R.layout.labels_gragment, container, false);
-        final NotesDbHelper tn = new NotesDbHelper(getActivity());
+        final NotesDbHelperOld tn = new NotesDbHelperOld(getActivity());
 
         labelsRetrieved = new ArrayList<String>();
         labelsRetrieved = tn.retrieveLabel();
@@ -112,7 +112,7 @@ public class LabelsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        NotesDbHelper tn = new NotesDbHelper(getContext());
+        NotesDbHelperOld tn = new NotesDbHelperOld(getContext());
         labelsRetrieved = tn.retrieveLabel();
         listView = (ListView) getView().findViewById(R.id.listLabel);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, labelsRetrieved);
@@ -155,7 +155,7 @@ public class LabelsFragment extends Fragment {
 
                         Log.i("brinjalResume", "Yes");
 
-                        NotesDbHelper tn = new NotesDbHelper(getActivity());
+                        NotesDbHelperOld tn = new NotesDbHelperOld(getActivity());
                         tn.deleteTextNote(String.valueOf(parent.getItemAtPosition(position)));
                         labelsRetrieved=tn.retrieveLabel();
                         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, labelsRetrieved);
@@ -185,7 +185,7 @@ public class LabelsFragment extends Fragment {
 
     }
 
-    public void addLabelFunc(View v, NotesDbHelper nt) {
+    public void addLabelFunc(View v, NotesDbHelperOld nt) {
         editText = (CustomEditText) v.findViewById(R.id.addLabelInput);
         String ed = editText.getText().toString().trim();
         if (ed.isEmpty()) {

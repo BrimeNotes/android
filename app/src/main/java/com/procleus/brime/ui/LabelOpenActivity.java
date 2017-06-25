@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.procleus.brime.R;
 import com.procleus.brime.adapter.RecyclerAdapter;
-import com.procleus.brime.data.NotesDbHelper;
+import com.procleus.brime.data.NotesDbHelperOld;
 import com.procleus.brime.models.NotesModel;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
 public class LabelOpenActivity extends AppCompatActivity {
 
 
-    NotesDbHelper helpher;
+    NotesDbHelperOld helpher;
     List<NotesModel> dbList;
     private View view;
     RecyclerView mRecyclerView;
@@ -40,7 +40,7 @@ public class LabelOpenActivity extends AppCompatActivity {
 
     public void initialiseList(String label) {
 
-        helpher = new NotesDbHelper(this);
+        helpher = new NotesDbHelperOld(this);
         dbList = new ArrayList<NotesModel>();
         dbList = helpher.getDataFromDBWithLabel(label);
 

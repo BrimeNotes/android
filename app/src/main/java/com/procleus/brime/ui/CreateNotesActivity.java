@@ -21,7 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.procleus.brime.R;
-import com.procleus.brime.data.NotesDbHelper;
+import com.procleus.brime.data.NotesDbHelperOld;
 
 import org.json.JSONObject;
 
@@ -134,7 +134,7 @@ public class CreateNotesActivity extends AppCompatActivity {
         /*/This is Database Spinner Retreival*/
         /* Spinner getting Data from dataBase*/
 
-        final NotesDbHelper tn =new NotesDbHelper(CreateNotesActivity.this);
+        final NotesDbHelperOld tn =new NotesDbHelperOld(CreateNotesActivity.this);
 
 
 
@@ -174,7 +174,7 @@ public class CreateNotesActivity extends AppCompatActivity {
                             }
                         }
                         if (id == R.id.radioPublic) {
-                            NotesDbHelper tn = new NotesDbHelper(getApplicationContext());
+                            NotesDbHelperOld tn = new NotesDbHelperOld(getApplicationContext());
                             EditText title = (EditText) findViewById(R.id.noteTitle);
                             EditText note = (EditText) findViewById(R.id.note);
                             String note_desc, note_title;
@@ -189,7 +189,7 @@ public class CreateNotesActivity extends AppCompatActivity {
                             Toast.makeText(CreateNotesActivity.this, String.valueOf(parent.getItemAtPosition(position)), Toast.LENGTH_SHORT).show();
                             finish();
                         } else if (id == R.id.radioPrivate) {
-                            NotesDbHelper tn = new NotesDbHelper(CreateNotesActivity.this);
+                            NotesDbHelperOld tn = new NotesDbHelperOld(CreateNotesActivity.this);
                             EditText title = (EditText) findViewById(R.id.noteTitle);
                             EditText note = (EditText) findViewById(R.id.note);
                             String note_desc, note_title;

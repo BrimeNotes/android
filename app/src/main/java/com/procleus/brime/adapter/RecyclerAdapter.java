@@ -14,9 +14,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.procleus.brime.data.NotesDbHelperOld;
 import com.procleus.brime.ui.EditNotesActivity;
 import com.procleus.brime.R;
-import com.procleus.brime.data.NotesDbHelper;
 import com.procleus.brime.models.NotesModel;
 
 import java.util.ArrayList;
@@ -132,7 +132,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     }
     public void changeAccess(int pos,View v){
-        NotesDbHelper tn = new NotesDbHelper(context);
+        NotesDbHelperOld tn = new NotesDbHelperOld(context);
         String access = dbList.get(pos).getAccess_type();
         Log.d("Access Value" ,access);
         if( access.equals("public")){
@@ -161,7 +161,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 /*.setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "NotesDbHelper Restored!", Snackbar.LENGTH_SHORT);
+                        Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "NotesDbHelperOld Restored!", Snackbar.LENGTH_SHORT);
                         snackbar1.show();
                     }
                 })
@@ -169,7 +169,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         snackbar.show();
         int id = dbList.get(pos).getId();
-        NotesDbHelper tn = new NotesDbHelper(context);
+        NotesDbHelperOld tn = new NotesDbHelperOld(context);
         tn.moveToTrash(id);
         dbList.remove(pos);
         notifyItemRemoved(pos);
