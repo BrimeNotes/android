@@ -32,7 +32,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
-import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 public class SigninActivity extends AppCompatActivity {
     public static final String PREF = "com.procleus.brime";
