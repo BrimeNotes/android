@@ -26,12 +26,13 @@ import com.procleus.brime.ui.MainActivity;
 import com.procleus.brime.R;
 import com.procleus.brime.utils.CustomButton;
 import com.procleus.brime.utils.CustomEditText;
-
+import com.basgeekball.awesomevalidation.AwesomeValidation;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
 
 public class SigninActivity extends AppCompatActivity {
@@ -54,6 +55,9 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        AwesomeValidation mAwesomeValidation = new AwesomeValidation(UNDERLABEL);
+        mAwesomeValidation.setContext(this);  // mandatory for UNDERLABEL style
+
         setContentView(R.layout.activity_signin);
         etun = (CustomEditText) findViewById(R.id.editText);
         etpass = (CustomEditText) findViewById(R.id.editText2);
@@ -72,6 +76,9 @@ public class SigninActivity extends AppCompatActivity {
         btlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!cvalidate(etun.getText().toString(),etpass.getText().toString())){
+                    return  ;
+                }
                 progressDialog = new ProgressDialog(SigninActivity.this, R.style.Dialog);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Login ...");
@@ -186,6 +193,23 @@ public class SigninActivity extends AppCompatActivity {
         };
         requestQueue.add(req);
 
+    }
+
+    public boolean cvalidate(String uid,String pass) {
+        boolean legal = true;
+        if (uid.isEmpty()) {
+            legal = false;
+            etun.setError("Username can not be empty");
+        } else {
+            etun.setError(null);
+        }
+        if(pass.isEmpty()){
+            legal=false;
+            etpass.setError("Password can not be empty");
+        }else{
+            etpass.setError(null);
+        }
+        return legal;
     }
 
      public void onLogInSuccess() {
