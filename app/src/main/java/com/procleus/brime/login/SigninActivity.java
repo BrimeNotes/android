@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.Map;
 import static com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL;
 
-
 public class SigninActivity extends AppCompatActivity {
     public static final String PREF = "com.procleus.brime";
     public static final String emailpref = "null";
@@ -73,7 +72,7 @@ public class SigninActivity extends AppCompatActivity {
         btlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!cvalidate(etun.getText().toString(),etpass.getText().toString())){
+                if(!clientValidation(etun.getText().toString(),etpass.getText().toString())){
                     return  ;
                 }
                 progressDialog = new ProgressDialog(SigninActivity.this, R.style.Dialog);
@@ -128,8 +127,7 @@ public class SigninActivity extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(String response) {
-                        // response
-                         Log.d("Response:mba", response);
+
                         try{
                             JSONObject reader= new JSONObject(response);
                             msg = reader.get("message").toString();
@@ -165,7 +163,6 @@ public class SigninActivity extends AppCompatActivity {
                                         HttpHeaderParser.parseCharset(response.headers, "utf-8"));
                                 // Now you can use any deserializer to make sense of data
                                 JSONObject obj = new JSONObject(res);
-                                Log.i("fuckoff:",obj.toString());
                                 Toast.makeText(getApplicationContext(),"Login Failed !", Toast.LENGTH_LONG).show();
                             } catch (UnsupportedEncodingException e1) {
                                 // Couldn't properly decode data to string
@@ -192,7 +189,7 @@ public class SigninActivity extends AppCompatActivity {
 
     }
 
-    public boolean cvalidate(String uid,String pass) {
+    public boolean clientValidation(String uid,String pass) {
         boolean legal = true;
         if (uid.isEmpty()) {
             legal = false;
