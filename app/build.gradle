@@ -40,5 +40,4 @@ dependencies {
     compile 'com.android.volley:volley:1.0.0'
     debugCompile 'com.amitshekhar.android:debug-db:1.0.1'
 
-
 }

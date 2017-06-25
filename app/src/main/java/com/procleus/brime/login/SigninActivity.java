@@ -26,13 +26,12 @@ import com.procleus.brime.ui.MainActivity;
 import com.procleus.brime.R;
 import com.procleus.brime.utils.CustomButton;
 import com.procleus.brime.utils.CustomEditText;
-
+import com.basgeekball.awesomevalidation.AwesomeValidation;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class SigninActivity extends AppCompatActivity {
     public static final String PREF = "com.procleus.brime";
@@ -72,6 +71,9 @@ public class SigninActivity extends AppCompatActivity {
         btlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!clientValidation(etun.getText().toString(),etpass.getText().toString())){
+                    return  ;
+                }
                 progressDialog = new ProgressDialog(SigninActivity.this, R.style.Dialog);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Login ...");
@@ -124,8 +126,7 @@ public class SigninActivity extends AppCompatActivity {
                 {
                     @Override
                     public void onResponse(String response) {
-                        // response
-                         Log.d("Response:mba", response);
+
                         try{
                             JSONObject reader= new JSONObject(response);
                             msg = reader.get("message").toString();
@@ -161,7 +162,6 @@ public class SigninActivity extends AppCompatActivity {
                                         HttpHeaderParser.parseCharset(response.headers, "utf-8"));
                                 // Now you can use any deserializer to make sense of data
                                 JSONObject obj = new JSONObject(res);
-                                Log.i("fuckoff:",obj.toString());
                                 Toast.makeText(getApplicationContext(),"Login Failed !", Toast.LENGTH_LONG).show();
                             } catch (UnsupportedEncodingException e1) {
                                 // Couldn't properly decode data to string
@@ -186,6 +186,23 @@ public class SigninActivity extends AppCompatActivity {
         };
         requestQueue.add(req);
 
+    }
+
+    public boolean clientValidation(String uid,String pass) {
+        boolean legal = true;
+        if (uid.isEmpty()) {
+            legal = false;
+            etun.setError("Username can not be empty");
+        } else {
+            etun.setError(null);
+        }
+        if(pass.isEmpty()){
+            legal=false;
+            etpass.setError("Password can not be empty");
+        }else{
+            etpass.setError(null);
+        }
+        return legal;
     }
 
      public void onLogInSuccess() {
