@@ -101,6 +101,12 @@
 
         <activity android:name=".ui.LabelOpenActivity" />
         <activity android:name=".ui.CreateAudioNotesActivity"></activity>
+        <provider
+            android:name=".data.NotesProvider"
+            android:authorities="@string/content_authority"
+            android:exported="false"
+            android:syncable="true" />
+
     </application>
 
 </manifest>
