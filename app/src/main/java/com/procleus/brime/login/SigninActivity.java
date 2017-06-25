@@ -55,9 +55,6 @@ public class SigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AwesomeValidation mAwesomeValidation = new AwesomeValidation(UNDERLABEL);
-        mAwesomeValidation.setContext(this);  // mandatory for UNDERLABEL style
-
         setContentView(R.layout.activity_signin);
         etun = (CustomEditText) findViewById(R.id.editText);
         etpass = (CustomEditText) findViewById(R.id.editText2);
