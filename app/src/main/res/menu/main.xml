@@ -10,7 +10,7 @@
     <item
         android:id="@+id/action_exit"
         android:orderInCategory="100"
-        android:title="Exit"
+        android:title="@string/main_exit"
         />
     
 
