@@ -16,7 +16,7 @@
         <com.procleus.brime.utils.CustomEditText
             style="@style/textInputLeftAlign"
             android:layout_weight="9"
-            android:hint="Add Label"
+            android:hint="@string/labels_addlabels"
             android:paddingLeft="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

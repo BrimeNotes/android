@@ -22,7 +22,7 @@
             android:id="@+id/first_name"
             style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
-            android:hint="FirstName"
+            android:hint="@string/acc_info_hint_1"
 
             />
     </android.support.design.widget.TextInputLayout>
@@ -36,7 +36,7 @@
             android:id="@+id/last_name"
             style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
-            android:hint="LastName"
+            android:hint="@string/acc_info_hint_2"
 
             />
     </android.support.design.widget.TextInputLayout>
@@ -51,7 +51,7 @@
             android:id="@+id/Email"
             style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
-            android:hint="Email"
+            android:hint="@string/acc_info_hint_3"
 
             />
     </android.support.design.widget.TextInputLayout>
@@ -65,8 +65,8 @@
             android:id="@+id/date_picker"
             style="@style/textInputLeftAlign"
             android:layout_centerHorizontal="true"
-            android:hint="Date of Birth"
-            android:text="YYYY-MM-DD"
+            android:hint="@string/acc_info_hint_4"
+            android:text="@string/acc_info_date"
             android:inputType="none"
             android:clickable="true"
             android:onClick="showDatePickerDialog"

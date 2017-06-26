@@ -4,38 +4,38 @@
         <item
             android:id="@+id/nav_public_notes"
             android:icon="@drawable/ic_insert_drive_file_black_24dp"
-            android:title="Public Notes" />
+            android:title="@string/main_drawer_publicnotes" />
         <item
             android:id="@+id/nav_private_notes"
             android:icon="@drawable/ic_lock_outline_black_24dp"
-            android:title="Private Notes" />
+            android:title="@string/main_drawer_priv_notes" />
         <item
             android:id="@+id/nav_labels"
             android:icon="@drawable/ic_label_outline_black_24dp"
-            android:title="Labels" />
+            android:title="@string/main_drawer_labels" />
         <item
             android:id="@+id/nav_trash"
             android:icon="@drawable/ic_delete_black_24dp"
-            android:title="Trash" />
+            android:title="@string/main_drawer_trash" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings_black_24dp"
-            android:title="Settings" />
+            android:title="@string/main_drawer_settings" />
         <item
             android:id="@+id/nav_sync"
             android:icon="@drawable/ic_cloud_upload_black_24dp"
-            android:title="Cloud Sync" />
+            android:title="@string/main_drawer_cloudsync" />
     </group>
-    <item android:title="Other">
+    <item android:title="@string/main_drawer_other">
         <menu>
             <item
                 android:id="@+id/nav_explore"
                 android:icon="@drawable/ic_cloud_upload_black_24dp"
-                android:title="Explore" />
+                android:title="@string/main_drawer_explore" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/main_drawer_share" />
         </menu>
     </item>
 </menu>

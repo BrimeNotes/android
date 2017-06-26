@@ -14,7 +14,7 @@
         android:layout_weight="6"
         android:paddingLeft="5dp"
         android:paddingTop="16dp"
-        android:text="ARE YOU SURE YOU WANT TO DELETE?\nCORRESPONDING NOTES WILL BE TRASHED"
+        android:text="@string/dialog_label_warning_1"
         android:textColor="#f9661c"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -42,7 +42,7 @@
             android:background="@android:color/white"
             android:clickable="true"
             android:textColor="#f9661c"
-            android:text="Yes"
+            android:text="@string/dialog_label_warning_yes"
 
             android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
             android:layout_height="30dp"
             android:background="@android:color/white"
             android:clickable="true"
-            android:text="No"
+            android:text="@string/dialog_label_warning_no"
             android:textColor="#f9661c"
             android:textStyle="bold" />
 

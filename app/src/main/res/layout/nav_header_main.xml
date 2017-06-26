@@ -25,7 +25,7 @@
         android:textSize="20sp"
         android:textColor="#ffffff"
         android:gravity="center_vertical"
-        android:text="Guest"
+        android:text="@string/nav_header_guest"
         android:id="@+id/name"/>
 
 </LinearLayout>

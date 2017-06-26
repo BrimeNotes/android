@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Brime builds apps and products that are defining the way individuals and teams work today."
+        android:text="@string/aboutus_1"
         android:id="@+id/textView12"
         android:paddingTop="8dp"
         android:paddingLeft="16dp"
@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="As one workspace that lives across your phone, tablet, and computer, Brime is the place you write free from distraction, collect information, find what you need, and present your ideas to the world."
+        android:text="@string/aboutus_2"
         android:id="@+id/textView13"
         android:paddingTop="8dp"
         android:paddingLeft="16dp"
@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Whatever you’re working toward, Brime’s job is to make sure you get there."
+        android:text="@string/aboutus_3"
         android:id="@+id/textView14"
         android:paddingTop="8dp"
         android:paddingLeft="16dp"

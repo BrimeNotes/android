@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:background="#00000000"
-                android:text="Hello Buddy"
+                android:text="@string/edit_notes_text_1"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -50,7 +50,7 @@
         </LinearLayout>
     <com.procleus.brime.utils.CustomEditText
         android:id="@+id/note"
-        android:text="Nice"
+        android:text="@string/edit_notes_text_"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="@dimen/activity_vertical_margin"

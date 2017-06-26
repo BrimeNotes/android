@@ -40,7 +40,7 @@
              android:layout_height="wrap_content"
              android:layout_below="@+id/view"
              android:layout_centerHorizontal="true"
-             android:text="BRIME"
+             android:text="@string/intro_title"
              android:textColor="#ffffff"
              android:textSize="60sp" />
 
@@ -50,7 +50,7 @@
              android:layout_height="wrap_content"
              android:layout_below="@+id/textView2"
              android:layout_centerHorizontal="true"
-             android:text="NOTE TAKING MADE EASY"
+             android:text="@string/intro_punchline"
              android:textColor="#ffffff"
              android:textSize="18sp" />
 
@@ -84,7 +84,7 @@
                     android:layout_centerHorizontal="true"
 
                     android:gravity="center_horizontal"
-                    android:hint="USERNAME" />
+                    android:hint="@string/signin_username" />
 
                 <com.procleus.brime.utils.CustomEditText
                     android:id="@+id/editText2"
@@ -93,7 +93,7 @@
                     android:layout_below="@id/editText"
                     android:layout_centerHorizontal="true"
                     android:gravity="center_horizontal"
-                    android:hint="PASSWORD"
+                    android:hint="@string/signin_password"
                     android:inputType="textPassword" />
 
                 <LinearLayout
@@ -130,7 +130,7 @@
                     android:layout_centerInParent="true"
                     android:background="@drawable/textbtn_dark_cornered"
                     android:gravity="center"
-                    android:text="LOGIN"
+                    android:text="@string/intro_login"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
@@ -154,7 +154,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/textbtn_dark_cornered"
                     android:gravity="center"
-                    android:text="Skip to Local"
+                    android:text="@string/signin_skip"
                     android:textAlignment="center"
                     android:textColor="#ffffff"
                     android:textSize="20sp" />
