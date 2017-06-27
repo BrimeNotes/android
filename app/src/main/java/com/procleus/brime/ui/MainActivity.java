@@ -208,7 +208,8 @@ public class MainActivity extends AppCompatActivity
         }
         else {
             if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
-                 android.os.Process.killProcess(android.os.Process.myPid());
+                 super.onBackPressed();
+                // android.os.Process.killProcess(android.os.Process.myPid());
             } else {
                 Toast.makeText(getBaseContext(), "Press once again to exit!",
                         Toast.LENGTH_SHORT).show();

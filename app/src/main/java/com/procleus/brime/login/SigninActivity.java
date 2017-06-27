@@ -26,7 +26,6 @@ import com.procleus.brime.ui.MainActivity;
 import com.procleus.brime.R;
 import com.procleus.brime.utils.CustomButton;
 import com.procleus.brime.utils.CustomEditText;
-import com.basgeekball.awesomevalidation.AwesomeValidation;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
