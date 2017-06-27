@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class LabelsFragment extends Fragment {
 
     private ArrayList<String> labelsRetrieved;
-    private static ListView listView;
+    private  ListView listView;
     EditText editText;
 
     @Override

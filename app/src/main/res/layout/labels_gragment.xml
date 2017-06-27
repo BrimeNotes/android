@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#efefef"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,13 +10,12 @@
         android:id="@+id/addLabelInputLayout"
         android:orientation="horizontal"
         android:padding="12dp"
-        android:background="#efefef"
         android:layout_alignParentTop="true">
         <com.procleus.brime.utils.CustomEditText
             style="@style/textInputLeftAlign"
             android:layout_weight="9"
             android:hint="@string/labels_addlabels"
-            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/addLabelInput"
@@ -36,7 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listLabel"
-        android:background="#ffffff"
         android:padding="8dp"
         android:layout_below="@id/addLabelInputLayout"
          />
