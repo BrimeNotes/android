@@ -44,6 +44,7 @@ public class TrashFragment extends Fragment  {
         // Inflate the layout for this fragment
         final View v = inflater.inflate(R.layout.trash_fragment,container,false);
         ((MainActivity) getActivity()).setActionBarTitle("Trash");
+        ((MainActivity) getActivity()).showFloatingActionButton(false);
         view = inflater.inflate(R.layout.trash_fragment, container, false);
         initialiseList();
 

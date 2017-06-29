@@ -45,6 +45,7 @@ public class PrivateFragment extends Fragment  {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.private_fragment,container,false);
         ((MainActivity) getActivity()).setActionBarTitle("Private NotesDbHelperOld");
+        ((MainActivity) getActivity()).showFloatingActionButton(true);
             if(isEmptyPrivate == true){
             view = inflater.inflate(R.layout.empty_notes, container, false);
             mImageView = (ImageView)view.findViewById(R.id.empty_avatar);
