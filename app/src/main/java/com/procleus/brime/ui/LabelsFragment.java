@@ -36,6 +36,7 @@ public class LabelsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ((MainActivity) getActivity()).setActionBarTitle("Labels");
+        ((MainActivity) getActivity()).showFloatingActionButton(true);
         final View v = inflater.inflate(R.layout.labels_gragment, container, false);
         final NotesDbHelperOld tn = new NotesDbHelperOld(getActivity());
 

@@ -44,6 +44,7 @@ public class PublicFragment extends Fragment {
        final View v = inflater.inflate(R.layout.public_fragment, container, false);
 
         ((MainActivity) getActivity()).setActionBarTitle("Public NotesDbHelperOld");
+        ((MainActivity) getActivity()).showFloatingActionButton(true);
         if(isEmptyPublic == true){
             view = inflater.inflate(R.layout.empty_notes, container, false);
             mImageView = (ImageView)view.findViewById(R.id.empty_avatar);

@@ -29,6 +29,7 @@ public class SettingsFragment extends Fragment {
        final View v = inflater.inflate(R.layout.settings_fragment,container,false);
         ListView lv = (ListView)v.findViewById(R.id.listView);
         ((MainActivity) getActivity()).setActionBarTitle("Settings");
+        ((MainActivity) getActivity()).showFloatingActionButton(false);
         sharedPreferences = this.getActivity().getSharedPreferences("com.procleus.brime", Context.MODE_PRIVATE);
         settingsOptions.add("Account Info");
         settingsOptions.add("Change Password");

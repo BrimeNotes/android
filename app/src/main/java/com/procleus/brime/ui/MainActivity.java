@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences("com.procleus.brime", MODE_PRIVATE);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity
         fab3.setOnClickListener(this);
         fab1.setOnClickListener(this);
         // FAB END
+        //calling function to show fab
+        showFloatingActionButton(true);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -79,6 +82,15 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.relativeLayout, fragment).commit();
         getSupportActionBar().setTitle("Public NotesDbHelperOld");
+    }
+
+    public void showFloatingActionButton(boolean toggle){
+        if(toggle==true){
+            fab.show();
+        }
+        else{
+            fab.hide();
+        }
     }
 
     @Override
