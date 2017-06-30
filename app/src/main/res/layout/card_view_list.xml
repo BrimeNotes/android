@@ -35,7 +35,7 @@
             android:paddingBottom="8dp"
             android:textSize="26sp"
             android:fontFamily="sans-serif"
-            android:text="Name"
+            android:text="@string/card_view_list_name"
             android:textColor="@color/notes_title"
             />
         <View
@@ -43,14 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#e4e4e4"/>
-        <com.procleus.brime.textview
+        <com.procleus.brime.utils.CustomTextView
             android:id="@+id/note_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="14dp"
             android:paddingTop="14dp"
             android:paddingRight="14dp"
-            android:text="Email"
+            android:text="@string/card_view_list_userid"
             android:textColor="@color/notes_desc"
             android:textSize="15sp"
             android:layout_below="@id/note_head"/>

@@ -25,10 +25,10 @@
             android:layout_height="1dp"
             android:background="#fff"
             android:layout_margin="8dp"/>
-        <com.procleus.brime.textview
+        <com.procleus.brime.utils.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NOTES ANYWHERE"
+            android:text="@string/get_started_1_text_1"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -56,7 +56,7 @@
             android:textSize="24sp"
             android:textAlignment="center"
             android:textColor="@color/textColorInputHint"
-            android:text="Now Take\nNotes like Never\n before"
+            android:text="@string/get_started_1_text_2"
             android:layout_centerInParent="true"/>
  </RelativeLayout>
 

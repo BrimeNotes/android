@@ -14,63 +14,64 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
         <activity
-            android:name=".SplashScreen"
+            android:name=".ui.SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
-            android:name=".GetStartedActivity"
+            android:name=".ui.GetStartedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="Brime"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity
-            android:name=".SigninActivity"
+            android:name=".login.SigninActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2" />
+
         <activity
-            android:name=".SignupActivity"
+            android:name=".ui.IntroActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2" />
+
         <activity
-            android:name=".IntroActivity"
+            android:name=".ui.SettingsClickedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme2" />
-        <activity
-            android:name=".SettingsClickedActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeEditNotes" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -80,15 +81,15 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".CreateNotes"
+            android:name=".ui.CreateNotesActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".EditNotes"
+            android:name=".ui.EditNotesActivity"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppThemeEditNotes" />
 
-        <receiver android:name=".Widget">
+        <receiver android:name=".widget.Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -98,8 +99,14 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
-        <activity android:name=".Label_Open" />
-        <activity android:name=".CreateAudioNotes"></activity>
+        <activity android:name=".ui.LabelOpenActivity" />
+        <activity android:name=".ui.CreateAudioNotesActivity"></activity>
+        <provider
+            android:name=".data.NotesProvider"
+            android:authorities="@string/content_authority"
+            android:exported="false"
+            android:syncable="true" />
+
     </application>
 
 </manifest>

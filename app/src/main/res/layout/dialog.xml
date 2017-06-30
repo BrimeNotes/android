@@ -7,14 +7,14 @@
     android:weightSum="12">
 
 
-    <com.procleus.brime.textview
+    <com.procleus.brime.utils.CustomTextView
         android:id="@+id/txt_dia"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
         android:paddingLeft="5dp"
         android:paddingTop="16dp"
-        android:text="SAVE YOUR NOTE"
+        android:text="@string/dialog_savenotes"
         android:textColor="#f9661c"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -49,7 +49,7 @@
                 android:checked="true"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Public"
+                android:text="@string/dialog_public"
                 android:textColor="@drawable/rbtn_textcolor_selector" />
 
             <RadioButton
@@ -61,7 +61,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Private"
+                android:text="@string/dialog_private"
                 android:textColor="@drawable/rbtn_textcolor_selector" />
         </RadioGroup>
 
@@ -91,24 +91,24 @@
         android:orientation="horizontal">
 
 
-        <com.procleus.brime.buttons
+        <com.procleus.brime.utils.CustomButton
             android:id="@+id/btn_yes"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:background="@android:color/white"
             android:clickable="true"
             android:textColor="#f9661c"
-            android:text="Yes"
+            android:text="@string/dialog_yes"
 
             android:textStyle="bold" />
 
-        <com.procleus.brime.buttons
+        <com.procleus.brime.utils.CustomButton
             android:id="@+id/btn_no"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:background="@android:color/white"
             android:clickable="true"
-            android:text="No"
+            android:text="@string/dialog_no"
             android:textColor="#f9661c"
             android:textStyle="bold" />
 

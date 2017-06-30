@@ -37,20 +37,20 @@
              android:layout_below="@id/image"
              android:id="@+id/view" />
 
-         <com.procleus.brime.textview
+         <com.procleus.brime.utils.CustomTextView
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
-             android:text="BRIME"
+             android:text="@string/intro_title"
              android:textSize="60sp"
              android:textColor="#ffffff"
              android:layout_below="@+id/view"
              android:layout_centerHorizontal="true"
              android:id="@+id/textView2" />
 
-         <com.procleus.brime.textview
+         <com.procleus.brime.utils.CustomTextView
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
-             android:text="NOTE TAKING MADE EASY"
+             android:text="@string/intro_punchline"
              android:textSize="18sp"
              android:textColor="#ffffff"
              android:id="@+id/textView"
@@ -70,11 +70,11 @@
         android:orientation="vertical"
         >
 
-            <com.procleus.brime.buttons
+            <com.procleus.brime.utils.CustomButton
                 android:layout_height="50dp"
                 android:layout_width="match_parent"
                 android:layout_centerInParent="true"
-                android:text="GET STARTED"
+                android:text="@string/intro_getstarted"
                 android:id="@+id/getStarted"
                 android:textSize="20sp"
                 android:textAlignment="center"
@@ -83,12 +83,12 @@
                 android:gravity="center"
                 android:layout_margin="16dp"
                 />
-                <com.procleus.brime.buttons
+                <com.procleus.brime.utils.CustomButton
                     android:layout_height="50dp"
                     android:layout_width="match_parent"
                     android:id="@+id/signinbtn"
                     android:layout_centerInParent="true"
-                    android:text="LOGIN"
+                    android:text="@string/intro_login"
                     android:textSize="20sp"
                     android:textAlignment="center"
                     android:textColor="#f83845"
