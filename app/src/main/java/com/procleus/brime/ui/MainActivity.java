@@ -281,7 +281,9 @@ public void displayView(int viewId) {
             fragment = new TrashFragment();
             break;
         case R.id.nav_settings:
-            fragment = new SettingsFragment();
+            Intent setin = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(setin);
+            //fragment = new SettingsFragment();
             break;
         case R.id.nav_sync:
             break;
