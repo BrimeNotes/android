@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showFloatingActionButton(boolean toggle){
-        if(toggle==true){
+        if(toggle){
             fab.show();
         }
         else{
