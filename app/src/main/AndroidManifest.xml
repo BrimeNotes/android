@@ -70,9 +70,10 @@
             android:name=".ui.SettingsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/action_settings"
+            android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeEditNotes" />
-        @style/AppTheme2"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -101,7 +102,7 @@
         </receiver>
 
         <activity android:name=".ui.LabelOpenActivity" />
-        <activity android:name=".ui.CreateAudioNotesActivity"></activity>
+        <activity android:name=".ui.CreateAudioNotesActivity"/>
         <provider
             android:name=".data.NotesProvider"
             android:authorities="@string/content_authority"
