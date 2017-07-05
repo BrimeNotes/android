@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import com.procleus.brime.R;
+
 
 /**
  * Created by suraj on 02-07-2017.
@@ -24,6 +26,10 @@ public class SettingsActivity extends AppCompatActivity{
         }catch (NullPointerException e){
             e.printStackTrace();
         }
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new SettingsFragment())
+                .commit();
 
     }
 }

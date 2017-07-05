@@ -72,7 +72,9 @@
             android:label="@string/action_settings"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for

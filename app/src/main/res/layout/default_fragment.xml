@@ -5,11 +5,12 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/default_fragment_greet"
+        android:layout_height="wrap_content"/>
+       <!-- android:text="@string/default_fragment_greet"
         android:textSize="40sp"
         android:id="@+id/textView10"
         android:layout_gravity="center_horizontal"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"-->
+
 </RelativeLayout>
