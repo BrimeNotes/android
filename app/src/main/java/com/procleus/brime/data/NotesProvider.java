@@ -1,3 +1,22 @@
+/**
+ * @author Saad Hassan <hassan.saad.mail@gmail.com>
+ *
+ * @license AGPL-3.0
+ *
+ * This code is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License, version 3,
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ */
+
 package com.procleus.brime.data;
 
 import android.content.ContentProvider;
@@ -11,9 +30,6 @@ import android.os.CancellationSignal;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-/**
- * Created by syedaamir on 25-06-2017.
- */
 
 public class NotesProvider extends ContentProvider{
 
