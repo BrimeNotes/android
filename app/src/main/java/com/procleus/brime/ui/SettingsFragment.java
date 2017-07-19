@@ -67,6 +67,7 @@ public class SettingsFragment extends PreferenceFragment {
     private class SettingsClickListener implements Preference.OnPreferenceClickListener{
 
         private String option;
+        private String title="Setting";
 
         public SettingsClickListener(String option){
             this.option=option;
@@ -79,9 +80,11 @@ public class SettingsFragment extends PreferenceFragment {
                 switch (option) {
                     case PREFERENCE_ACCOUNT_INFO:
                         fragment = new AccountInfoFragment();
+                        title="Account Info";
                         break;
                     case PREFERENCE_ABOUT_US:
                         fragment = new AboutUsFragment();
+                        title="About Us";
                         break;
                     case PREFERENCE_SIGN_OUT:
                             signOut();
@@ -91,9 +94,11 @@ public class SettingsFragment extends PreferenceFragment {
                         break;
                     case PREFERENCE_CHANGE_PASSWORD:
                         fragment = new ChangePasswordFragment();
+                        title="Change Password";
                         break;
                     case PREFERENCE_HELP:
                         //fragment = new HelpFragment();
+                        title="Help";
                         break;
                     default:
                         throw new AssertionError();
@@ -101,7 +106,8 @@ public class SettingsFragment extends PreferenceFragment {
 
                 if (fragment != null) {
                     final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragment_container, fragment);
+                    ft.replace(R.id.fragment_container, fragment,"pref_setting");
+                    ((SettingsActivity) getActivity()).setActionBarTitle(title);
                     ft.addToBackStack("Settings");
                     ft.commit();
 
