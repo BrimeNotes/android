@@ -22,7 +22,12 @@
 
 package com.procleus.brime.ui;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 
@@ -30,62 +35,90 @@ import com.procleus.brime.R;
 
 public class SettingsFragment extends PreferenceFragment {
 
+    private static final String PREFERENCE_ACCOUNT_INFO="accinfo";
+    private static final String PREFERENCE_ABOUT_US="aboutus";
+    private static final String PREFERENCE_CHANGE_PASSWORD="changepass";
+    private static final String PREFERENCE_SHARE="shareme";
+    private static final String PREFERENCE_HELP="helpme";
+    private static final String PREFERENCE_SIGN_OUT="signout";
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.pref_settings);
+        this.findPreference(PREFERENCE_ABOUT_US).setOnPreferenceClickListener(new SettingsClickListener(PREFERENCE_ABOUT_US));
+        this.findPreference(PREFERENCE_ACCOUNT_INFO).setOnPreferenceClickListener(new SettingsClickListener(PREFERENCE_ACCOUNT_INFO));
+        this.findPreference(PREFERENCE_SIGN_OUT).setOnPreferenceClickListener(new SettingsClickListener(PREFERENCE_SIGN_OUT));
+        this.findPreference(PREFERENCE_SHARE).setOnPreferenceClickListener(new SettingsClickListener(PREFERENCE_SHARE));
+        this.findPreference(PREFERENCE_HELP).setOnPreferenceClickListener(new SettingsClickListener(PREFERENCE_HELP));
+        this.findPreference(PREFERENCE_CHANGE_PASSWORD).setOnPreferenceClickListener(new SettingsClickListener(PREFERENCE_CHANGE_PASSWORD));
+
+
+
     }
+
+    public void signOut() {
+    }
+
+    private class SettingsClickListener implements Preference.OnPreferenceClickListener{
+
+        private String option;
+        private String title="Setting";
+
+        public SettingsClickListener(String option){
+            this.option=option;
+        }
+
+        @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Fragment fragment = null;
+
+                switch (option) {
+                    case PREFERENCE_ACCOUNT_INFO:
+                        fragment = new AccountInfoFragment();
+                        title="Account Info";
+                        break;
+                    case PREFERENCE_ABOUT_US:
+                        fragment = new AboutUsFragment();
+                        title="About Us";
+                        break;
+                    case PREFERENCE_SIGN_OUT:
+                            signOut();
+                        break;
+                    case PREFERENCE_SHARE:
+                        //TODO: share app
+                        break;
+                    case PREFERENCE_CHANGE_PASSWORD:
+                        fragment = new ChangePasswordFragment();
+                        title="Change Password";
+                        break;
+                    case PREFERENCE_HELP:
+                        //fragment = new HelpFragment();
+                        title="Help";
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+
+                if (fragment != null) {
+                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment_container, fragment,"pref_setting");
+                    ((SettingsActivity) getActivity()).setActionBarTitle(title);
+                    ft.addToBackStack("Settings");
+                    ft.commit();
+
+                }
+
+                return true;
+        }
+    }
+
+
 }
 
 
 
-
-
-//OLD SettingsFragment
-//public class SettingsFragment extends Fragment {
-
-
-//    ArrayList<String> settingsOptions = new ArrayList<String>();
-//    SharedPreferences sharedPreferences = null;
-// //   public static String[] settingsOptions = new String[]{"Account Info","Change Password","Share App","Sign Out", "About Us"};
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//
-//       final View v = inflater.inflate(R.layout.settings_fragment,container,false);
-//        ListView lv = (ListView)v.findViewById(R.id.listView);
-//        ((MainActivity) getActivity()).setActionBarTitle("Settings");
-//        ((MainActivity) getActivity()).showFloatingActionButton(false);
-//        sharedPreferences = this.getActivity().getSharedPreferences("com.procleus.brime", Context.MODE_PRIVATE);
-//        settingsOptions.add("Account Info");
-//        settingsOptions.add("Change Password");
-//        settingsOptions.add("Share App");
-//        settingsOptions.add("About Us");
-//        Boolean bool = sharedPreferences.getBoolean("loggedin", false);
-//        if (bool == false) {
-//            settingsOptions.add("Log In");
-//        } else {
-//            settingsOptions.add("SignOut");
-//        }
-//
-//        ArrayAdapter<String> ar = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,settingsOptions);
-//        lv.setAdapter(ar);
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if (settingsOptions.get(4).equals("Log In")) {
-//                    Intent i = new Intent(v.getContext(), SigninActivity.class);
-//                    startActivity(i);
-//                } else {
-//                    Intent intent = new Intent(v.getContext(), SettingsClickedActivity.class);
-//                    String x = String.valueOf(position);
-//                    intent.putExtra("a", x);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
-//        return v;
-//    }
-//}
