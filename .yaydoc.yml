@@ -1,0 +1,10 @@
+metadata:
+  author: "Ujjwal Bhardwaj"
+  projectname: BrimeNotes
+  version: development
+build:
+  theme: alabaster
+  source: "."
+publish:
+  ghpages:
+    url: docs.brime.tk
