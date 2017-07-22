@@ -25,7 +25,7 @@ See also the list of [contributors](https://github.com/imujjwal96/Brime/contribu
 
 This project is licensed under the AGPL v3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 
-Report Bugs: https://github.com/imujjwal96/Brime/issues
+Report Bugs: https://github.com/BrimeNotes/android/issues
 
 
 
