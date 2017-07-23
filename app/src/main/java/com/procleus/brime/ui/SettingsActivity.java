@@ -20,13 +20,16 @@
 package com.procleus.brime.ui;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.procleus.brime.R;
+import com.procleus.brime.login.SigninActivity;
 
 public class SettingsActivity extends AppCompatActivity{
 
@@ -69,6 +72,19 @@ public class SettingsActivity extends AppCompatActivity{
 
     }
 
+    public void signOut(){
+        SharedPreferences sharedpreferences = getSharedPreferences(SigninActivity.PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.remove("emailpref");
+        editor.remove("passwordpref");
+        editor.remove("loggedin");
+        editor.commit();
+        Intent intent = new Intent(this, SigninActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        // intent.putExtra("EXIT", true);
+        startActivity(intent);
+         finish();
+   }
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
