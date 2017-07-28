@@ -1,4 +1,4 @@
-# Brime
+# Brimes
 
 [![Join the chat at https://gitter.im/BrimeNotes/android](https://badges.gitter.im/BrimeNotes/android.svg)](https://gitter.im/BrimeNotes/android?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ![Brime](/Logo-branding/logo_0.5x.png?raw=true "Brime Logo")
