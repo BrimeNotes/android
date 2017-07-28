@@ -1,0 +1,14 @@
+.. mdinclude:: README.md
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents
+
+   LICENSE
+
+.. toctree::
+   :maxdepth: 1
+   :caption: .Github
+
+   github/PULL_REQUEST_TEMPLATE
+   github/ISSUE_TEMPLATE
