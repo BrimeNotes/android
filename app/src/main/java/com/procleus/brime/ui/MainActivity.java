@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
     private static long back_pressed;
     private FloatingActionButton fab,fab1,fab2,fab3;
     private Animation show_fab,hide_fab,rotate_fab_forward,rotate_fab_backward;
+    private TextView textView1,textView2,textView3;
+    private FrameLayout labelsLayout;
     SharedPreferences sharedPreferences = null;
     NavigationView navigationView;
     @Override
@@ -70,6 +72,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        labelsLayout = (FrameLayout) findViewById(R.id.labels);
+
+        // TEXTVIEW REFERENCES
+        textView1 = (TextView)findViewById(R.id.label_1);
+        textView2 = (TextView)findViewById(R.id.label_2);
+        textView3 = (TextView)findViewById(R.id.label_3);
 
         // ===  FAB REFRENCES ===
         fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -176,6 +184,8 @@ public class MainActivity extends AppCompatActivity
 
         if(isFabOpen){
 
+            labelsLayout.setVisibility(View.INVISIBLE);
+
             fab.startAnimation(rotate_fab_backward);
             FrameLayout.LayoutParams layoutParamsFab1 = (FrameLayout.LayoutParams) fab1.getLayoutParams();
             FrameLayout.LayoutParams layoutParamsFab2 = (FrameLayout.LayoutParams) fab2.getLayoutParams();
@@ -183,15 +193,34 @@ public class MainActivity extends AppCompatActivity
             //layoutParams.rightMargin -= (int) (fab1.getWidth() * 1.7);
             //layoutParams.bottomMargin -= (int) (fab1.getHeight() * 0.25);
             //layoutParams.rightMargin -= (int) (fab1.getHeight() * 0.2);
+
+            // Label 1
+            FrameLayout.LayoutParams layoutParamsText1 = (FrameLayout.LayoutParams) textView1.getLayoutParams();
+            layoutParamsText1.bottomMargin -= (int) (layoutParamsFab1.bottomMargin);
+            textView1.setLayoutParams(layoutParamsText1);
+            textView1.startAnimation(show_fab);
+
             layoutParamsFab1.bottomMargin -= (int) (fab1.getHeight() * 1.8);
             fab1.setLayoutParams(layoutParamsFab1);
             fab1.startAnimation(hide_fab);
             fab1.setClickable(false);
 
+            // Label 2
+            FrameLayout.LayoutParams layoutParamsText2 = (FrameLayout.LayoutParams) textView2.getLayoutParams();
+            layoutParamsText2.bottomMargin -= (int) (layoutParamsFab2.bottomMargin);
+            textView2.setLayoutParams(layoutParamsText2);
+            textView2.startAnimation(show_fab);
+
             layoutParamsFab2.bottomMargin -= (int) (fab2.getHeight() * 3);
             fab2.setLayoutParams(layoutParamsFab2);
             fab2.startAnimation(hide_fab);
             fab2.setClickable(false);
+
+            // Label 3
+            FrameLayout.LayoutParams layoutParamsText3 = (FrameLayout.LayoutParams) textView3.getLayoutParams();
+            layoutParamsText3.bottomMargin -= (int) (layoutParamsFab3.bottomMargin);
+            textView3.setLayoutParams(layoutParamsText3);
+            textView3.startAnimation(show_fab);
 
             layoutParamsFab3.bottomMargin -= (int) (fab3.getHeight() * 4.2);
             fab3.setLayoutParams(layoutParamsFab3);
@@ -200,6 +229,8 @@ public class MainActivity extends AppCompatActivity
             isFabOpen = false;
 
         } else {
+            labelsLayout.setVisibility(View.VISIBLE);
+
             fab.startAnimation(rotate_fab_forward);
             FrameLayout.LayoutParams layoutParamsFab1 = (FrameLayout.LayoutParams) fab1.getLayoutParams();
             FrameLayout.LayoutParams layoutParamsFab2 = (FrameLayout.LayoutParams) fab2.getLayoutParams();
@@ -211,18 +242,35 @@ public class MainActivity extends AppCompatActivity
             fab1.startAnimation(show_fab);
             fab1.setClickable(true);
 
+            FrameLayout.LayoutParams layoutParamsText1 = (FrameLayout.LayoutParams) textView1.getLayoutParams();
+            layoutParamsText1.bottomMargin += (int) (layoutParamsFab1.bottomMargin);
+            layoutParamsText1.rightMargin = (int)(fab1.getWidth() * 2.2);
+            textView1.setLayoutParams(layoutParamsText1);
+            textView1.startAnimation(show_fab);
+
             layoutParamsFab2.rightMargin = (int) (fab2.getWidth() * 0.7);
             layoutParamsFab2.bottomMargin += (int) (fab2.getHeight() * 3);
             fab2.setLayoutParams(layoutParamsFab2);
             fab2.startAnimation(show_fab);
             fab2.setClickable(true);
 
+            FrameLayout.LayoutParams layoutParamsText2 = (FrameLayout.LayoutParams) textView2.getLayoutParams();
+            layoutParamsText2.bottomMargin += (int) (layoutParamsFab2.bottomMargin);
+            layoutParamsText2.rightMargin = (int)(fab2.getWidth() * 2.2);
+            textView2.setLayoutParams(layoutParamsText2);
+            textView2.startAnimation(show_fab);
 
             layoutParamsFab3.rightMargin = (int) (fab3.getWidth() * 0.7);
             layoutParamsFab3.bottomMargin += (int) (fab3.getHeight() * 4.2);
             fab3.setLayoutParams(layoutParamsFab3);
             fab3.startAnimation(show_fab);
             fab3.setClickable(true);
+
+            FrameLayout.LayoutParams layoutParamsText3 = (FrameLayout.LayoutParams) textView3.getLayoutParams();
+            layoutParamsText3.bottomMargin += (int) (layoutParamsFab3.bottomMargin);
+            layoutParamsText3.rightMargin = (int)(fab3.getWidth() * 2.2);
+            textView3.setLayoutParams(layoutParamsText3);
+            textView3.startAnimation(show_fab);
 
             isFabOpen = true;
         }
