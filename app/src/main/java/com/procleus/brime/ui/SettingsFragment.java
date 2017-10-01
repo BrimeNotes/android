@@ -23,13 +23,12 @@
 package com.procleus.brime.ui;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-
 
 import com.procleus.brime.R;
 
@@ -99,6 +98,7 @@ public class SettingsFragment extends PreferenceFragment {
                     case PREFERENCE_HELP:
                         //fragment = new HelpFragment();
                         title="Help";
+                        getHelp();
                         break;
                     default:
                         throw new AssertionError();
@@ -117,6 +117,11 @@ public class SettingsFragment extends PreferenceFragment {
         }
     }
 
+    private void getHelp() {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:info@brime.tk?subject=Help%20-%20BrimeNotes/android"));
+        startActivity(intent);
+    }
 
 }
 
