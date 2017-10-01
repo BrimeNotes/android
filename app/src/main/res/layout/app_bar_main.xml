@@ -24,6 +24,8 @@
 
     <include layout="@layout/content_main" />
 
+    <include layout="@layout/fab_labels_layout" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         app:fabSize="normal"
