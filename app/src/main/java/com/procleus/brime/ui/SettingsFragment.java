@@ -22,6 +22,8 @@
 
 package com.procleus.brime.ui;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -29,6 +31,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.view.Window;
 
 import com.procleus.brime.R;
 
@@ -40,7 +43,7 @@ public class SettingsFragment extends PreferenceFragment {
     private static final String PREFERENCE_SHARE="shareme";
     private static final String PREFERENCE_HELP="helpme";
     private static final String PREFERENCE_SIGN_OUT="signout";
-
+    private Activity activity;
 
 
     @Override
@@ -63,6 +66,15 @@ public class SettingsFragment extends PreferenceFragment {
     public void signOut() {
     }
 
+
+    //required to get current activity
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        this.activity = activity;
+    }
+
+
     private class SettingsClickListener implements Preference.OnPreferenceClickListener{
 
         private String option;
@@ -82,11 +94,14 @@ public class SettingsFragment extends PreferenceFragment {
                         title="Account Info";
                         break;
                     case PREFERENCE_ABOUT_US:
-                        fragment = new AboutUsFragment();
                         title="About Us";
+                        Dialog dialog = new Dialog(activity);
+                        dialog.setContentView(R.layout.about_us_layout);
+                        dialog.setTitle(title);
+                        dialog.show();
                         break;
                     case PREFERENCE_SIGN_OUT:
-                            signOut();
+                        signOut();
                         break;
                     case PREFERENCE_SHARE:
                         //TODO: share app
