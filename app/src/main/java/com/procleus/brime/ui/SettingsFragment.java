@@ -60,9 +60,6 @@ public class SettingsFragment extends PreferenceFragment {
 
     }
 
-    public void signOut() {
-    }
-
     private class SettingsClickListener implements Preference.OnPreferenceClickListener{
 
         private String option;
@@ -86,7 +83,7 @@ public class SettingsFragment extends PreferenceFragment {
                         title="About Us";
                         break;
                     case PREFERENCE_SIGN_OUT:
-                            signOut();
+                        ((SettingsActivity) getActivity()).signOut();
                         break;
                     case PREFERENCE_SHARE:
                         //TODO: share app
