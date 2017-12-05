@@ -10,7 +10,7 @@ Brime is an open source, simple and powerful self-hosted note taking application
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ## Screenshots 
-[Check Here](https://github.com/syedsaadh/Brime/tree/master/Screenshots)
+[Check Here](https://github.com/BrimeNotes/android/tree/master/Screenshots)
 ## Authors
 
 * [Ujjwal Bhardwaj](https://github.com/imujjwal96)
