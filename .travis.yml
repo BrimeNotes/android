@@ -1,11 +1,10 @@
-language: java
+language: android
+jdk: oraclejdk8ge: java
 
 sudo: required
 
-before_install:
- - chmod +x gradlew
 
 script:
-  - sudo gradle wrapper --gradle-version 4.4.1
-  - sudo ./gradlew assembleDebug
+  - gradle wrapper --gradle-version 4.4.1
+  - ./gradlew assembleDebug
   - ls
