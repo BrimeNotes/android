@@ -4,5 +4,5 @@ sudo: required
 
 script:
   - sudo gradle wrapper --gradle-version 4.4.1
-  - ./gradlew assembleDebug
+  - sudo ./gradlew assembleDebug
   - ls
