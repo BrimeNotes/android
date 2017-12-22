@@ -1,4 +1,7 @@
 language: java
+
+sudo: required
+
 script:
   - gradle wrapper --gradle-version 4.4.1
   - ./gradlew assembleDebug
