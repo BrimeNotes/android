@@ -1,8 +1,33 @@
+sudo: false
+
 language: android
 jdk: oraclejdk8
-sudo: required
+
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-23.0.3
+  - android-23
+
+before_install:
+- chmod +x gradlew
 
 script:
-  - gradle wrapper --gradle-version 4.4.1
-  - sudo ./gradlew assembleDebug
-  - ls
+- "./gradlew clean build connectedAndroidTest -PdisablePreDex --stacktrace"
+
+after_success:
+- sh set_tags.sh
+
+notifications:
+  email: true
+  
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.gradle"
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
