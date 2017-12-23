@@ -14,7 +14,7 @@ before_install:
 - chmod +x gradlew
 
 script:
-- "./gradlew clean build connectedAndroidTest -PdisablePreDex --stacktrace"
+- "./gradlew clean assembleDebug -PdisablePreDex --stacktrace"
 
 after_success:
 - sh set_tags.sh
