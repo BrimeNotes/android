@@ -3,8 +3,8 @@ jdk: oraclejdk8
 sudo: required
 
 before_install:
-  - android update sdk --no-ui --all --filter platform-tools,android-25,extra-android-m2repository
-  - sdkmanager --update
+  - android update sdk --no-ui --all --filter -y platform-tools,android-25,extra-android-m2repository
+  - sdkmanager --update -y
 
 script:
   - gradle wrapper --gradle-version 4.4.1
