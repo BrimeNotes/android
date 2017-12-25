@@ -15,19 +15,4 @@ before_install:
 
 script:
 - "./gradlew clean assembleDebug -PdisablePreDex --stacktrace"
-
-after_success:
-- sh set_tags.sh
-
-notifications:
-  email: true
-  
-before_cache:
-- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-
-cache:
-  directories:
-  - "$HOME/.m2"
-  - "$HOME/.gradle"
-  - "$HOME/.gradle/caches/"
-  - "$HOME/.gradle/wrapper/"
+- ls
